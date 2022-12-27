@@ -1,18 +1,17 @@
 const express = require('express')
 const app = express()
 const port = 3005
+const cors = require('cors')
 app.use(express.json())
+app.use(cors())
+
 //query strings
 //params
 app.get('/products', (req, res) => {
     const arr =['apple','car']
-    const newArr = arr.filter((item,id)=>{
-        return item.startsWith(req.query.startswith)
-        })
-    /// 
     res.json({
         mgs: 'hello!',
-        productsList: newArr
+        productsList: arr
     })
 })
 
