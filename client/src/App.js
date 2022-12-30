@@ -1,18 +1,12 @@
 import React, {useState, useEffect} from "react";
 import './App.css';
-
+import { Routes, Route } from "react-router-dom"
+import Products from "./containers/admin/products";
 function App() {
-  const [name,setName] = useState('')
-  //first render
-  useEffect(()=>{
-    fetch('http://localhost:3005/products')
-    .then(res=> res.json())
-    .then(data=> alert(data.productsList))
-  },[])
   return (
-    <div className="App">
-    <input onKeyUp={(e)=>setName(e.target.value)} placeholder="name"/>
-    </div>
+    <Routes>
+        <Route path="/admin/products" element={ <Products/> } />
+      </Routes>
   );
 }
 
