@@ -6,6 +6,64 @@
   height: 40vmin;
   pointer-events: none;
 }
+body{
+  background-color: beige;
+}
+.headTitle{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(236, 231, 231);
+  background-color: rgb(220, 124, 240);
+  height: 50px;
+  border-radius: 20px;
+  box-shadow:2px 4px green ;
+  text-align: center;
+  text-transform: uppercase;
+}
+.form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  text-align: center;
+  width: 50%;
+  border-radius: 30px;
+  box-shadow: 2px 2px #944848;
+  height: 600px;
+  margin: auto;
+  margin-top: 40px;
+}
+
+.form input{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+  height: 25px;
+  width: 300px;
+  border-radius: 5px;
+  box-shadow: 2px 2px #888888;
+  padding: 10px;
+  margin: 7px;
+  text-align: center; 
+
+}
+.form button{
+  color: white;
+  background-color: rgb(169, 169, 241);
+  margin-top: 15px;
+  width: 300px;
+  height: 50px;
+  border-radius: 10px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 20px;
+  cursor: pointer;
+ transition: 1s ease-in-out;
+}
+.form button:hover{
+  color: white;
+  background-color: rgb(20, 12, 234);
+
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
