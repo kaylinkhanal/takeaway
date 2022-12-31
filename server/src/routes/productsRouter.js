@@ -5,6 +5,7 @@ const Products = require('../models/Products')
 
 router.post('/products', async(req, res) => {
     try{
+        console.log(req.body)
       const data = await Products.create(req.body)
     if(data){
         res.json({msg: "product is added"})
