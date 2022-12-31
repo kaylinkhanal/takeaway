@@ -66,7 +66,7 @@ const Login = () => {
           placeholder="Password" />
          {/* {errors.password && touched.password ? <div>{errors.password}</div> : null} */}
          <br/>
-         <button type="submit">Register</button>
+         <button type="submit">Login</button>
          <p>Dont have an Account? <Link to='/ '> Sign up</Link></p>
        </Form>
        </div>
