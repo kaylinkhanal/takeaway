@@ -18,7 +18,7 @@ router.post('/register', async(req, res) => {
                 }
                     await Register.create(req.body)
                     res.json({
-                        msg:"data created Successfully"
+                        msg:"user created Successfully"
                     })
             }
                 catch(err){
