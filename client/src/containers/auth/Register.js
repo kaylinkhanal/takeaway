@@ -59,7 +59,15 @@ const Register = () => {
                             }}
                             validationSchema={usersSchema}
                             onSubmit={(values, { resetForm }) => {
-             debugger;
+                                const requestOptions = {
+                                    method: "POST",
+                                    headers: { "Content-Type": "application/json" },
+                                    body: JSON.stringify(values),
+
+                                };
+                                fetch("http://localhost:3005/register", requestOptions);
+                                console.log(values);
+                                resetForm({ values: '' })
                             }}
                         >
 
