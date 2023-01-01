@@ -8,4 +8,8 @@ module.exports = connect=async()=>{
         console.error(error);
     }
   }
+<<<<<<< HEAD
   
+=======
+  
+>>>>>>> 1116cf309c576cad60e1484e9cb419e6fab9f747

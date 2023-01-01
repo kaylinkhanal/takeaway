@@ -34,6 +34,7 @@ const Register = () => {
           paassword: "",
           country: "",
           address: "",
+          role:""
         }}
         validationSchema={registerSchema}
         onSubmit={(values) => {
@@ -91,6 +92,7 @@ const Register = () => {
             <label for="role">
               user Role
               <select name="role" id="role">
+              <option value="user">account type</option>
                 <option value="user">user</option>
                 <option value="rider">rider</option>
               </select>

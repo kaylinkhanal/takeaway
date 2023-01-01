@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+import React, {useState, useEffect} from "react";
+>>>>>>> 1116cf309c576cad60e1484e9cb419e6fab9f747
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 const Products = () => {
@@ -48,3 +52,7 @@ const Products = () => {
 }
 
 export default Products;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1116cf309c576cad60e1484e9cb419e6fab9f747
