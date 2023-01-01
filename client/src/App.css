@@ -7,7 +7,6 @@
 input,
 select {
     margin-top: 15px;
-    width: 100%;
     padding: 1rem;
     font-size: 15px;
 }
@@ -60,7 +59,7 @@ select {
 }
 
 .register-area .register-box .right-side img {
-    width: 500px;
+    width: 180px;
     height: auto;
 }
 

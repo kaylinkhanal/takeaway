@@ -7,7 +7,7 @@ import img from '../../image/register.jpg'
 import { Link } from 'react-router-dom'
 
 
-const Resgister = () => {
+const Register = () => {
 
     const usersSchema = Yup.object().shape({
         name: Yup.string()
@@ -37,7 +37,7 @@ const Resgister = () => {
             .max(100, "Too Long!")
             .required("Required"),
 
-        type: Yup.string()
+            role: Yup.string()
             .required("Required"),
     });
 
@@ -55,19 +55,11 @@ const Resgister = () => {
                                 username: "",
                                 phone: "",
                                 password: "",
-                                type: "",
+                                role: "",
                             }}
                             validationSchema={usersSchema}
                             onSubmit={(values, { resetForm }) => {
-                                const requestOptions = {
-                                    method: "POST",
-                                    headers: { "Content-Type": "application/json" },
-                                    body: JSON.stringify(values),
-
-                                };
-                                fetch("http://localhost:3005/add-user", requestOptions);
-                                console.log(values);
-                                resetForm({ values: '' })
+             debugger;
                             }}
                         >
 
@@ -110,14 +102,14 @@ const Resgister = () => {
                                         ) : null}
                                     </div>
                                     <div>
-                                        <Field as="select" name="type" placeholder="Account Type">
+                                        <Field as="select" name="role" placeholder="Account Type">
                                             <option value="">Account Type</option>
                                             <option value="user">User</option>
                                             <option value="rider">Rider</option>
 
                                         </Field>
-                                        {errors.type && touched.type ? (
-                                            <div className="validaton-message">{errors.type}</div>
+                                        {errors.role && touched.role ? (
+                                            <div className="validaton-message">{errors.role}</div>
                                         ) : null}</div>
                                     {/* <button className="btn" type="submit">
                                         Submit
@@ -132,7 +124,7 @@ const Resgister = () => {
                         <div className="img-box">
                             <img src={img} alt="Logo" />
                             <div className="">
-                                <span>Already have an account <Link to='/auth/login'>Login..</Link></span>
+                                <span>Already have an account <Link to='/'>Login..</Link></span>
                             </div>
                         </div>
                     </div>
@@ -143,4 +135,4 @@ const Resgister = () => {
     );
 };
 
-export default Resgister;
+export default Register;

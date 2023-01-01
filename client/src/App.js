@@ -28,20 +28,16 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
 
 // export default App;
 
-import Product from "./container/admin/Product";
-import Resgister from "./container/auth/Resgister";
-import Login from "./container/auth/Login";
+import Product from "./containers/admin/Product";
+import Register from "./containers/auth/Register";
+import Login from "./containers/auth/Login";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/admin/products" element={<Product />} />
-        <Route path="/auth/register" element={<Resgister />} />
-        <Route path="/auth/Login" element={<Login />} />
-        <Route path="" element={
-          <><h1>this is home page</h1><br /> <Link to='/admin/products'>Add Prodcut</Link><br />
-            <Link to='/auth/register'>Add user</Link></>} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Login />} />
       </Routes>
     </BrowserRouter>
   )
