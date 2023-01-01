@@ -1,19 +1,20 @@
-import React, {useState, useEffect} from "react";
-import './App.css';
+import React from 'react'
+import './App.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Products from './containers/admin/products';
+import Register from './containers/user/register';
 
-function App() {
-  const [name,setName] = useState('')
-  //first render
-  useEffect(()=>{
-    fetch('http://localhost:3005/products')
-    .then(res=> res.json())
-    .then(data=> alert(data.productsList))
-  },[])
+const App = () => {
   return (
-    <div className="App">
-    <input onKeyUp={(e)=>setName(e.target.value)} placeholder="name"/>
-    </div>
-  );
+    <>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/admin/products" element={<Products />}></Route>
+        <Route path="/user/register" element={<Register />}></Route>
+      </Routes>
+    </BrowserRouter>
+    </>
+  )
 }
 
-export default App;
+export default App
