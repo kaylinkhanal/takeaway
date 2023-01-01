@@ -1,33 +1,47 @@
-.App {
-  text-align: center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+input,
+select {
+    margin-top: 15px;
+    padding: 1rem;
+    font-size: 15px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.validaton-message {
+    background-color: orange;
+    font-style: 20px;
+    font-weight: 600;
+    margin-top: .6rem;
+    padding: .5rem;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* register page styling */
+.register-area,
+.login-area {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    background-color: #e4dede;
+
 }
 
-.App-link {
-  color: #61dafb;
+.register-area .register-box {
+    width: 70%;
+    margin: auto;
+    background: #fff;
+    position: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    border-left: 15px solid rgb(174, 171, 171);
+
 }
 
+<<<<<<< HEAD
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -68,4 +82,80 @@
   padding: 10px;
   border:2px solid rgba(rgb(61, 48, 48), rgb(48, 124, 48), rgb(0, 255, 55), alpha) ;
   background-color: green;
+=======
+
+.register-area .register-box .left-side,
+.login-area .login-box .left-side {
+    width: 50%;
+    padding: 2rem 2rem 3rem 3rem;
+
+}
+
+.register-area .register-box .right-side,
+.login-area .login-box .right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem 3rem 3rem;
+
+}
+
+.register-area .register-box .right-side img {
+    width: 180px;
+    height: auto;
+}
+
+.register-area .register-box .right-side .img-box span {
+    margin-top: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.register-area .register-box .right-side .img-box span a,
+.login-area .login-box .right-side .img-box span a {
+    margin-left: 10px;
+    color: #555;
+    text-decoration: none;
+}
+
+.register-area .register-box .left-side h3,
+.login-area .login-box .left-side h3 {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/*====== Login form style =========*/
+
+.login-area .login-box {
+    width: auto;
+    padding: 2rem;
+    margin: auto;
+    background: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    border-left: 15px solid rgb(174, 171, 171);
+
+}
+
+.login-area .login-box .right-side img {
+    width: 300px;
+    height: auto;
+}
+
+.login-area .login-box .right-side .img-box span {
+    margin-top: 1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.login-area .login-box .login .right-side img {
+    width: 300px;
+    height: auto;
+>>>>>>> 1116cf309c576cad60e1484e9cb419e6fab9f747
 }

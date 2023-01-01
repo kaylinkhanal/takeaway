@@ -15,6 +15,6 @@ const usersSchema = new mongoose.Schema({
         }
       }
 
-   },{ collection: 'products' });
+   },{ collection: 'userRegister' });
    
 module.exports = mongoose.model('Register', usersSchema);

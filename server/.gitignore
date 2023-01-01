@@ -5,6 +5,10 @@
 /node_modules
 /.pnp
 .pnp.js
+/.env
+
+#rest client file for api testing
+/.http
 
 # testing
 /coverage
