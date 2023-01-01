@@ -3,9 +3,9 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Button } from "../../components/Button";
-import img from '../../image/register.jpg'
-import { Link } from 'react-router-dom'
-
+import img from '../../image/register.jpg';
+import { Link } from 'react-router-dom';
+import { useState} from "react";
 
 const Register = () => {
 
@@ -37,9 +37,79 @@ const Register = () => {
             .max(100, "Too Long!")
             .required("Required"),
 
-            role: Yup.string()
+        role: Yup.string()
             .required("Required"),
+
+        confirmPassword: Yup.string()
+            .min(5, "Too Short!")
+            .max(100, "Too Long!")
+            .required("Required"),
+
+        role: Yup.string()
+            .required("Required"),
+
+
     });
+
+
+
+
+    const [input, setInput] = useState({
+
+        password: '',
+        confirmPassword: ''
+    });
+
+    const [error, setError] = useState({
+
+        password: '',
+        confirmPassword: ''
+    })
+
+    const onInputChange = e => {
+        const { name, value } = e.target;
+        setInput(prev => ({
+            ...prev,
+            [name]: value
+        }));
+        validateInput(e);
+    }
+
+    const validateInput = e => {
+        let { name, value } = e.target;
+        setError(prev => {
+            const stateObj = { ...prev, [name]: "" };
+
+            switch (name) {
+                case "password":
+                    if (!value) {
+                        stateObj[name] = "Please enter Password.";
+                    } else if (input.confirmPassword && value !== input.confirmPassword) {
+                        stateObj["confirmPassword"] = "Password and Confirm Password does not match.";
+                    } else {
+                        stateObj["confirmPassword"] = input.confirmPassword ? "" : error.confirmPassword;
+                    }
+                    break;
+
+                case "confirmPassword":
+                    if (!value) {
+                        stateObj[name] = "Please enter Confirm Password.";
+                    } else if (input.password && value !== input.password) {
+                        stateObj[name] = "Password and Confirm Password does not match.";
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            return stateObj;
+        });
+    }
+
+
+
+
 
     return (
         <>
@@ -55,6 +125,7 @@ const Register = () => {
                                 username: "",
                                 phone: "",
                                 password: "",
+                                confirmPassword: "",
                                 role: "",
                             }}
                             validationSchema={usersSchema}
@@ -104,11 +175,27 @@ const Register = () => {
                                         ) : null}
                                     </div>
                                     <div>
-                                        <Field name="password" placeholder="Password" type="password" />
-                                        {errors.password && touched.password ? (
-                                            <div className="validaton-message">{errors.password}</div>
-                                        ) : null}
+                                        <input
+                                            type="password"
+                                            name="password"
+                                            placeholder='Enter Password'
+                                            value={input.password}
+                                            onChange={onInputChange}
+                                            onBlur={validateInput}></input>
+                                        {error.password && <span className='err'>{error.password}</span>}
                                     </div>
+
+                                    <div>
+                                        <input
+                                            type="password"
+                                            name="confirmPassword"
+                                            placeholder='Enter Confirm Password'
+                                            value={input.confirmPassword}
+                                            onChange={onInputChange}
+                                            onBlur={validateInput}></input>
+                                        {error.confirmPassword && <span className='err'>{error.confirmPassword}</span>}
+                                    </div>
+
                                     <div>
                                         <Field as="select" name="role" placeholder="Account Type">
                                             <option value="">Account Type</option>
