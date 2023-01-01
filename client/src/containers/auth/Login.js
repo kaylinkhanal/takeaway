@@ -74,7 +74,7 @@ const Login = () => {
                         <div className="img-box">
                             <img src={img} alt="Logo"width={300}/>
                             <div className="">
-                                <span><Link to='/auth/register'>Create an account </Link></span>
+                                <span><Link to='/register'>Create an account </Link></span>
                             </div>
                         </div>
                     </div>
