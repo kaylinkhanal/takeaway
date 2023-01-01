@@ -6,6 +6,9 @@
 /.pnp
 .pnp.js
 
+#rest client file for api testing
+/.http
+
 # testing
 /coverage
 
