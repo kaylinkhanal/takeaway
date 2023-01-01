@@ -28,6 +28,15 @@
   color: #61dafb;
 }
 
+
+/* css for the form */
+.form{
+  width:25%;
+  border:1px solid rgb(75, 74, 74);
+  margin: 8% auto;
+  padding:2% 5%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +45,5 @@
     transform: rotate(360deg);
   }
 }
+
+
