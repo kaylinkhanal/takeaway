@@ -16,6 +16,7 @@ const Login = () => {
       <Formik
        initialValues={{
         name: '',
+        password:''
        }}
        validationSchema={loginSchema}
        onSubmit={values => {
@@ -24,7 +25,7 @@ const Login = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
-         fetch('http://localhost:3005/products',requestOptions )
+         fetch('http://localhost:3005/login',requestOptions )
        }}
      >
        {({ errors, touched }) => (

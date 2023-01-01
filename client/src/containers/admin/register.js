@@ -99,7 +99,7 @@ const Register = () => {
             <br />
             <button type="submit">Register</button>
            
-            <a href="./login.js"> Already have an account</a>
+            <a href="./login"> Already have an account</a>
           </Form>
         )}
       </Formik>
