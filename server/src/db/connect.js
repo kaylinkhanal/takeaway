@@ -1,11 +1,21 @@
 const mongoose = require('mongoose');
-module.exports = connect=async()=>{
-    try{
-      //database = takeaway
-        await mongoose.connect('mongodb://127.0.0.1:27017/takeaway', {useNewUrlParser: true, useUnifiedTopology: true});
-        console.log("connected to mongodb");
-    }catch(error){
-        console.error(error);
-    }
+
+const connectDB = async()=>{
+  try{
+      // mongo db conncetion string
+      const con = await mongoose.connect(process.env.MONGO_URI, {
+          // not allows to print unwanted console warnings
+          // useNewUrlParser : true,
+          // useUnifiedTopology: true,
+          // useCreateIndex: true
+      }) 
+      console.log(`MongoDB connected: ${con.connection.host}`);
+  }catch(err){
+
+      console.log(err);
+      process.exit(1);
   }
+}
+
+module.exports = connectDB
   
