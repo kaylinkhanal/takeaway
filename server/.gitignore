@@ -7,6 +7,9 @@
 .pnp.js
 /.env
 
+#rest client file for api testing
+/.http
+
 # testing
 /coverage
 
