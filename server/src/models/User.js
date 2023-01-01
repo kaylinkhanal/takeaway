@@ -7,8 +7,8 @@ const userSchema = new mongoose.Schema({
     conformPassword: {type: String},
     country:{type: String},
     address:{type: String},
-    userRole:{type: String}
-   },{ collection: 'user' });
+    role:{type: String}
+   },{ collection: 'users' });
    
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Users', userSchema);
 

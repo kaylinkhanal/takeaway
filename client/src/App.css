@@ -32,16 +32,46 @@ h1{
   justify-content: center;
   background-color: #61dafb;
 }
+.form input{
+  box-shadow: 0 0 2px 0 black;
+  border: none;
+  height: 25px;
+  width: 280px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 7px;
+
+}
 
 .dropdown{
-  width: 165px;
-  align-items: center;
-  justify-content: center;
+  border: none;
+  height: 25px;
+  width: 280px;
+  border-radius: 5px;
+  margin: 7px;
+  box-shadow: 0 0 2px 0 black;
 }
 .button{
+  border: none;
+  padding:  5px;
   margin:10px;
   width: 120px;
   font-size: 15px;
+  transition: 0.5s;
+}
+.button:hover{
+  transition: 0.5s;
+  border: none;
+  padding: 5px;
+  margin:10px;
+  width: 120px;
+  font-size: 15px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+}
+.createnew{
+  text-decoration:none;
 }
 
 .App {
