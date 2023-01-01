@@ -44,11 +44,6 @@ const Register = () => {
             .min(5, "Too Short!")
             .max(100, "Too Long!")
             .required("Required"),
-
-        role: Yup.string()
-            .required("Required"),
-
-
     });
 
 
