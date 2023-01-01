@@ -15,14 +15,14 @@ ReactDOM.render(
       {/* <Provider store={store}> */}
       <div style={{display:'flex',flexDirection:'row',}}>
         <div style={{marginLeft:'150px'}}>
-          <Link to="./admin/products">Products</Link>
+          <Link to="./products">Products</Link>
         </div >
 
         <div style={{marginLeft:'1000px'}}>
-          <Link to="./auth/login">Login</Link>
+          <Link to="./login">Login</Link>
         </div>
         <div style={{marginLeft:'50px'}}>
-          <Link to="./auth/register">Register</Link>
+          <Link to="./register">Register</Link>
         </div>
       </div>
 
