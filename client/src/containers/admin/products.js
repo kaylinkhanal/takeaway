@@ -21,6 +21,7 @@ const Products = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(values)
         };
+    
          fetch('http://localhost:3005/products',requestOptions )
        }}
      >
