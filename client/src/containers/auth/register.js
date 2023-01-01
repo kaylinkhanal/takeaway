@@ -9,6 +9,26 @@ const Register = () => {
       .min(1, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Required'),
+      password: Yup.string()
+      .min(5, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Required'),
+      confirmPassword: Yup.string()
+      .min(5, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Required'),
+      email: Yup.string()
+      .min(5, 'Too Short!')
+      .max(40, 'Too Long!')
+      .required('Required'),
+      address: Yup.string()
+      .min(2, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Required'),
+      Number: Yup.string()
+      .min(2, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Required'),
   });
   return (
     <div style={{ display: 'flex', marginTop: '200px' }}>
@@ -45,8 +65,8 @@ const Register = () => {
 
             <div style={{ marginBottom: "10px" }}>    <FontAwesomeIcon icon={faHome} />
               <Field name="address" placeholder="address" />
-              {errors.price && touched.price ? (
-                <div>{errors.price}</div>
+              {errors.address && touched.address ? (
+                <div>{errors.address}</div>
               ) : null}
             </div>
 

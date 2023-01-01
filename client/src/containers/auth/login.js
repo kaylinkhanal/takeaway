@@ -9,6 +9,10 @@ const Login = () => {
       .min(1, 'Too Short!')
       .max(100, 'Too Long!')
       .required('Required'),
+    password: Yup.string()
+      .min(5, 'Too Short!')
+      .max(20, 'Too Long!')
+      .required('Required'),
   });
   return (
     <div style={{ display: 'flex', marginTop: '200px' }}>

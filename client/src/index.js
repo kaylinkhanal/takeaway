@@ -19,7 +19,7 @@ ReactDOM.render(
         </div >
 
         <div style={{marginLeft:'1000px'}}>
-          <Link to="./login">Login</Link>
+          <Link to="./">Login</Link>
         </div>
         <div style={{marginLeft:'50px'}}>
           <Link to="./register">Register</Link>

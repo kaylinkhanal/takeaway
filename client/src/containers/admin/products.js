@@ -1,12 +1,20 @@
 import React, {useState, useEffect} from "react";
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { faBook, faCheck, faDollar, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faBook, faCheck, faDollar, faRupee, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Products = () => {
     const productsSchema = Yup.object().shape({
         name: Yup.string()
           .min(1, 'Too Short!')
+          .max(100, 'Too Long!')
+          .required('Required'),
+        price: Yup.string()
+          .min(1, 'Too Short!')
+          .max(10, 'Too Long!')
+          .required('Required'),
+        description: Yup.string()
+          .min(5, 'Too Short!')
           .max(100, 'Too Long!')
           .required('Required'),
       });
@@ -37,7 +45,7 @@ const Products = () => {
             </div>
            
             <div style={{ marginBottom: "10px" }}>
-              <FontAwesomeIcon icon={faDollar} />
+              <FontAwesomeIcon icon={faRupee} />
            <Field name="price" placeholder="price"/>
            {errors.price && touched.price ? (
              <div>{errors.price}</div>
@@ -48,7 +56,8 @@ const Products = () => {
               <FontAwesomeIcon icon={faBook} />
            <Field name="description"
             placeholder="description" type="description" />
-           {errors.description && touched.description ? <div>{errors.description}</div> : null}
+           {errors.description && touched.description ?
+            <div>{errors.description}</div> : null}
            </div>
            <div style={{ marginBottom: "10px" }}>
               <FontAwesomeIcon icon={faCheck} />
