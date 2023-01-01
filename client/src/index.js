@@ -1,18 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import { Link } from 'react-router-dom';
 import App from './App';
+import Login from './containers/auth/login';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from "react-redux";
-import store from "./store";
+// import {Provider} from "react-redux";
+// import store from "./store";
 import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
-      <BrowserRouter>
-    {/* <Provider store={store}> */}
+    <BrowserRouter>
+      {/* <Provider store={store}> */}
+      <div style={{display:'flex',flexDirection:'row',}}>
+        <div style={{marginLeft:'150px'}}>
+          <Link to="./admin/products">Products</Link>
+        </div >
+
+        <div style={{marginLeft:'1000px'}}>
+          <Link to="./auth/login">Login</Link>
+        </div>
+        <div style={{marginLeft:'50px'}}>
+          <Link to="./auth/register">Register</Link>
+        </div>
+      </div>
+
+
+
       <App />
-      </BrowserRouter>
+    </BrowserRouter>
     {/* </Provider> */}
   </React.StrictMode>,
   document.getElementById('root')
