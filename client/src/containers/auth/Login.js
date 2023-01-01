@@ -40,7 +40,7 @@ const Login = () => {
                                     body: JSON.stringify(values),
 
                                 };
-                                fetch("http://localhost:3005/add-user", requestOptions);
+                                fetch("http://localhost:3005/login", requestOptions);
                                 console.log(values);
                                 resetForm({ values: '' })
                             }}
