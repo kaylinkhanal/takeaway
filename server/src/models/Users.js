@@ -7,7 +7,6 @@ const usersSchema = new mongoose.Schema(
     email: { type: String },
     username: { type: String },
     password: { type: String },
-    confirmPassword: { type: String },
     role: { type: String },
   },
   { collection: "users" }

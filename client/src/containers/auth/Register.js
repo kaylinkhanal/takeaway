@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { Button } from "../../components/Button";
 import img from "../../image/register.jpg";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const usersSchema = Yup.object().shape({
@@ -40,7 +41,7 @@ const Register = () => {
 
     role: Yup.string().required("Required"),
   });
-
+  const navigate = useNavigate();
   return (
     <>
       <div className="register-area">
@@ -59,22 +60,24 @@ const Register = () => {
                 role: "",
               }}
               validationSchema={usersSchema}
-              onSubmit={(values, { resetForm }) => {
+              onSubmit={async(values, { resetForm }) => {
+                const {confirmPassword, ...updatedValues} = values
                 const requestOptions = {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(values),
+                  body: JSON.stringify(updatedValues),
                 };
                 try {
-                  fetch("http://localhost:3005/register", requestOptions).then(
-                    (response) => {
-                      if (!response.ok) {
-                        console.log(response);
-                        alert(response.statusText);
-                      }
-                    }
-                  );
-                  resetForm({ values: "" });
+                  const response = await fetch("http://localhost:3005/register", requestOptions)
+                  const data = await response.json()
+                 
+                  if(response.status === 409 && data.error){
+                    alert(data.error)
+                  }else if(response.status === 200){
+                    alert(data.msg)
+                    navigate("/");
+                  }
+                  // resetForm({ values: "" });
                 } catch (err) {
                   alert(err);
                 }
