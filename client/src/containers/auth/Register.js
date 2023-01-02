@@ -59,7 +59,7 @@ const Register = () => {
                             }}
                             validationSchema={usersSchema}
                             onSubmit={(values, { resetForm }) => {
-             debugger;
+            
                             }}
                         >
 
