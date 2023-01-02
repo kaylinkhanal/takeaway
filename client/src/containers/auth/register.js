@@ -10,13 +10,12 @@ const SignupSchema = Yup.object().shape({
         .required('Required'),
     password: Yup.string().required("Not a valid password")
         .oneOf([Yup.ref('password'), null]).min(8, 'Error')
-        .oneOf([Yup.ref('password'), null]).matches(/[a-z]/, "Error")
-        .oneOf([Yup.ref('password'), null]).matches(/[A-Z]/, "Error")
-        .min(8, 'Password is too short - should be 8 chars minimum.')
-        .matches(/[a-zA-Z]/, 'Atlease one character')
-        .matches(/[0-9]/, 'Atleast  one number'),
+        .oneOf([Yup.ref('password'), null]).matches(/[a-z]/, "Atleast one small letter")
+        .oneOf([Yup.ref('password'), null]).matches(/[A-Z]/, "Atleast one capital letter")
+        .matches(/[0-9]/, 'Atleast  one number')
+        .min(8, 'Should be 8 chars minimum.'),
 
-        conformPassword: Yup.string()
+    conformPassword: Yup.string()
         .oneOf([Yup.ref('password'), null], 'Passwords must match'),
     email: Yup.string().email('Invalid email').required('Required'),
     phoneNumber: Yup.string().required('Required'),
@@ -97,7 +96,7 @@ const Register = () => (
                             ) : null}</div>
                         <div >
                             <button className='button' type="submit">Submit</button>
-                            <Link to="/"className='createnew'> <button className='button' type="submit">Back to login</button></Link>
+                            <Link to="/" className='createnew'> <span type="submit">Back to login</span></Link>
                         </div>
                     </Form>
                 </div>
