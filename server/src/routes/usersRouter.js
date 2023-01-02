@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Users = require('../models/Users');
-
 router.post('/register', async (req, res) => {
-    const {name, address,email,userName, password, confirmPassword,role}=req.body;
+    const {name, address,email,userName,password,confirmPassword,role}=req.body;
     if(!name||!address||!email||!userName||!password||!confirmPassword||!role){
         return res.json({
             error:"please fill up required fields"
@@ -27,5 +26,4 @@ router.post('/register', async (req, res) => {
         console.log(err)
     }
 })
-
 module.exports = router;
