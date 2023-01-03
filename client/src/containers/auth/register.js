@@ -1,108 +1,174 @@
-import '../../App.css';
-import React from 'react';
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+// import "./register.css";
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+import { Button } from "../../components/Button";
+import img from "../../image/register.jpg";
 import { Link } from "react-router-dom";
-const SignupSchema = Yup.object().shape({
+import { useNavigate } from "react-router-dom";
+
+const Register = () => {
+  const usersSchema = Yup.object().shape({
     name: Yup.string()
-        .min(2, 'Too Short!')
-        .max(50, 'Too Long!')
-        .required('Required'),
-    password: Yup.string().required("Not a valid password")
-        .oneOf([Yup.ref('password'), null]).min(8, 'Error')
-        .oneOf([Yup.ref('password'), null]).matches(/[a-z]/, "Atleast one small letter")
-        .oneOf([Yup.ref('password'), null]).matches(/[A-Z]/, "Atleast one capital letter")
-        .matches(/[0-9]/, 'Atleast  one number')
-        .min(8, 'Should be 8 chars minimum.'),
+      .min(1, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
 
-    conformPassword: Yup.string()
-        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
-    email: Yup.string().email('Invalid email').required('Required'),
-    phoneNumber: Yup.string().required('Required'),
-    address: Yup.string().required('Required'),
-    role: Yup.string().required('Required'),
+    address: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
 
-});
-const Register = () => (
-    <div className='register'>
-        <h1>Signup</h1>
-        <Formik
-            initialValues={{
+    email: Yup.string().email("Invalid email").required("Required"),
+
+    phone: Yup.number().required("Required"),
+
+    username: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
+
+    password: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
+
+    confirmPassword: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
+
+    role: Yup.string().required("Required"),
+  });
+  const navigate = useNavigate();
+  return (
+    <>
+      <div className="register-area">
+        <div className="register-box">
+          <div className="left-side">
+            <h3>Create an account</h3>
+            <Formik
+              initialValues={{
                 name: "",
-                email: "",
-                phoneNumber: "",
-                password: "",
-                conformPassword: "",
-                country: "",
                 address: "",
-                role: ""
-            }}
-            validationSchema={SignupSchema}
-            onSubmit={values => {
-                const url='http://localhost:3005/register'
+                email: "",
+                username: "",
+                phone: "",
+                password: "",
+                confirmPassword: "",
+                role: "",
+              }}
+              validationSchema={usersSchema}
+              onSubmit={async(values, { resetForm }) => {
+                const {confirmPassword, ...updatedValues} = values
                 const requestOptions = {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(values)
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(updatedValues),
                 };
-                const res=fetch(url, requestOptions)//use axios for json convert
-            }}
-        >
-            {({ errors, touched }) => (
-                <div className='form'>
-                    <Form className='registerForm'>
-                        <div>
-                            <Field name="name" placeholder='Name' />
-                            {errors.name && touched.name ? (
-                                <div>{errors.name}</div>
-                            ) : null}
-                        </div>
-                        <div>
-                            <Field name="email" type="email" placeholder="Email eg tul@gmail.com" />
-                            {errors.email && touched.email ? <div>{errors.email}</div> : null}
-                        </div>
-                        <div>
-                            <Field name="phoneNumber" placeholder="Phone Number" />
-                            {errors.phoneNumber && touched.phoneNumber ? <div>{errors.phoneNumber}</div> : null}
-                        </div>
-                        <div>
-                            <Field name="country" placeholder='Country' />{errors.country && touched.country ? (
-                                <div>{errors.country}</div>
-                            ) : null}
-                        </div>
-                        <div>
-                            <Field name="address" placeholder='Address' />{errors.address && touched.address ? (
-                                <div>{errors.address}</div>
-                            ) : null}
-                        </div>
-                        <div>
-                            <Field name="password" type="password" placeholder='Password' />
-                            {errors.password && touched.password ? (
-                                <div>{errors.password}</div>
-                            ) : null}
-                        </div>
-                        <div>
-                            <Field name="conformPassword" type="password" placeholder='Conform Password' />
-                            {errors.conformPassword && touched.conformPassword ? <div>{errors.conformPassword}</div> : null}
-                        </div>
-                        <div>
-                            <Field as="select" className="dropdown" name="role" placeholder="Account Type">
-                                <option value="">Account Type</option>
-                                <option value="user">User</option>
-                                <option value="rider">Rider</option>
+                try {
+                  const response = await fetch("http://localhost:3005/register", requestOptions)
+                  const data = await response.json()
+                 
+                  if(response.status === 409 && data.error){
+                    alert(data.error)
+                  }else if(response.status === 200){
+                    alert(data.msg)
+                    navigate("/");
+                  }
+                  // resetForm({ values: "" });
+                } catch (err) {
+                  alert(err);
+                }
+              }}
+            >
+              {({ errors, touched }) => (
+                <Form>
+                  <div>
+                    <Field name="name" placeholder="Name" />
+                    {errors.name && touched.name ? (
+                      <div className="validaton-message">{errors.name}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field name="address" placeholder="Address" />
+                    {errors.address && touched.address ? (
+                      <div className="validaton-message">{errors.address}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field name="email" placeholder="Email.." />
+                    {errors.email && touched.email ? (
+                      <div className="validaton-message">{errors.email}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field name="phone" placeholder="Phone.." />
+                    {errors.phone && touched.phone ? (
+                      <div className="validaton-message">{errors.phone}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field name="username" placeholder="Username " />
+                    {errors.username && touched.username ? (
+                      <div className="validaton-message">{errors.username}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field
+                      name="password"
+                      placeholder="Password"
+                      type="password"
+                    />
+                    {errors.password && touched.password ? (
+                      <div className="validaton-message">{errors.password}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field
+                      name="confirmPassword"
+                      placeholder="confirmPassword"
+                      type="password"
+                    />
+                    {errors.confirmPassword && touched.confirmPassword ? (
+                      <div className="validaton-message">
+                        {errors.confirmPassword}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field as="select" name="role" placeholder="Account Type">
+                      <option value="">Account Type</option>
+                      <option value="user">User</option>
+                      <option value="rider">Rider</option>
+                    </Field>
+                    {errors.role && touched.role ? (
+                      <div className="validaton-message">{errors.role}</div>
+                    ) : null}
+                  </div>
+                  {/* <button className="btn" type="submit">
+                                        Submit
+                                    </button> */}
+                  <Button name="Submit" type="submit" />
+                </Form>
+              )}
+            </Formik>
+          </div>
+          <div className="right-side">
+            <div className="img-box">
+              <img src={img} alt="Logo" />
+              <div className="">
+                <span>
+                  Already have an account <Link to="/">Login..</Link>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
 
-                            </Field>
-                            {errors.role && touched.role ? (
-                                <div className="validaton-message">{errors.role}</div>
-                            ) : null}</div>
-                        <div >
-                            <button className='button' type="submit">Submit</button>
-                            <Link to="/" className='createnew'> <span type="submit">Back to login</span></Link>
-                        </div>
-                    </Form>
-                </div>
-            )}
-        </Formik>
-    </div>
-);
-export default Register
+export default Register;
