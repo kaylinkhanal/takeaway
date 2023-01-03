@@ -45,17 +45,13 @@ input {
   border-radius: 0.2rem;
   border: 1px solid;
 }
-.btn-cont{
-    display: flex;
-    justify-content: center;
-    height: 42px;
-    
-  /* width: 100%; */
-}
-button {
-  height: 42px;
+.btn-cont {
+  display: flex;
+  /* width:66%; */
   
+  justify-content: center;
 }
+
 .image-container {
   width: 45%;
   flex: 1;
