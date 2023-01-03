@@ -39,12 +39,13 @@ const Register = () => (
             }}
             validationSchema={SignupSchema}
             onSubmit={values => {
+                const url='http://localhost:3005/register'
                 const requestOptions = {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(values)
                 };
-                fetch('http://localhost:3005/register', requestOptions)
+                const res=fetch(url, requestOptions)//use axios for json convert
             }}
         >
             {({ errors, touched }) => (
