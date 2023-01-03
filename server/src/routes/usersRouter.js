@@ -25,19 +25,31 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  try {
     const user = await Users.findOne({email: req.body.email})
-    if(user){
-      const {password} = user
-      const isMatched = bcrypt.compareSync(req.body.password, password)
-      console.log(isMatched)
-    }else{
-      res.json({
-        msg: "user doesn't exist"
-      })
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
+      if(user){
+        try{
+        const{email,password}=user;
+        const isMatched= bcrypt.compareSync(req.body.password, password)
+        if(email&&isMatched){
+          res.status(200).json({
+            msg:"logged in successfully"
+          })
+        }
+        else{
+          res.status(401).json({
+            error:"unauthorized user"
+          })
+        }
+        }
+        catch(err){
+          console.log(err)
+        }
+        }
+        else{
+          res.json({
+            msg:"user doesn't exist"
+          })
+        }
+    
+ })
 module.exports = router;

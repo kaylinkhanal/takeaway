@@ -4,6 +4,7 @@ import { Button } from "../../components/Button";
 import { Formik, Form, Field } from "formik";
 import img from "../../image/login.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Login = () => {
@@ -19,6 +20,7 @@ const Login = () => {
             .max(100, "Too Long!")
             .required("Required"),
     });
+    const navigate = useNavigate();
 
     return (
         <>
@@ -33,16 +35,23 @@ const Login = () => {
 
                             }}
                             validationSchema={usersSchema}
-                            onSubmit={(values, { resetForm }) => {
+                            onSubmit= { async(values) => {
                                 const requestOptions = {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(values),
-
                                 };
-                                fetch("http://localhost:3005/login", requestOptions);
-                                console.log(values);
-                                resetForm({ values: '' })
+                                try{
+                                    const response= await fetch("http://localhost:3005/login", requestOptions)
+                                    console.log(response);
+                                    const data= await response.json();
+                                    console.log(data)
+                                    // navigate("/rider");
+                                }
+                                catch(err){
+                                    alert(err)
+                                }
+                                
                             }}
                         >
 
