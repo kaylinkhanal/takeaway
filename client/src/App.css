@@ -1,143 +1,118 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-body{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  background-color: rgb(236, 234, 230);
-  background-image: url(Ride.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-}
-h1{
-  color: white;
-}
-.register{
-  width: 300px;
-  height:100%;
-  box-shadow: 0 0 10px 1px black;
-  position: relative;
-  align-items: center;
-  background-color: red;
-  justify-content: center;
-  flex-wrap: wrap;
-  border-radius: 10px;
-}
-.registerForm{
-  /* position: absolute; */
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #61dafb;
-}
-.form input{
-  box-shadow: 0 0 2px 0 black;
-  border: none;
-  height: 35px;
-  width: 280px;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 7px;
 
+input,
+select {
+    margin-top: 15px;
+    padding: 1rem;
+    font-size: 15px;
 }
-.form input:hover{
-  box-shadow: 0 0 5px 1px black;
-  border: none;
-  height: 35px;
-  width: 280px;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 7px;
+
+.validaton-message {
+    background-color: orange;
+    font-style: 20px;
+    font-weight: 600;
+    margin-top: .6rem;
+    padding: .5rem;
+}
+
+/* register page styling */
+.register-area,
+.login-area {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    background-color: #e4dede;
 
 }
 
-.dropdown{
-  border: none;
-  height: 35px;
-  width: 280px;
-  border-radius: 10px;
-  margin: 7px;
-  box-shadow: 0 0 2px 0 black;
-}
-.dropdown:hover{
-  border: none;
-  height: 35px;
-  width: 280px;
-  border-radius: 10px;
-  margin: 7px;
-  box-shadow: 0 0 5px 1px black;
-}
-.button{
-  border: none;
-  padding:  5px;
-  margin:10px;
-  width: 120px;
-  font-size: 20px;
-  transition: 0.5s;
-  border-radius: 10px;
-}
-.button:hover{
-  transition: 0.5s;
-  border: none;
-  padding: 5px;
-  margin:10px;
-  width: 120px;
-  font-size: 20px;
-  background-color: red;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-}
-.createnew{
-  text-decoration:none;
-}
-.createnew:hover{
-  text-decoration:none;
-  background-color: orange;
-  border-radius: 5px;
+.register-area .register-box {
+    width: 70%;
+    margin: auto;
+    background: #fff;
+    position: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    border-left: 15px solid rgb(174, 171, 171);
+
 }
 
-.App {
-  text-align: center;
+
+.register-area .register-box .left-side,
+.login-area .login-box .left-side {
+    width: 50%;
+    padding: 2rem 2rem 3rem 3rem;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.register-area .register-box .right-side,
+.login-area .login-box .right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2rem 3rem 3rem;
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.register-area .register-box .right-side img {
+    width: 180px;
+    height: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.register-area .register-box .right-side .img-box span {
+    margin-top: 2rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
 }
 
-.App-link {
-  color: #61dafb;
+.register-area .register-box .right-side .img-box span a,
+.login-area .login-box .right-side .img-box span a {
+    margin-left: 10px;
+    color: #555;
+    text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.register-area .register-box .left-side h3,
+.login-area .login-box .left-side h3 {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/*====== Login form style =========*/
+
+.login-area .login-box {
+    width: auto;
+    padding: 2rem;
+    margin: auto;
+    background: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    display: flex;
+    border-left: 15px solid rgb(174, 171, 171);
+
+}
+
+.login-area .login-box .right-side img {
+    width: 300px;
+    height: auto;
+}
+
+.login-area .login-box .right-side .img-box span {
+    margin-top: 1rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.login-area .login-box .login .right-side img {
+    width: 300px;
+    height: auto;
 }
