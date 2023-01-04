@@ -3,39 +3,41 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { Button } from "../../components/Button";
-import img from '../../image/register.jpg'
-import { Link } from 'react-router-dom'
-
+import img from "../../image/register.jpg";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const usersSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(1, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
 
-    const usersSchema = Yup.object().shape({
-        name: Yup.string()
-            .min(1, "Too Short!")
-            .max(100, "Too Long!")
-            .required("Required"),
+    address: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
 
-        address: Yup.string()
-            .min(5, "Too Short!")
-            .max(100, "Too Long!")
-            .required("Required"),
+    email: Yup.string().email("Invalid email").required("Required"),
 
-        email: Yup.string()
-            .email("Invalid email")
-            .required("Required"),
+    phone: Yup.number().required("Required"),
 
-        phone: Yup.number()
-            .required("Required"),
+    username: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
 
-        username: Yup.string()
-            .min(5, "Too Short!")
-            .max(100, "Too Long!")
-            .required("Required"),
+    password: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
 
-        password: Yup.string()
-            .min(5, "Too Short!")
-            .max(100, "Too Long!")
-            .required("Required"),
+    confirmPassword: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
 
             role: Yup.string()
             .required("Required"),
@@ -114,25 +116,25 @@ const Register = () => {
                                     {/* <button className="btn" type="submit">
                                         Submit
                                     </button> */}
-                                    <Button name='Submit' type="submit" />
-                                </Form>
-                            )}
-                        </Formik>
-                    </div>
-                    <div className="right-side">
-
-                        <div className="img-box">
-                            <img src={img} alt="Logo" />
-                            <div className="">
-                                <span>Already have an account <Link to='/'>Login..</Link></span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                  <Button name="Submit" type="submit" />
+                </Form>
+              )}
+            </Formik>
+          </div>
+          <div className="right-side">
+            <div className="img-box">
+              <img src={img} alt="Logo" />
+              <div className="">
+                <span>
+                  Already have an account <Link to="/">Login..</Link>
+                </span>
+              </div>
             </div>
-        </>
-    );
+          </div>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Register;
