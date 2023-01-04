@@ -41,9 +41,9 @@ const Login = () => {
                                 };
                                 try {
                                     const res = await fetch("http://localhost:3005/login", requestOptions)
-                                    console.log(response);
+                                    // console.log(response);
                                     const data = await res.json()
-                                    if (res.status = 200) {
+                                    if (res.status===200) {
                                         alert(data.msg)
                                         navigate('/rider')
                                     }
@@ -57,7 +57,6 @@ const Login = () => {
 
                             }}
                         >
-
                             {({ errors, touched }) => (
                                 <div style={{ display: "flex", alignItem: 'center', justifyContent: 'center' }}>
                                     <Form >
