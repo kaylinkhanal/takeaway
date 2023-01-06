@@ -26,21 +26,34 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  try {
-    const user = await Users.findOne({email: req.body.email})
-    if(user){
-      const {password} = user
-      const isMatched = bcrypt.compareSync(req.body.password, password)
-      console.log(isMatched)
-    }else{
-      res.json({
-        msg: "user doesn't exist"
+  const user = await Users.findOne({email: req.body.email}).lean()
+  if(user){
+    try{
+    const {email,password} = user;
+    const isMatched= bcrypt.compareSync(req.body.password, password)
+    if(email && isMatched){
+      const {password, ...refactoredUserObj} = user
+      res.status(200).json({
+        msg:"logged in successfully",
+        userData: refactoredUserObj
       })
     }
-   
-  } catch (err) {
-    console.log(err);
-  }
+    else{
+      res.status(401).json({
+        error:"unauthorized user"
+      })
+    }
+    }
+    catch(err){
+      console.log(err)
+    }
+    }
+    else{
+      res.json({
+        msg:"user doesn't exist"
+      })
+    }
+
 });
 
 
