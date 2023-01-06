@@ -39,115 +39,81 @@ const Register = () => {
       .required("Required")
       .oneOf([Yup.ref("password"), null], "Passwords must match"),
 
-    role: Yup.string().required("Required"),
-  });
-  const navigate = useNavigate();
-  return (
-    <>
-      <div className="register-area">
-        <div className="register-box">
-          <div className="left-side">
-            <h3>Create an account</h3>
-            <Formik
-              initialValues={{
-                name: "",
-                address: "",
-                email: "",
-                username: "",
-                phone: "",
-                password: "",
-                confirmPassword: "",
-                role: "",
-              }}
-              validationSchema={usersSchema}
-              onSubmit={async(values, { resetForm }) => {
-                const {confirmPassword, ...updatedValues} = values
-                const requestOptions = {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(updatedValues),
-                };
-                try {
-                  const response = await fetch("http://localhost:3005/register", requestOptions)
-                  const data = await response.json()
-                 
-                  if(response.status === 409 && data.error){
-                    alert(data.error)
-                  }else if(response.status === 200){
-                    alert(data.msg)
-                    navigate("/");
-                  }
-                  // resetForm({ values: "" });
-                } catch (err) {
-                  alert(err);
-                }
-              }}
-            >
-              {({ errors, touched }) => (
-                <Form>
-                  <div>
-                    <Field name="name" placeholder="Name" />
-                    {errors.name && touched.name ? (
-                      <div className="validaton-message">{errors.name}</div>
-                    ) : null}
-                  </div>
-                  <div>
-                    <Field name="address" placeholder="Address" />
-                    {errors.address && touched.address ? (
-                      <div className="validaton-message">{errors.address}</div>
-                    ) : null}
-                  </div>
-                  <div>
-                    <Field name="email" placeholder="Email.." />
-                    {errors.email && touched.email ? (
-                      <div className="validaton-message">{errors.email}</div>
-                    ) : null}
-                  </div>
-                  <div>
-                    <Field name="phone" placeholder="Phone.." />
-                    {errors.phone && touched.phone ? (
-                      <div className="validaton-message">{errors.phone}</div>
-                    ) : null}
-                  </div>
-                  <div>
-                    <Field name="username" placeholder="Username " />
-                    {errors.username && touched.username ? (
-                      <div className="validaton-message">{errors.username}</div>
-                    ) : null}
-                  </div>
-                  <div>
-                    <Field
-                      name="password"
-                      placeholder="Password"
-                      type="password"
-                    />
-                    {errors.password && touched.password ? (
-                      <div className="validaton-message">{errors.password}</div>
-                    ) : null}
-                  </div>
-                  <div>
-                    <Field
-                      name="confirmPassword"
-                      placeholder="confirmPassword"
-                      type="password"
-                    />
-                    {errors.confirmPassword && touched.confirmPassword ? (
-                      <div className="validaton-message">
-                        {errors.confirmPassword}
-                      </div>
-                    ) : null}
-                  </div>
-                  <div>
-                    <Field as="select" name="role" placeholder="Account Type">
-                      <option value="">Account Type</option>
-                      <option value="user">User</option>
-                      <option value="rider">Rider</option>
-                    </Field>
-                    {errors.role && touched.role ? (
-                      <div className="validaton-message">{errors.role}</div>
-                    ) : null}
-                  </div>
-                  {/* <button className="btn" type="submit">
+            role: Yup.string()
+            .required("Required"),
+    });
+
+    return (
+        <>
+            <div className="register-area">
+                <div className="register-box">
+                    <div className="left-side">
+                        <h3>Create an account</h3>
+                        <Formik
+                            initialValues={{
+                                name: "",
+                                address: "",
+                                email: "",
+                                username: "",
+                                phone: "",
+                                password: "",
+                                role: "",
+                            }}
+                            validationSchema={usersSchema}
+                            onSubmit={(values, { resetForm }) => {
+            
+                            }}
+                        >
+
+                            {({ errors, touched }) => (
+                                <Form>
+                                    <div>
+                                        <Field name="name" placeholder="Name" />
+                                        {errors.name && touched.name ? (
+                                            <div className="validaton-message">{errors.name}</div>
+                                        ) : null}
+                                    </div>
+                                    <div>
+                                        <Field name="address" placeholder="Address" />
+                                        {errors.address && touched.address ? (
+                                            <div className="validaton-message">{errors.address}</div>
+                                        ) : null}
+                                    </div>
+                                    <div>
+                                        <Field name="email" placeholder="Email.." />
+                                        {errors.email && touched.email ? (
+                                            <div className="validaton-message">{errors.email}</div>
+                                        ) : null}
+                                    </div>
+                                    <div>
+                                        <Field name="phone" placeholder="Phone.." />
+                                        {errors.phone && touched.phone ? (
+                                            <div className="validaton-message">{errors.phone}</div>
+                                        ) : null}
+                                    </div>
+                                    <div>
+                                        <Field name="username" placeholder="Username " />
+                                        {errors.username && touched.username ? (
+                                            <div className="validaton-message">{errors.username}</div>
+                                        ) : null}
+                                    </div>
+                                    <div>
+                                        <Field name="password" placeholder="Password" type="password" />
+                                        {errors.password && touched.password ? (
+                                            <div className="validaton-message">{errors.password}</div>
+                                        ) : null}
+                                    </div>
+                                    <div>
+                                        <Field as="select" name="role" placeholder="Account Type">
+                                            <option value="">Account Type</option>
+                                            <option value="user">User</option>
+                                            <option value="rider">Rider</option>
+
+                                        </Field>
+                                        {errors.role && touched.role ? (
+                                            <div className="validaton-message">{errors.role}</div>
+                                        ) : null}</div>
+                                    {/* <button className="btn" type="submit">
                                         Submit
                                     </button> */}
                   <Button name="Submit" type="submit" />
