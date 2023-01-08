@@ -5,11 +5,14 @@ import { Formik, Form, Field } from "formik";
 import img from "../../image/login.png";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-
+import { useNavigate } from "react-router-dom";
+import addUserDetails from "../../redux/actions/userAction"
+import {useDispatch, useSelector} from "react-redux";
 const Login = () => {
-
+    const dispatch= useDispatch()
+    const navigate = useNavigate();
     const usersSchema = Yup.object().shape({
-        username: Yup.string()
+        email: Yup.string()
             .min(5, "Too Short!")
             .max(100, "Too Long!")
             .required("Required"),
@@ -28,20 +31,23 @@ const Login = () => {
                         <h3>Welcome to login page</h3>
                         <Formik
                             initialValues={{
-                                username: "",
+                                email: "",
                                 password: "",
-
                             }}
                             validationSchema={usersSchema}
-                            onSubmit={(values, { resetForm }) => {
+                            onSubmit={async(values, { resetForm }) => {
                                 const requestOptions = {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(values),
-
                                 };
-                                fetch("http://localhost:3005/login", requestOptions);
-                                console.log(values);
+                                const res = await fetch("http://localhost:3005/login", requestOptions);
+                                const data = await res.json()
+                                if(res.status===200){
+                                    dispatch(addUserDetails(data.userData))
+                                }else{
+                                    alert(data.msg)
+                                }
                                 resetForm({ values: '' })
                             }}
                         >
@@ -51,9 +57,9 @@ const Login = () => {
                                 <Form >
 
                                     <div>
-                                        <Field name="username" placeholder="Username " />
-                                        {errors.username && touched.username ? (
-                                                <div className="validaton-message">{errors.username}</div>
+                                        <Field name="email" placeholder="email" />
+                                        {errors.email && touched.email ? (
+                                                <div className="validaton-message">{errors.email}</div>
                                         ) : null}
                                     </div>
                                     <div>

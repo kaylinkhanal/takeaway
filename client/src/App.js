@@ -1,10 +1,12 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
-import Register from "./containers/auth/Register";
-import Login from "./containers/auth/Login";
+import Register from "./containers/auth/register";
+import Login from "./containers/auth/login";
 import UserDashboard from "./containers/user/userDashboard";
 import RiderDashboard from "./containers/rider/riderDashboard";
+import AdminDashboard from "./containers/admin/adminDashboard";
+
 
 import { useSelector } from "react-redux";
 
@@ -14,6 +16,8 @@ function App() {
       return <RiderScreens/>
     }else if(role === 'user'){
       return <UserScreens/>
+    }else if(role === 'admin'){
+      return <AdminScreens/>
     }
       return <AuthScreens/>
 }
@@ -27,6 +31,13 @@ const AuthScreens = () => {
   )
 }
 
+const AdminScreens = () => {
+  return (
+    <Routes>
+    <Route exact path="/" element={<AdminDashboard />} />
+    </Routes>
+  )
+}
 
 const UserScreens = () => {
   return (
