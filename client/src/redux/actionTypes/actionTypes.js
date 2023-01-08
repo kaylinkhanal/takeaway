@@ -1,0 +1,2 @@
+const ADD_USER_DETAILS = "ADD_USER_DETAILS";
+export default ADD_USER_DETAILS
