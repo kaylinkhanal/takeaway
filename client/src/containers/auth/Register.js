@@ -53,7 +53,6 @@ const Register = () => {
                 name: "",
                 address: "",
                 email: "",
-                username: "",
                 phone: "",
                 password: "",
                 confirmPassword: "",

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import addUserDetails from "../../redux/actions/userAction"
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 const Login = () => {
     const dispatch= useDispatch()
     const navigate = useNavigate();
@@ -45,6 +45,7 @@ const Login = () => {
                                 const data = await res.json()
                                 if(res.status===200){
                                     dispatch(addUserDetails(data.userData))
+                                    navigate('userDashboard')
                                 }else{
                                     alert(data.msg)
                                 }
