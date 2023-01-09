@@ -2,6 +2,8 @@ const express = require("express");
 const { db } = require("../models/Users");
 const router = express.Router();
 const Users = require("../models/Users");
+// const { db } = require("../models/Items");
+const Items = require("../models/Items");
 const bcrypt = require("bcrypt")
 
 router.post("/register", async (req, res) => {
@@ -54,6 +56,31 @@ router.post("/login", async (req, res) => {
       })
     }
 
+});
+
+
+router.post("/additem", async (req, res) => {
+  try {
+    Items.findOne({ catagoryName: req.body.catagoryName }).then((item) => {
+      console.log(item);
+      
+      if(!item){
+        const itemData =  Items.create(req.body);
+         console.log(itemData);
+        if (itemData) {
+          res.json({ msg: "Item is added" });
+        } else {
+          res.json({ msg: "something went worng" });
+        } 
+      }
+      else{
+        res.status(409).json({ error: "item already exists" });
+      }
+ 
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 

@@ -116,3 +116,28 @@ select {
     width: 300px;
     height: auto;
 }
+
+
+/* Style for Add Items at Admin panel */
+.form-group label{
+    font-size: 17px;
+    font-weight: 600;
+    margin:0 10px;
+    
+}
+.form-group input{
+   width:40%;
+   height:4%;
+}
+
+/* style for button */
+.button{
+    background-color:rgb(94, 162, 245);
+    padding:3%;
+    border: none;
+    border-radius: 0;
+    color: rgb(35, 35, 35);
+    font-weight: 400;
+    font-size: 1.1rem;
+    margin-top: 25px;
+}

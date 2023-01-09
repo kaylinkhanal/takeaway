@@ -1,10 +1,10 @@
 import React from 'react'
 
-const RiderDashboard=()=> {
+const RiderDashboard=(name)=> {
   return (
     <div>
     <h1>
-    <input type="file"/>
+     Hii {name} !!
     </h1>
     </div>
   )

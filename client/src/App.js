@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import {  Routes, Route} from 'react-router-dom'
 import Register from "./containers/auth/register";
 import Login from "./containers/auth/login";
 import UserDashboard from "./containers/user/userDashboard";
@@ -16,7 +16,8 @@ function App() {
       return <RiderScreens/>
     }else if(role === 'user'){
       return <UserScreens/>
-    }else if(role === 'admin'){
+    }else 
+    if(role === 'admin'){
       return <AdminScreens/>
     }
       return <AuthScreens/>
