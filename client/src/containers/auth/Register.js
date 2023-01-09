@@ -2,8 +2,8 @@ import React from "react";
 // import "./register.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { Button } from "../../components/Button";
 import img from "../../image/register.jpg";
+import {Button} from 'antd'
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 

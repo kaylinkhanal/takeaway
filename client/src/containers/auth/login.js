@@ -1,12 +1,12 @@
 import React from "react";
 // import "./login.css";
-import { Button } from "../../components/Button";
+import { Button } from "../../components/button";
 import { Formik, Form, Field } from "formik";
 import img from "../../image/login.png";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import addUserDetails from "../../redux/actions/userAction"
+import {addUserDetails} from "../../redux/actions/userAction"
 import {useDispatch} from "react-redux";
 const Login = () => {
     const dispatch= useDispatch()
@@ -45,7 +45,6 @@ const Login = () => {
                                 const data = await res.json()
                                 if(res.status===200){
                                     dispatch(addUserDetails(data.userData))
-                                    navigate('userDashboard')
                                 }else{
                                     alert(data.msg)
                                 }

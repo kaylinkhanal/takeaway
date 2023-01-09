@@ -3,16 +3,16 @@ import { Drawer, Modal, Button } from "antd";
 import "../../App.css";
 import {Formik,Field,Form} from 'formik';
 import * as Yup from 'yup';
-
+import {useDispatch} from "react-redux";
+import {logoutResetDetails} from "../../redux/actions/userAction"
 const AdminDashboard = () => {
+  const dispatch= useDispatch()
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+ 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -30,21 +30,22 @@ const AdminDashboard = () => {
         .max(100, "Too Long!")
         .required("Required"),
 
-    price: Yup.string()
+        minimumDeliveryPrice: Yup.string()
         .required("Required"),
 });
+
+  const triggerLogout = () => {
+    dispatch(logoutResetDetails())
+  }
+
   return (
     <>
-      <button type="primary" onClick={showDrawer}>
-        Open
-      </button>
-      <Button type="primary" onClick={showModal}>
-        Add Items
-      </Button>
+      <button type="primary" onClick={showDrawer}> Open</button>
+      <Button type="primary" onClick={showModal}>Add Items</Button>
       <Modal
         title="Add Items"
+        footer={null}
         open={isModalOpen}
-        onOk={handleOk}
         onCancel={handleCancel}
       >
         {/* Start  Add Items */}
@@ -52,7 +53,7 @@ const AdminDashboard = () => {
         <Formik
           initialValues={{
             catagoryName: "",
-            price: "",
+            minimumDeliveryPrice: "",
           }}
           validationSchema={itemSchema}
           onSubmit={async (values, { resetForm }) => {
@@ -85,12 +86,12 @@ const AdminDashboard = () => {
                 </div>
                 <div>
                   <Field
-                    name="price"
-                    placeholder="Price"
+                    name="minimumDeliveryPrice"
+                    placeholder="minimum delivery price"
                     type="number"
                   />
-                  {errors.price && touched.price ? (
-                    <div className="validaton-message">{errors.price}</div>
+                  {errors.minimumDeliveryPrice && touched.minimumDeliveryPrice ? (
+                    <div className="validaton-message">{errors.minimumDeliveryPrice}</div>
                   ) : null}
                 </div>
                 <button className="button" name="Sumbit" type="submit">Add Item</button>
@@ -110,6 +111,7 @@ const AdminDashboard = () => {
         <li>Delivery Items</li>
         <li>Update crendentials</li>
       </Drawer>
+      <button onClick={()=> triggerLogout()}>Log out</button>
     </>
   );
 };

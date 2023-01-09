@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const itemSchema = new mongoose.Schema(
   {
     catagoryName: { type: String },
-    price: { type: Number },
+    minimumDeliveryPrice: { type: Number },
   },
   { collection: "items" }
 );
