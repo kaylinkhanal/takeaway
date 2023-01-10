@@ -14,11 +14,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
-<<<<<<< HEAD
     "mongoose": "^6.8.2"
-=======
-    "mongoose": "^6.8.2",
-    "react-router-dom": "^6.6.1"
->>>>>>> 1116cf309c576cad60e1484e9cb419e6fab9f747
   }
 }

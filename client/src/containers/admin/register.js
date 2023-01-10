@@ -1,111 +1,176 @@
 import React from "react";
+// import "./register.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { Button } from "../../components/Button";
+import img from "../../image/register.jpg";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const registerSchema = Yup.object().shape({
+  const usersSchema = Yup.object().shape({
     name: Yup.string()
       .min(1, "Too Short!")
       .max(100, "Too Long!")
       .required("Required"),
 
-    email: Yup.string().email().required("Required"),
+    address: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
 
-    phone: Yup.number()
-      .min(9, "invalid number")
+    email: Yup.string().email("Invalid email").required("Required"),
+
+    phone: Yup.number().required("Required"),
+
+    username: Yup.string()
+      .min(2, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
+
+    password: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
+
+    confirmPassword: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
       .required("Required")
-      .positive()
-      .integer()
-   ,
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
 
-    password: Yup.string().min(6, "min 6").required("Required"),
-
-    country: Yup.string().required("Required"),
-
-    address: Yup.string().required("Required"),
+    role: Yup.string().required("Required"),
   });
+  const navigate = useNavigate();
   return (
     <>
-      <Formik
-        initialValues={{
-          name: "",
-          email: "",
-          Phone: "",
-          paassword: "",
-          country: "",
-          address: "",
-          role:""
-        }}
-        validationSchema={registerSchema}
-        onSubmit={(values) => {
-          const requestOptions = {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(values),
-          };
-          fetch("http://localhost:3005/register", requestOptions);
-        }}
-      >
-        {({ errors, touched }) => (
-          <Form
-            style={{
-                display:"block",
-              padding: "12px 20px",
-              margin: " 5px   ",
-              border: "1px solid #ccc",
-              width: "500px",
-              height:"800px"
-             
-            }}
-          >
-            <h1 style={{ color: "blue", fontSize: "20px" }}>REGISTRATION</h1>
-            <label>Full Name</label>
-            <Field name="name" placeholder="name" />
-            {errors.name && touched.name ? <div>{errors.name}</div> : null}
-            <br />
-            <label>Email</label>
-            <Field name="email" placeholder="email" />
-            {errors.email && touched.email ? <div>{errors.email}</div> : null}
-            <br />
-            <label>Phone</label>
-            <Field name="phone" placeholder="phone" type="phone" />
-            {errors.phone && touched.phone ? <div>{errors.phone}</div> : null}
-            <br />
-            <label>Password</label>
-            <Field name="password" placeholder="password" type="password" />
-            {errors.password && touched.password ? (
-              <div>{errors.password}</div>
-            ) : null}
-            <br />
-            <label>Country</label>
-            <Field name="country" placeholder="country" type="country" />
-            {errors.country && touched.country ? (
-              <div>{errors.country}</div>
-            ) : null}
-            <br />
-            <label>Address</label>
-            <Field name="address" placeholder="address" type="address" />
-            {errors.address && touched.address ? (
-              <div>{errors.address}</div>
-            ) : null}
-            <br />
-            <label for="role">
-              user Role
-              <select name="role" id="role">
-              <option value="user">account type</option>
-                <option value="user">user</option>
-                <option value="rider">rider</option>
-              </select>
-            </label>
+      <div className="register-area">
+        <div className="register-box">
+          <div className="left-side">
+            <h3>Create an account</h3>
+            <Formik
+              initialValues={{
+                name: "",
+                address: "",
+                email: "",
+                username: "",
+                phone: "",
+                password: "",
+                confirmPassword: "",
+                role: "",
+              }}
+              validationSchema={usersSchema}
+              onSubmit={async (values, { resetForm }) => {
+                const { confirmPassword, ...updatedValues } = values;
+                const requestOptions = {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(updatedValues),
+                };
+                try {
+                  const response = await fetch(
+                    "http://localhost:3005/register",
+                    requestOptions
+                  );
+                  const data = await response.json();
 
-            <br />
-            <button type="submit">Register</button>
-           
-            <a href="./login"> Already have an account</a>
-          </Form>
-        )}
-      </Formik>
+                  if (response.status === 409 && data.error) {
+                    console.log(data.error);
+                    alert(data.error);
+                  } else if (response.status === 200) {
+                    console.log(data.msg);
+                    alert(data.msg);
+                    navigate("/");
+                  }
+                  resetForm({ values: "" });
+                } catch (err) {
+                  alert(err);
+                }
+              }}
+            >
+              {({ errors, touched }) => (
+                <Form>
+                  <div>
+                    <Field name="name" placeholder="Name" />
+                    {errors.name && touched.name ? (
+                      <div className="validaton-message">{errors.name}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field name="address" placeholder="Address" />
+                    {errors.address && touched.address ? (
+                      <div className="validaton-message">{errors.address}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field name="email" placeholder="Email.." />
+                    {errors.email && touched.email ? (
+                      <div className="validaton-message">{errors.email}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field name="phone" placeholder="Phone.." />
+                    {errors.phone && touched.phone ? (
+                      <div className="validaton-message">{errors.phone}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field name="username" placeholder="Username " />
+                    {errors.username && touched.username ? (
+                      <div className="validaton-message">{errors.username}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field
+                      name="password"
+                      placeholder="Password"
+                      type="password"
+                    />
+                    {errors.password && touched.password ? (
+                      <div className="validaton-message">{errors.password}</div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field
+                      name="confirmPassword"
+                      placeholder="confirmPassword"
+                      type="password"
+                    />
+                    {errors.confirmPassword && touched.confirmPassword ? (
+                      <div className="validaton-message">
+                        {errors.confirmPassword}
+                      </div>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Field as="select" name="role" placeholder="Account Type">
+                      <option value="">Account Type</option>
+                      <option value="user">User</option>
+                      <option value="rider">Rider</option>
+                    </Field>
+                    {errors.role && touched.role ? (
+                      <div className="validaton-message">{errors.role}</div>
+                    ) : null}
+                  </div>
+                  <Button name="Submit" type="submit" />
+                </Form>
+              )}
+            </Formik>
+          </div>
+          <div className="right-side">
+            <div className="img-box">
+              <img src={img} alt="Logo" />
+              <div className="">
+                <span>
+                  Already have an account <Link to="/">Login..</Link>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
+
 export default Register;

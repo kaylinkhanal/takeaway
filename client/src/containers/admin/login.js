@@ -1,53 +1,108 @@
-import React from 'react'
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import { Button } from "../../components/Button";
+import { Formik, Form, Field } from "formik";
+import img from "../../image/login.png";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 const Login = () => {
-    const loginSchema = Yup.object().shape({
-        name: Yup.string()
-          .min(1, 'Too Short!')
-          .max(100, 'Too Long!')
-          .required('Required'),
-          password:Yup.string()
-          .required()
-      });
+  const usersSchema = Yup.object().shape({
+    email: Yup.string().email("Invalid email").required("Required"),
+
+    password: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
+  });
+  const navigate = useNavigate();
+
   return (
     <>
-      <Formik
-       initialValues={{
-        name: '',
-        password:''
-       }}
-       validationSchema={loginSchema}
-       onSubmit={values => {
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(values)
-        };
-         fetch('http://localhost:3005/login',requestOptions )
-       }}
-     >
-       {({ errors, touched }) => (
-         <Form >
-            <h1>Login Page</h1>
-           <Field name="userid" placeholder="user id"/>
-           {errors.userid && touched.userid ? (
-             <div>{errors.userid}</div>
-           ) : null}
-           <br/>
-           <Field name="password" type="password" placeholder="enter password"/>
-           {errors.password && touched.password ? (
-             <div>{errors.password}</div>
-           ) : null}
-           <br/>
-           
-           <button type="submit">Login</button>
-         </Form>
-       )}
-     </Formik>
-    </>
-  )
-}
+      <div className="login-area">
+        <div className="login-box">
+          <div className="left-side">
+            <h3>Welcome to login page</h3>
+            <Formik
+              initialValues={{
+                email: "",
+                password: "",
+              }}
+              validationSchema={usersSchema}
+              onSubmit={async (values) => {
+                const requestOptions = {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(values),
+                };
+                try {
+                  const response = await fetch(
+                    "http://localhost:3005/login",
+                    requestOptions
+                  );
+                  console.log(response);
 
-export default Login
+                  const data = await response.json();
+                  console.log(data);
+                  if (response.status === 200) {
+                    alert(data.msg);
+                    navigate("/dashBoard");
+                  } else {
+                    alert(data.error);
+                  }
+                } catch (err) {
+                  alert(err);
+                }
+              }}
+            >
+              {({ errors, touched }) => (
+                <div
+                  style={{
+                    display: "flex",
+                    alignItem: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Form>
+                    <div>
+                      <Field name="email" placeholder="email " />
+                      {errors.email && touched.email ? (
+                        <div className="validaton-message">{errors.email}</div>
+                      ) : null}
+                    </div>
+                    <div>
+                      <Field
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                      />
+                      {errors.password && touched.password ? (
+                        <div className="validaton-message">
+                          {errors.password}
+                        </div>
+                      ) : null}
+                    </div>
+
+                    <Button name="Submit" type="submit" />
+                  </Form>
+                </div>
+              )}
+            </Formik>
+          </div>
+          <div className="right-side">
+            <div className="img-box">
+              <img src={img} alt="Logo" width={300} />
+              <div className="">
+                <span>
+                  <Link to="/register">Create an account </Link>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default Login;
