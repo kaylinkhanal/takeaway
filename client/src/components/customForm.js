@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, } from "formik";
 import { Link } from "react-router-dom";
-import { Button } from "./button"
+import { Button } from "./Button"
 import * as Yup from "yup";
 
 const CustomForm = () => {

@@ -1,6 +1,6 @@
 import React from "react";
 // import "./login.css";
-import { Button } from "../../components/button";
+import { Button } from "../../components/Button";
 import { Formik, Form, Field } from "formik";
 import img from "../../image/login.png";
 import { Link } from "react-router-dom";
@@ -8,7 +8,11 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import {addUserDetails} from "../../redux/actions/userAction"
 import {useDispatch} from "react-redux";
+
+
+
 const Login = () => {
+    console.log(process.env.REACT_APP_NOT_SECRET_CODE)
     const dispatch= useDispatch()
     const navigate = useNavigate();
     const usersSchema = Yup.object().shape({
@@ -41,7 +45,7 @@ const Login = () => {
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(values),
                                 };
-                                const res = await fetch("http://localhost:3005/login", requestOptions);
+                                const res = await fetch(`${process.env.REACT_APP_NOT_SECRET_CODE}+/login`, requestOptions);
                                 const data = await res.json()
                                 if(res.status===200){
                                     dispatch(addUserDetails(data.userData))

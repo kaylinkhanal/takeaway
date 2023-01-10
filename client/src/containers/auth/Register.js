@@ -3,7 +3,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import img from "../../image/register.jpg";
-import { Button } from "../../components/button";
+import { Button } from "../../components/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { responseHandler } from "../../utils/responseHandler"
@@ -67,7 +67,7 @@ const Register = () => {
                   body: JSON.stringify(updatedValues),
                 };
                 try {
-                  const response = await fetch("http://localhost:3005/register", requestOptions)
+                  const response = await fetch(`${process.env.REACT_APP_NOT_SECRET_CODE}+/register`, requestOptions)
                   const data = await response.json()
                   const alertMessage = responseHandler(response, data.errorMsg)
                   alert(alertMessage)

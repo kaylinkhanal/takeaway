@@ -63,7 +63,7 @@ const AdminDashboard = () => {
               body: JSON.stringify(values),
             };
             const res = await fetch(
-              "http://localhost:3005/additem",
+              `${process.env.REACT_APP_NOT_SECRET_CODE}+/additem`,
               requestOptions
             );
             const data = await res.json();

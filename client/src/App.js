@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
 import {  Routes, Route} from 'react-router-dom'
-import Register from "./containers/auth/register";
-import Login from "./containers/auth/Login";
+import Register from "./containers/auth/Register";
+import Login from "./containers/auth/login";
 import UserDashboard from "./containers/user/userDashboard";
 import RiderDashboard from "./containers/rider/riderDashboard";
 import AdminDashboard from "./containers/admin/adminDashboard";

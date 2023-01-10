@@ -1,12 +1,12 @@
 import React,{useEffect, useState} from 'react'
 import { useSelector} from 'react-redux'
 import axios from "axios";
-import  Card  from '../../components/card';
+import  Card  from '../../components/Card';
 function UserDashboard() {
     const {name} = useSelector(state=>state.user)
     const [validItems, setValidItems] = useState([])
     const fetchAvailableItems= ()=>{
-        axios.get("http://localhost:3005/items").then((response) => {
+        axios.get(`${process.env.REACT_APP_NOT_SECRET_CODE}+/items`).then((response) => {
             setValidItems(response.data.validItemOptions)
           });
           
