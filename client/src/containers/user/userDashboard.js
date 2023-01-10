@@ -9,6 +9,7 @@ function UserDashboard() {
         axios.get("http://localhost:3005/items").then((response) => {
             setValidItems(response.data.validItemOptions)
           });
+          
     }
     useEffect(()=>{
         fetchAvailableItems()
