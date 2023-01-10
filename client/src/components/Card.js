@@ -1,10 +1,11 @@
 import React from 'react'
 import './button.css'
 
-export const Card = (props) => {
+ const Card = (props) => {
   return (
     <div>
-       {props.title}
+       {props.item.catagoryName}
     </div>
   )
 }
+export default Card
