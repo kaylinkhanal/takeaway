@@ -36,13 +36,14 @@ router.post("/login", async (req, res) => {
     if(email && isMatched){
       const {password, ...refactoredUserObj} = user
       res.status(200).json({
-        msg:"logged in successfully",
+        msg:"Logged in successfully",
+        isLogin:true,
         userData: refactoredUserObj
       })
     }
     else{
       res.status(401).json({
-        error:"unauthorized user"
+        msg:"Invalid email & password"
       })
     }
     }
@@ -52,7 +53,7 @@ router.post("/login", async (req, res) => {
     }
     else{
       res.json({
-        msg:"user doesn't exist"
+        msg:"User Doesn't Exist"
       })
     }
 

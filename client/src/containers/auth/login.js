@@ -5,15 +5,17 @@ import { Formik, Form, Field } from "formik";
 import img from "../../image/login.png";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import {addUserDetails} from "../../redux/actions/userAction"
 import {useDispatch} from "react-redux";
+import { message } from 'antd';
+
+
 const Login = () => {
     const dispatch= useDispatch()
-    const navigate = useNavigate();
     const usersSchema = Yup.object().shape({
         email: Yup.string()
-            .min(5, "Too Short!")
+            .min(3, "Too Short!")
             .max(100, "Too Long!")
             .required("Required"),
 
@@ -43,10 +45,11 @@ const Login = () => {
                                 };
                                 const res = await fetch("http://localhost:3005/login", requestOptions);
                                 const data = await res.json()
-                                if(res.status===200){
+                                if(data.isLogin){
                                     dispatch(addUserDetails(data.userData))
+                                    message.success(data.msg,[4])
                                 }else{
-                                    alert(data.msg)
+                                message.error(data.msg,[3])
                                 }
                                 resetForm({ values: '' })
                             }}
