@@ -1,9 +1,6 @@
 const express = require("express");
-const { db } = require("../models/Users");
 const router = express.Router();
 const Users = require("../models/Users");
-// const { db } = require("../models/Items");
-const Items = require("../models/Items");
 const bcrypt = require("bcrypt")
 
 router.post("/register", async (req, res) => {
@@ -16,10 +13,10 @@ router.post("/register", async (req, res) => {
         if (userData) {
           res.json({ msg: "user is added" });
         } else {
-          res.json({ msg: "something went worng" });
+          res.json({ errorMsg: "something went worng" });
         }
       } else {
-        res.status(409).json({ error: "user already exists" });
+        res.status(409).json({ errorMsg: "user already exists" });
       }
     });
   } catch (err) {
@@ -42,7 +39,7 @@ router.post("/login", async (req, res) => {
     }
     else{
       res.status(401).json({
-        error:"unauthorized user"
+        errorMsg:"unauthorized user"
       })
     }
     }
@@ -52,36 +49,10 @@ router.post("/login", async (req, res) => {
     }
     else{
       res.json({
-        msg:"user doesn't exist"
+        errorMsg:"user doesn't exist"
       })
     }
 
 });
-
-
-router.post("/additem", async (req, res) => {
-  try {
-    Items.findOne({ catagoryName: req.body.catagoryName }).then((item) => {
-      console.log(item);
-      
-      if(!item){
-        const itemData =  Items.create(req.body);
-         console.log(itemData);
-        if (itemData) {
-          res.json({ msg: "Item is added" });
-        } else {
-          res.json({ msg: "something went worng" });
-        } 
-      }
-      else{
-        res.status(409).json({ error: "item already exists" });
-      }
- 
-    });
-  } catch (err) {
-    console.log(err);
-  }
-});
-
 
 module.exports = router;
