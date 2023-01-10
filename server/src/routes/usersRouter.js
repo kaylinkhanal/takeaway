@@ -13,10 +13,10 @@ router.post("/register", async (req, res) => {
         if (userData) {
           res.json({ msg: "user is added" });
         } else {
-          res.json({ msg: "something went worng" });
+          res.json({ errorMsg: "something went worng" });
         }
       } else {
-        res.status(409).json({ error: "user already exists" });
+        res.status(409).json({ errorMsg: "user already exists" });
       }
     });
   } catch (err) {
@@ -39,7 +39,7 @@ router.post("/login", async (req, res) => {
     }
     else{
       res.status(401).json({
-        error:"unauthorized user"
+        errorMsg:"unauthorized user"
       })
     }
     }
@@ -49,7 +49,7 @@ router.post("/login", async (req, res) => {
     }
     else{
       res.json({
-        msg:"user doesn't exist"
+        errorMsg:"user doesn't exist"
       })
     }
 

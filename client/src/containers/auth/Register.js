@@ -3,10 +3,10 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import img from "../../image/register.jpg";
-import {Button} from 'antd'
+import { Button } from "../../components/button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-
+import { responseHandler } from "../../utils/responseHandler"
 const Register = () => {
   const usersSchema = Yup.object().shape({
     name: Yup.string()
@@ -69,13 +69,8 @@ const Register = () => {
                 try {
                   const response = await fetch("http://localhost:3005/register", requestOptions)
                   const data = await response.json()
-                 
-                  if(response.status === 409 && data.error){
-                    alert(data.error)
-                  }else if(response.status === 200){
-                    alert(data.msg)
-                    navigate("/");
-                  }
+                  const alertMessage = responseHandler(response, data.errorMsg)
+                  alert(alertMessage)
                   // resetForm({ values: "" });
                 } catch (err) {
                   alert(err);
