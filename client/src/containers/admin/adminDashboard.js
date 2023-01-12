@@ -6,6 +6,8 @@ import * as Yup from 'yup';
 import {useDispatch} from "react-redux";
 import {logoutResetDetails} from "../../redux/actions/userAction"
 const AdminDashboard = () => {
+ 
+  const [modal2Open, setModal2Open] = useState(false);
   const dispatch= useDispatch()
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,6 +26,8 @@ const AdminDashboard = () => {
     setOpen(false);
   };
 
+
+
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
         .min(5, "Too Short!")
@@ -34,6 +38,15 @@ const AdminDashboard = () => {
         .required("Required"),
 });
 
+const measurementSchema = Yup.object().shape({
+  catagoryName: Yup.string()
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
+
+      minimumDeliveryPrice: Yup.string()
+      .required("Required"),
+});
   const triggerLogout = () => {
     dispatch(logoutResetDetails())
   }
@@ -102,6 +115,7 @@ const AdminDashboard = () => {
     
         {/* End  Add Items */}
       </Modal>
+      
       <Drawer
         title="Admin options"
         placement="left"
@@ -111,7 +125,78 @@ const AdminDashboard = () => {
         <li>Delivery Items</li>
         <li>Update crendentials</li>
       </Drawer>
-      <button onClick={()=> triggerLogout()}>Log out</button>
+      <button onClick={()=> triggerLogout()}>Log out</button> 
+    
+      <br />
+      <br />
+
+
+   {/* measurement */}
+
+      <Button type="primary" onClick={() => setModal2Open(true)}>
+         Add Measurement
+      </Button>
+      <Modal
+        
+        centered
+        open={modal2Open}
+        footer={null}
+        onCancel={() => setModal2Open(false)}
+      >
+       <h1>Add Measurement</h1>    
+        <Formik
+          initialValues={{
+            ParameterName: "",
+            minimumValue: "",
+          }}
+          validationSchema={measurementSchema}
+          onSubmit={async (values, { resetForm }) => {
+            console.log(values)
+            const requestOptions = {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(values),
+            };
+            const res = await fetch(
+              "http://localhost:3005/addmeasurement",
+              requestOptions
+            );
+            const data = await res.json();
+            if (res.status === 200) {
+              alert(data.msg)
+            } else {
+              alert(data.msg);
+            }
+            resetForm({ values: "" });
+          }}
+        >
+         {({ errors, touched }) => (
+            <div>
+              <Form>
+                <div>
+                  <Field name="ParameterName" placeholder="ParameterName" />
+                  {errors.catagoryName && touched.catagoryName ? (
+                    <div className="validaton-message">{errors.ParameterName}</div>
+                  ) : null}
+                </div>
+                <div>
+                  <Field
+                    name=" minimumValue"
+                    placeholder=" minimumValue"
+                    type="number,string"
+                  />
+                  {errors.minimumValue && touched.minimumValue ? (
+                    <div className="validaton-message">{errors.minimumValue}</div>
+                  ) : null}
+                </div>
+                <button className="button" type="submit">Add Details</button>
+              </Form>
+            </div>
+          )}
+        </Formik>
+      </Modal>
+    
+
     </>
   );
 };

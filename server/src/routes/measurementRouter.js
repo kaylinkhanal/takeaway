@@ -1,22 +1,22 @@
 const express = require("express");
 const router = express.Router();
-const Items = require("../models/Items");
 const Measurement = require("../models/measurement");
+
   
-router.post("/additem", async (req, res) => {
+router.post("/addmeasurement", async (req, res) => {
     try {
-      Items.findOne({ catagoryName: req.body.catagoryName }).then((item) => {
+     Measurement.findOne({ parameterName: req.body.parameterName }).then((item) => {
         if(!item){
-          const itemData =  Items.create(req.body);
-           console.log(itemData);
-          if (itemData) {
-            res.json({ msg: "Item is added" });
+          const measurementData =  Measurement.create(req.body);
+           console.log(measurementData);
+          if (measurementData) {
+            res.json({ msg: "measurement is added" });
           } else {
             res.json({ msg: "something went worng" });
           } 
         }
         else{
-          res.status(409).json({ error: "item already exists" });
+          res.status(409).json({ error: "already exists" });
         }
    
       });
@@ -25,9 +25,9 @@ router.post("/additem", async (req, res) => {
     }
   });
   
-router.get("/items", async (req, res) => {
+router.get("/measurement", async (req, res) => {
 try {
-    const data = await Items.find()
+    const data = await Measurement.find()
     if(data){
         res.status(200).json({
             validItemOptions: data
