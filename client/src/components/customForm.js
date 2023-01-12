@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import { Formik, Form, Field, } from "formik";
 import { Link } from "react-router-dom";
 import { CustomButton } from "./customButton"
 import * as Yup from "yup";
+import axios from "axios";
 
 const CustomForm = (props) => {
   const usersSchema = Yup.object().shape({
@@ -11,16 +12,20 @@ const CustomForm = (props) => {
       .max(100, "Too Long!")
       .required("Required"),
   });
-  const tempObj = {}
-  props.inputFields.map((item)=>{
-    tempObj[item] = ''
-  })
+  const [formStep, setFormStep] = useState(1)
+
+
   return (
     <Formik
-      initialValues={tempObj}
+      initialValues={{}}
       // validationSchema={usersSchema}
       onSubmit={async (values, { resetForm }) => {
-        
+        if(formStep ==1){
+          setFormStep(formStep+1)
+        }else{
+         axios.post(`http://localhost:3005/${props.endpoint}`, values)
+        }
+    
       }}
     >
       {({ errors, touched }) => (
@@ -32,18 +37,37 @@ const CustomForm = (props) => {
           }}
         >
           <Form>
-              {props.inputFields.map((item)=>{
-                return (
-                  <div>
-                  <Field name={item} placeholder={item} type= {item=="password" ? "password" : "text"} />
-                  {errors[item] && touched[item] ? (
-                    <div className="validaton-message">{errors[item]}</div>
-                  ) : null}
-                </div>
-                )
-              })}
+              {formStep == 1 ? (
+                <>
+                  {props.itemDetails.map((item)=>{
+                    return (
+                      <div>
+                      <Field name={item}  key={item} placeholder={item} type= {item=="password" ? "password" : "text"} />
+                      {errors[item] && touched[item] ? (
+                        <div className="validaton-message">{errors[item]}</div>
+                      ) : null}
+                    </div>
+                    )
+                  })}
+                  </>
+              ): (
+                <>
+                {props.senderDetails.map((item)=>{
+                  return (
+                    <div>
+                    <Field name={item} key={item} placeholder={item} type= {item=="password" ? "password" : "text"} />
+                    {errors[item] && touched[item] ? (
+                      <div className="validaton-message">{errors[item]}</div>
+                    ) : null}
+                  </div>
+                  )
+                })}
+                </>
+              )}
+
              
-            <CustomButton name="Submit" type="submit" />
+             
+            <CustomButton name={formStep ==1 ? "Next" : "Submit"} type="submit" />
           </Form>
         </div>
       )}
