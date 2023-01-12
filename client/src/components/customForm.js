@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Form, Field, } from "formik";
 import { Link } from "react-router-dom";
-import { Button } from "./button"
+import { CustomButton } from "./customButton"
 import * as Yup from "yup";
 
 const CustomForm = (props) => {
@@ -20,8 +20,7 @@ const CustomForm = (props) => {
       initialValues={tempObj}
       // validationSchema={usersSchema}
       onSubmit={async (values, { resetForm }) => {
-        debugger;
-      console.log(values)
+        
       }}
     >
       {({ errors, touched }) => (
@@ -44,7 +43,7 @@ const CustomForm = (props) => {
                 )
               })}
              
-            <Button name="Submit" type="submit" />
+            <CustomButton name="Submit" type="submit" />
           </Form>
         </div>
       )}

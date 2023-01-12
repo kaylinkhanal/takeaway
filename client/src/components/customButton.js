@@ -1,8 +1,6 @@
 import React from 'react'
 import './button.css'
-
-export const Button = (props) => {
-
+export const CustomButton = (props) => {
   return (
     <div>
         <button className='btn' type='{props.type}'>{props.name}</button>

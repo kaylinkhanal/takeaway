@@ -1,6 +1,6 @@
 import React from "react";
 // import "./login.css";
-import { Button } from "../../components/button";
+import { CustomButton } from "../../components/customButton";
 import { Formik, Form, Field } from "formik";
 import img from "../../image/login.png";
 import { Link } from "react-router-dom";
@@ -70,7 +70,7 @@ const Login = () => {
                                         ) : null}
                                     </div>
 
-                                    <Button name='Submit' type="submit" />
+                                    <CustomButton name='Submit' type="submit" />
                                 </Form>
                                 </div>
                             )}

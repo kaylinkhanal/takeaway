@@ -3,7 +3,7 @@ import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import img from "../../image/register.jpg";
-import { Button } from "../../components/button";
+import { CustomButton } from "../../components/customButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { responseHandler } from "../../utils/responseHandler"
@@ -144,7 +144,7 @@ const Register = () => {
                   {/* <button className="btn" type="submit">
                                         Submit
                                     </button> */}
-                  <Button name="Submit" type="submit" />
+                  <CustomButton name="Submit" type="submit" />
                 </Form>
               )}
             </Formik>
