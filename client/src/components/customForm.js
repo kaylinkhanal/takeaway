@@ -4,20 +4,25 @@ import { Link } from "react-router-dom";
 import { Button } from "./button"
 import * as Yup from "yup";
 
-const CustomForm = () => {
+const CustomForm = (props) => {
   const usersSchema = Yup.object().shape({
     password: Yup.string()
       .min(5, "Too Short!")
       .max(100, "Too Long!")
       .required("Required"),
   });
+  const tempObj = {}
+  props.inputFields.map((item)=>{
+    tempObj[item] = ''
+  })
   return (
     <Formik
-      // initialValues={}
-      validationSchema={usersSchema}
-      // onSubmit={async (values, { resetForm }) => {
-      //   null;
-      // }}
+      initialValues={tempObj}
+      // validationSchema={usersSchema}
+      onSubmit={async (values, { resetForm }) => {
+        debugger;
+      console.log(values)
+      }}
     >
       {({ errors, touched }) => (
         <div
@@ -28,12 +33,17 @@ const CustomForm = () => {
           }}
         >
           <Form>
-            <div>
-              <Field name="password" placeholder="Password" type="password" />
-              {errors.password && touched.password ? (
-                <div className="validaton-message">{errors.password}</div>
-              ) : null}
-            </div>
+              {props.inputFields.map((item)=>{
+                return (
+                  <div>
+                  <Field name={item} placeholder={item} type= {item=="password" ? "password" : "text"} />
+                  {errors[item] && touched[item] ? (
+                    <div className="validaton-message">{errors[item]}</div>
+                  ) : null}
+                </div>
+                )
+              })}
+             
             <Button name="Submit" type="submit" />
           </Form>
         </div>
