@@ -54,6 +54,7 @@ select {
     padding: 2rem 2rem 3rem 3rem;
 
 }
+
 .right-side,
 .login-area .login-box .left-side {
     width: 50%;
@@ -275,6 +276,34 @@ select {
     color: rgb(32, 147, 248);
 }
 
+.adminDrawer {
+    position: absolute;
+    margin-top: -42px;
+    margin-left: 19%;
+    width: 27px;
+    height: 27px;
+    color: white;
+}
+
+.adminDrawer:hover {
+    cursor: pointer;
+    color: rgb(32, 147, 248);;
+}
+
+.addItems {
+    position: absolute;
+    margin-top: -42px;
+    margin-left: 30%;
+    background-color: rgb(32, 147, 248);
+    color: white;
+    font-size: 1.2rem;
+    padding: 0 10px;
+}
+
+.addItems:hover {
+    background-color: white;
+}
+
 @media screen and (max-width:768px) {
     .navBox1 {
         width: 100%;
@@ -294,8 +323,19 @@ select {
         width: 300px;
         height: 300px;
     }
+
     .user_details {
         margin-right: 20px;
+    }
+
+    .adminDrawer {
+        margin-left: 75%;
+
+    }
+
+    .addItems {
+        margin-left: 50%;
+        background-color: rgb(231, 111, 81);
     }
 
 }

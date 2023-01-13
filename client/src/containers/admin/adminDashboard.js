@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Drawer, Modal, Button } from "antd";
+import {faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "../../App.css";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
@@ -42,8 +44,8 @@ const AdminDashboard = () => {
   return (
     <>
       <NavBar />
-      <button type="primary" onClick={showDrawer}> Open</button>
-      <Button type="primary" onClick={showModal}>Add Items</Button>
+       <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
+      <Button onClick={showModal} className="addItems">Add Items</Button>
       <Modal
         title="Add Items"
         footer={null}
