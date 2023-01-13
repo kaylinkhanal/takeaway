@@ -44,8 +44,8 @@ const Register = () => {
   const navigate = useNavigate();
   return (
     <>
+      <div className="register">
       <div className="register-area">
-        <div className="register-box">
           <div className="left-side">
             <h3>Create an account</h3>
             <Formik
@@ -158,8 +158,8 @@ const Register = () => {
                 </span>
               </div>
             </div>
-          </div>
         </div>
+      </div>
       </div>
     </>
   );
