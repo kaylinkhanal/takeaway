@@ -20,10 +20,10 @@ const CustomForm = (props) => {
       initialValues={{}}
       // validationSchema={usersSchema}
       onSubmit={async (values, { resetForm }) => {
-        if(formStep ==1){
+        if(formStep ===1){
           setFormStep(formStep+1)
         }else{
-         axios.post(`http://localhost:3005/${props.endpoint}`, values)
+         axios.post(`${process.env.REACT_APP_API_URL}${props.endpoint}`, values)
         }
     
       }}
@@ -37,12 +37,12 @@ const CustomForm = (props) => {
           }}
         >
           <Form>
-              {formStep == 1 ? (
+              {formStep === 1 ? (
                 <>
                   {props.itemDetails.map((item)=>{
                     return (
                       <div>
-                      <Field name={item}  key={item} placeholder={item} type= {item=="password" ? "password" : "text"} />
+                      <Field name={item}  key={item} placeholder={item} type= {item==="password" ? "password" : "text"} />
                       {errors[item] && touched[item] ? (
                         <div className="validaton-message">{errors[item]}</div>
                       ) : null}
@@ -55,7 +55,7 @@ const CustomForm = (props) => {
                 {props.senderDetails.map((item)=>{
                   return (
                     <div>
-                    <Field name={item} key={item} placeholder={item} type= {item=="password" ? "password" : "text"} />
+                    <Field name={item} key={item} placeholder={item} type= {item==="password" ? "password" : "text"} />
                     {errors[item] && touched[item] ? (
                       <div className="validaton-message">{errors[item]}</div>
                     ) : null}
@@ -67,7 +67,7 @@ const CustomForm = (props) => {
 
              
              
-            <CustomButton name={formStep ==1 ? "Next" : "Submit"} type="submit" />
+            <CustomButton name={formStep ===1 ? "Next" : "Submit"} type="submit" />
           </Form>
         </div>
       )}

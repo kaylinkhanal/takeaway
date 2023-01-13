@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { responseHandler } from "../../utils/responseHandler"
 const Register = () => {
+
+  console.log(process.env.REACT_APP_API_URL)
+
   const usersSchema = Yup.object().shape({
     name: Yup.string()
       .min(1, "Too Short!")
@@ -67,7 +70,7 @@ const Register = () => {
                   body: JSON.stringify(updatedValues),
                 };
                 try {
-                  const response = await fetch("http://localhost:3005/register", requestOptions)
+                  const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, requestOptions)
                   const data = await response.json()
                   const alertMessage = responseHandler(response, data.errorMsg)
                   alert(alertMessage)
