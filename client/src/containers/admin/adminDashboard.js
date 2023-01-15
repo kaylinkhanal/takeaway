@@ -33,6 +33,21 @@ const AdminDashboard = () => {
       title: 'Weight',
       dataIndex: 'weight',
     },
+    {
+      title: 'Actions',
+      key: 'key',
+      dataIndex: 'key',
+      render: () => (
+        <>
+        <Button>
+         {'Accept'}
+       </Button>
+       <Button>
+         {'Delete'}
+       </Button>
+        </>
+      ),
+    },
   ])
   const dispatch= useDispatch()
   const [open, setOpen] = useState(false);
