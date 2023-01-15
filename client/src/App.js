@@ -7,7 +7,6 @@ import UserDashboard from "./containers/user/userDashboard";
 import RiderDashboard from "./containers/rider/riderDashboard";
 import AdminDashboard from "./containers/admin/adminDashboard";
 
-
 import { useSelector } from "react-redux";
 
 function App() {

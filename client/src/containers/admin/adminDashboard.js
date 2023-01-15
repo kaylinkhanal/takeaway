@@ -1,11 +1,39 @@
-import React, { useState } from "react";
-import { Drawer, Modal, Button } from "antd";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Drawer, Modal, Button,Table } from "antd";
 import "../../App.css";
 import {Formik,Field,Form} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from "react-redux";
 import {logoutResetDetails} from "../../redux/actions/userAction"
 const AdminDashboard = () => {
+  const [orders, setOrders]= useState([])
+  const [columns, setColumns]=useState([
+    {
+      title: 'Pickup Date',
+      dataIndex: 'pickupDate',
+    },
+    {
+      title: 'Pickup Time',
+      dataIndex: 'pickupTime',
+    },
+    {
+      title: 'Reciver Name',
+      dataIndex: "receiverName"
+    },
+    {
+      title: 'Phone Number',
+      dataIndex: "receiverPhoneNo",
+    },
+    {
+      title: 'Unit Items',
+      dataIndex: 'unitItems',
+    },
+    {
+      title: 'Weight',
+      dataIndex: 'weight',
+    },
+  ])
   const dispatch= useDispatch()
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,6 +51,15 @@ const AdminDashboard = () => {
   const onClose = () => {
     setOpen(false);
   };
+  const fetchAvailableItems= ()=>{
+    axios.get("http://localhost:3005/orders").then((response) => {
+        setOrders(response.data.orders)
+      });
+}
+useEffect(()=>{
+    fetchAvailableItems()
+}, [])
+
 
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
@@ -112,6 +149,9 @@ const AdminDashboard = () => {
         <li>Update crendentials</li>
       </Drawer>
       <button onClick={()=> triggerLogout()}>Log out</button>
+      <div>
+      <Table dataSource={orders} columns={columns} />;
+      </div>
     </>
   );
 };

@@ -20,7 +20,7 @@ router.post("/orders", async (req, res) => {
         const data = await Orders.find()
         if(data){
             res.status(200).json({
-                data:data
+                orders:data
             })
         }
     } catch (err) {
