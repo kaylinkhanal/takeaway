@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Drawer, Modal, Button,Table } from "antd";
+import {faBars } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "../../App.css";
-import {Formik,Field,Form} from 'formik';
+import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import {useDispatch} from "react-redux";
-import {logoutResetDetails} from "../../redux/actions/userAction"
+// import {useDispatch} from "react-redux";
+// import {logoutResetDetails} from "../../redux/actions/userAction"
+import NavBar from '../../components/navBar';
 const AdminDashboard = () => {
   const [orders, setOrders]= useState([])
   const [columns, setColumns]=useState([
@@ -55,7 +58,7 @@ const AdminDashboard = () => {
   const showModal = () => {
     setIsModalOpen(true);
   };
- 
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -78,22 +81,23 @@ useEffect(()=>{
 
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
-        .min(5, "Too Short!")
-        .max(100, "Too Long!")
-        .required("Required"),
+      .min(5, "Too Short!")
+      .max(100, "Too Long!")
+      .required("Required"),
 
-        minimumDeliveryPrice: Yup.string()
-        .required("Required"),
-});
+    minimumDeliveryPrice: Yup.string()
+      .required("Required"),
+  });
 
-  const triggerLogout = () => {
-    dispatch(logoutResetDetails())
-  }
+  // const triggerLogout = () => {
+  //   dispatch(logoutResetDetails())
+  // }
 
   return (
     <>
-      <button type="primary" onClick={showDrawer}> Open</button>
-      <Button type="primary" onClick={showModal}>Add Items</Button>
+      <NavBar />
+       <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
+      <Button onClick={showModal} className="addItems">Add Items</Button>
       <Modal
         title="Add Items"
         footer={null}
@@ -101,7 +105,7 @@ useEffect(()=>{
         onCancel={handleCancel}
       >
         {/* Start  Add Items */}
-        <h1>Add Items</h1>    
+        <h1>Add Items</h1>
         <Formik
           initialValues={{
             catagoryName: "",
@@ -151,7 +155,7 @@ useEffect(()=>{
             </div>
           )}
         </Formik>
-    
+
         {/* End  Add Items */}
       </Modal>
       <Drawer

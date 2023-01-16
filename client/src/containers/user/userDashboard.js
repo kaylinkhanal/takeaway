@@ -1,11 +1,12 @@
 import React,{useEffect, useState} from 'react'
-import { useSelector, useDispatch} from 'react-redux'
+// import { useSelector, useDispatch} from 'react-redux'
 import axios from "axios";
 import  Card  from '../../components/card';
-import {logoutResetDetails} from "../../redux/actions/userAction"
+// import {logoutResetDetails} from "../../redux/actions/userAction"
+import NavBar from '../../components/navBar';
 function UserDashboard() {
-    const dispatch = useDispatch()
-    const {name} = useSelector(state=>state.user)
+    // const dispatch = useDispatch()
+    // const {name} = useSelector(state=>state.user)
     const [validItems, setValidItems] = useState([])
     const fetchAvailableItems= ()=>{
         axios.get("http://localhost:3005/items").then((response) => {
@@ -18,17 +19,23 @@ function UserDashboard() {
     }, [])
 
 
-  const triggerLogout = () => {
-    dispatch(logoutResetDetails())
-  }
+  // const triggerLogout = () => {
+  //   dispatch(logoutResetDetails())
+  // }
   return (
-    <div>
-        Hi {name} welcome to home
+    <>
+    <NavBar/>
+        {/* Hi {name} welcome to home */}
+       <div>
+         Welcome to home
+        </div> 
+    <div className='mainCard'>
         {validItems.map((item)=>{
            return( <Card item={item}/>)
         })}
-         <button onClick={()=> triggerLogout()}>Log out</button>
     </div>
+         {/* <button onClick={()=> triggerLogout()}>Log out</button> */}
+    </>
   )
 }
 
