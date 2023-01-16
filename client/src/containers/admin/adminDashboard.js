@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Drawer, Modal, Button } from "antd";
 import "../../App.css";
 import {Formik,Field,Form} from 'formik';
 import * as Yup from 'yup';
 import {useDispatch} from "react-redux";
+import axios from "axios";
 import {logoutResetDetails} from "../../redux/actions/userAction"
 const AdminDashboard = () => {
   const dispatch= useDispatch()
@@ -37,6 +38,18 @@ const AdminDashboard = () => {
   const triggerLogout = () => {
     dispatch(logoutResetDetails())
   }
+
+  const [validOrders, setValidOrders] = useState([])
+  const fetchAvailableOrders= ()=>{
+      axios.get("http://localhost:3005/get-orders").then((response) => {
+          setValidOrders(response.data.ordersList)
+        });
+         
+  }
+  
+  useEffect(()=>{
+      fetchAvailableOrders()
+  }, [])
 
   return (
     <>
@@ -112,6 +125,17 @@ const AdminDashboard = () => {
         <li>Update crendentials</li>
       </Drawer>
       <button onClick={()=> triggerLogout()}>Log out</button>
+      {validOrders.map((item)=>{
+          return <div style={{padding:'30px', backgroundColor:'pink',width:'200px', margin:'10px'}}>
+          pickupDate: {item.pickupDate}<br/>
+          pickupTime: {item.pickupTime}<br/>
+          weight: {item.weight}<br/>
+          unitItems: {item.unitItems}<br/>
+          maxLength: {item.maxLength}<br/>
+          receiverName: {item.receiverName}<br/>
+          receiverPhoneNo: {item.receiverPhoneNo}<br/>
+       </div>
+        })}
     </>
   );
 };
