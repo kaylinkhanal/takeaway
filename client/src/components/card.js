@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './button.css'
 import { Drawer, Modal, Button } from "antd";
 import CustomForm from "../components/customForm"
+import ReusableForm from "../components/reusableForm"
+
 const Card = (props) => {
    const [isModalOpen, setIsModalOpen] = useState(false)
    const itemDetails = [
@@ -22,10 +24,12 @@ const Card = (props) => {
             onCancel={() => setIsModalOpen(false)}
             open={isModalOpen}>
             {props.item.catagoryName}
-            <CustomForm endpoint="orders" itemDetails={itemDetails} senderDetails={senderDetails} />
+            {
+              props.role == 'admin' ? <ReusableForm item={props.item}/> : <CustomForm endpoint="orders" itemDetails={itemDetails} senderDetails={senderDetails} /> 
+            }
          </Modal>
          <div onClick={() => setIsModalOpen(true)}className='category'>
-            <div className='categoryImage'>Image Area</div>
+            <div className='categoryImage' style={{backgroundColor: props.role ==='admin'? 'orange': 'aqua'}}>Image Area</div>
             <div className='categoryName'> {props.item.catagoryName} </div>
          </div>
       </>

@@ -174,7 +174,6 @@ select {
     border-radius: 10px;
     background-color: #e4dede;
     text-align: center;
-    background-color: rgb(94, 162, 245);
 }
 
 /* card page styling  from userDashboard*/
@@ -185,6 +184,14 @@ select {
     justify-content: space-around;
     align-items: center;
 
+}
+
+.adminCard{
+    margin: 10px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
 }
 
 /* For navBaar design*/
