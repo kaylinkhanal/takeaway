@@ -18,7 +18,7 @@ const Items = ()=> {
     }, [])
 
 return (
-    <div>
+    <div className='mainCard'id={role=="admin"?"adminThemeBackground":"userThemeBackground"}>
     {validItems.map((item)=>{
        return( <Card item={item} role={role}/>)
     })}
