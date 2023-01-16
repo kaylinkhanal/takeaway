@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Drawer, Modal, Button } from "antd";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import { Drawer, Modal, Button,Table } from "antd";
 import {faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "../../App.css";
@@ -9,7 +10,49 @@ import * as Yup from 'yup';
 // import {logoutResetDetails} from "../../redux/actions/userAction"
 import NavBar from '../../components/navBar';
 const AdminDashboard = () => {
-  // const dispatch= useDispatch()
+  const [orders, setOrders]= useState([])
+  const [columns, setColumns]=useState([
+    {
+      title: 'Pickup Date',
+      dataIndex: 'pickupDate',
+    },
+    {
+      title: 'Pickup Time',
+      dataIndex: 'pickupTime',
+    },
+    {
+      title: 'Reciver Name',
+      dataIndex: "receiverName"
+    },
+    {
+      title: 'Phone Number',
+      dataIndex: "receiverPhoneNo",
+    },
+    {
+      title: 'Unit Items',
+      dataIndex: 'unitItems',
+    },
+    {
+      title: 'Weight',
+      dataIndex: 'weight',
+    },
+    {
+      title: 'Actions',
+      key: 'key',
+      dataIndex: 'key',
+      render: () => (
+        <>
+        <Button>
+         {'Accept'}
+       </Button>
+       <Button>
+         {'Delete'}
+       </Button>
+        </>
+      ),
+    },
+  ])
+  const dispatch= useDispatch()
   const [open, setOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
@@ -26,6 +69,15 @@ const AdminDashboard = () => {
   const onClose = () => {
     setOpen(false);
   };
+  const fetchAvailableItems= ()=>{
+    axios.get("http://localhost:3005/orders").then((response) => {
+        setOrders(response.data.orders)
+      });
+}
+useEffect(()=>{
+    fetchAvailableItems()
+}, [])
+
 
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
@@ -115,7 +167,10 @@ const AdminDashboard = () => {
         <li>Delivery Items</li>
         <li>Update crendentials</li>
       </Drawer>
-      {/* <button onClick={()=> triggerLogout()}>Log out</button> */}
+      <button onClick={()=> triggerLogout()}>Log out</button>
+      <div>
+      <Table dataSource={orders} columns={columns} />;
+      </div>
     </>
   );
 };
