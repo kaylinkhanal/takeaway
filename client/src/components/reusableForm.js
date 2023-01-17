@@ -1,7 +1,7 @@
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 
-const ReusableForm =(props)=>{
+const ReusableForm =({isAdminEdit, item})=>{
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
       .min(5, "Too Short!")
@@ -14,18 +14,18 @@ const ReusableForm =(props)=>{
     return(
         <>
              {/* Start  Add Items */}
-             <h1>Add Items</h1>
+             <h1>{isAdminEdit ? 'Edit Items': 'Add Items'}</h1>
         <Formik
-          initialValues={props.item}
+          initialValues={item || {}}
           validationSchema={itemSchema}
           onSubmit={async (values, { resetForm }) => {
             const requestOptions = {
-              method: "POST",
+              method: isAdminEdit ? "PUT" : "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(values),
             };
             const res = await fetch(
-              "http://localhost:3005/additem",
+              "http://localhost:3005/items",
               requestOptions
             );
             const data = await res.json();
@@ -56,7 +56,7 @@ const ReusableForm =(props)=>{
                     <div className="validaton-message">{errors.minimumDeliveryPrice}</div>
                   ) : null}
                 </div>
-                <button className="button" name="Sumbit" type="submit">Add Item</button>
+                <button className="button" name="Sumbit" type="submit">{isAdminEdit ? 'Save Item' :'Add Item'}</button>
               </Form>
             </div>
           )}

@@ -20,7 +20,7 @@ const Items = ()=> {
 return (
     <div className='mainCard'id={role=="admin"?"adminThemeBackground":"userThemeBackground"}>
     {validItems.map((item)=>{
-       return( <Card item={item} role={role}/>)
+       return( <Card item={item} role={role} fetchAvailableItems={fetchAvailableItems}/>)
     })}
 </div>
 )

@@ -17,6 +17,10 @@ const Card = (props) => {
       'receiverName',
       'receiverPhoneNo'
    ]
+   const triggerDelete = ()=>{
+      //fetch -> 
+   //   props.fetchAvailableItems()
+   }
    return (
       <>
          <Modal
@@ -25,11 +29,12 @@ const Card = (props) => {
             open={isModalOpen}>
             {props.item.catagoryName}
             {
-              props.role === 'admin' ? <ReusableForm item={props.item}/> : <CustomForm endpoint="orders" itemDetails={itemDetails} senderDetails={senderDetails} /> 
+              props.role === 'admin' ? <ReusableForm item={props.item} isAdminEdit={true}/> : <CustomForm endpoint="orders" itemDetails={itemDetails} senderDetails={senderDetails} /> 
             }
          </Modal>
-         <div onClick={() => setIsModalOpen(true)}className='category'id={props.role==='admin'?'adminCardTheme':'userCardTheme'}>
-            <div className='categoryImage'>Image Area</div>
+         <div className='category'id={props.role==='admin'?'adminCardTheme':'userCardTheme'}>
+            <button onClick={() => setIsModalOpen(true)}>Edit</button>
+            <button onClick={() => triggerDelete()}>Delete</button>
             <div className='categoryName'> {props.item.catagoryName} </div>
          </div>
       </>

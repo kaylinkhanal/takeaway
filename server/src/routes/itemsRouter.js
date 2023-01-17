@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Items = require("../models/Items");
   
-router.post("/additem", async (req, res) => {
+router.post("/items", async (req, res) => {
     try {
       Items.findOne({ catagoryName: req.body.catagoryName }).then((item) => {
         if(!item){
@@ -23,6 +23,17 @@ router.post("/additem", async (req, res) => {
       console.log(err);
     }
   });
+
+router.put("/items", async (req, res) => {
+  try {
+    const data = await Items.findByIdAndUpdate(req.body._id, req.body)
+    if(data){
+      res.status(200).json({msg: "updated successfully!"})
+    }
+  } catch (err) {
+    console.log(err);
+  }
+});
   
 router.get("/items", async (req, res) => {
 try {
@@ -41,4 +52,16 @@ try {
     console.log(err);
 }
 });
+
+router.delete("/items", async (req, res) => {
+  try {
+    const data = await Items.findByIdAndDelete(req.body._id)
+    if(data){
+      res.status(204).json({msg: 'deleted successfully'})
+    }
+     console.log(req.body)
+  } catch (err) {
+      console.log(err);
+  }
+  });
 module.exports = router;
