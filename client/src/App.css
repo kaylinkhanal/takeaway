@@ -159,10 +159,11 @@ select {
     border-radius: 15px;
     box-shadow: 0 0 3px 0px rgb(117, 104, 104);
     transition: 0.3s;
+    
 }
 
 .category:hover {
-    box-shadow: 0 0 10px 0px rgb(117, 104, 104);
+    box-shadow: 0 0 10px 0px rgb(45, 44, 44);
     scale: 1.1;
     cursor: pointer;
     transition: 0.3s;
@@ -172,11 +173,11 @@ select {
     width: 80%;
     height: 80%;
     border-radius: 10px;
-    background-color: #e4dede;
+    background-color: #ffffff;
     text-align: center;
 }
 
-/* card page styling  from userDashboard*/
+/* card page styling  from Items*/
 .mainCard {
     margin: 10px 60px;
     display: flex;
@@ -203,8 +204,8 @@ select {
     width: 25%;
     height: 55px;
     color: white;
-    background-color: rgb(231, 111, 81);
-    box-shadow: 5px 0 5px 2px black;
+    background: linear-gradient(135deg, #561750 0%, #152d87 100%);
+    /* box-shadow: 5px 0 5px 2px black; */
     padding: 10px;
     font-size: 1.7rem;
     font-family: "Sofia";
@@ -223,7 +224,7 @@ select {
     color: white;
     background-color: rgb(32, 147, 248);
     float: right;
-    box-shadow: 10px 0 5px 2px black;
+    /* box-shadow: 10px 0 5px 2px black; */
 }
 
 .user_icon {
@@ -309,6 +310,25 @@ select {
 
 .addItems:hover {
     background-color: white;
+}
+#adminTheme{
+background-color: #78290f
+}
+#adminThemeBackground{
+    background-color: #ff9c9c
+    }
+
+#userTheme{
+background-color: #15616d
+}
+#userThemeBackground{
+    background-color: #efefef
+    }
+#adminCardTheme{
+background-color: #fb5607
+}
+#userCardTheme{
+background-color: #7eb2ba
 }
 
 @media screen and (max-width:768px) {
