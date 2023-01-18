@@ -39,7 +39,7 @@ const ReusableForm =({isAdminEdit, item})=>{
         >
           {({ errors, touched }) => (
             <div>
-              <Form>
+              <Form >
                 <div>
                   <Field name="catagoryName" placeholder="Catagory Name" />
                   {errors.catagoryName && touched.catagoryName ? (
