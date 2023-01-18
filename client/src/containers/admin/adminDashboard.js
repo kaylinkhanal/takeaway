@@ -72,7 +72,7 @@ const AdminDashboard = () => {
     setOpen(false);
   };
   const fetchAvailableItems= ()=>{
-    axios.get("http://localhost:3005/orders").then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/orders`).then((response) => {
         setOrders(response.data.orders)
       });
 }

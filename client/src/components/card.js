@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import './button.css'
+import axios from "axios";
 import { Drawer, Modal, Button } from "antd";
 import CustomForm from "../components/customForm"
 import ReusableForm from "../components/reusableForm"
+import Items from '../containers/sharedScreens/items';
 
 const Card = (props) => {
    const [isModalOpen, setIsModalOpen] = useState(false)
@@ -17,9 +19,19 @@ const Card = (props) => {
       'receiverName',
       'receiverPhoneNo'
    ]
-   const triggerDelete = ()=>{
+ const [delItems,setDelItems]=useState([])
+
+   const triggerDelete = async(_id)=>{
       //fetch -> 
-   //   props.fetchAvailableItems()
+     Items.findByIdAndDelete(_id)
+     .then(response => {
+       // If the deletion is successful, update the component's state to remove the item from the list
+       const newItems = delItems.filter(item => item._id !== _id);
+       setDelItems(newItems);
+     })
+     .catch(error => {
+       console.log(error);
+     });
    }
    return (
       <>
@@ -33,7 +45,7 @@ const Card = (props) => {
             }
          </Modal>
          <div className='category'id={props.role==='admin'?'adminCardTheme':'userCardTheme'}>
-            <button onClick={() => setIsModalOpen(true)}>Edit</button>
+            <button onClick={() => setIsModalOpen(true) }>Edit</button>
             <button onClick={() => triggerDelete()}>Delete</button>
             <div className='categoryName'> {props.item.catagoryName} </div>
          </div>

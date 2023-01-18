@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import {addUserDetails} from "../../redux/actions/userAction"
 import {useDispatch} from "react-redux";
 const Login = () => {
-    
+    console.log(`${process.env.REACT_APP_API_URL}/login`)
     const dispatch= useDispatch()
     const navigate = useNavigate();
     const usersSchema = Yup.object().shape({
@@ -42,7 +42,7 @@ const Login = () => {
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(values),
                                 };
-                                const res = await fetch("http://localhost:3005/login", requestOptions);
+                                const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, requestOptions);
                                 const data = await res.json()
                                 if(res.status===200){
                                     dispatch(addUserDetails(data.userData))
