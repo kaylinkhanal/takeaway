@@ -8,7 +8,7 @@ const Items = ()=> {
 
     const [validItems, setValidItems] = useState([])
     const fetchAvailableItems= ()=>{
-        axios.get("http://localhost:3005/items").then((response) => {
+        axios.get(`${process.env.REACT_APP_API_URL}/items`).then((response) => {
             setValidItems(response.data.validItemOptions)
           });
           
@@ -18,7 +18,7 @@ const Items = ()=> {
     }, [])
 
 return (
-    <div className='mainCard'id={role=="admin"?"adminThemeBackground":"userThemeBackground"}>
+    <div className='mainCard'id={role==="admin"?"adminThemeBackground":"userThemeBackground"}>
     {validItems.map((item)=>{
        return( <Card item={item} role={role} fetchAvailableItems={fetchAvailableItems}/>)
     })}

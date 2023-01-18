@@ -67,7 +67,7 @@ const Register = () => {
                   body: JSON.stringify(updatedValues),
                 };
                 try {
-                  const response = await fetch("http://localhost:3005/register", requestOptions)
+                  const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, requestOptions)
                   const data = await response.json()
                   const alertMessage = responseHandler(response, data.errorMsg)
                   alert(alertMessage)
