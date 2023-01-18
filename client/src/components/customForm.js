@@ -27,7 +27,7 @@ const CustomForm = (props) => {
         if (formStep === 1) {
           setFormStep(formStep + 1);
         } else {
-          axios.post(`http://localhost:3005/${props.endpoint}`, values);
+          axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values);
         }
       }}
     >
