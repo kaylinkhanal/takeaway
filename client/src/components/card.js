@@ -19,19 +19,10 @@ const Card = (props) => {
       'receiverName',
       'receiverPhoneNo'
    ]
- const [delItems,setDelItems]=useState([])
 
    const triggerDelete = async(_id)=>{
       //fetch -> 
-     Items.findByIdAndDelete(_id)
-     .then(response => {
-       // If the deletion is successful, update the component's state to remove the item from the list
-       const newItems = delItems.filter(item => item._id !== _id);
-       setDelItems(newItems);
-     })
-     .catch(error => {
-       console.log(error);
-     });
+    
    }
    return (
       <>

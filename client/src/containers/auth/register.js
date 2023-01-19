@@ -7,6 +7,8 @@ import { CustomButton } from "../../components/customButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { responseHandler } from "../../utils/responseHandler"
+import HandlePassword from "../../components/handlePassword";
+
 const Register = () => {
   const usersSchema = Yup.object().shape({
     name: Yup.string()
@@ -110,16 +112,18 @@ const Register = () => {
                     ) : null}
                   </div>
                   <div>
-                    <Field
+                  <HandlePassword />
+                    {/* <Field
                       name="password"
                       placeholder="Password"
                       type="password"
-                    />
+                    /> */}
                     {errors.password && touched.password ? (
                       <div className="validaton-message">{errors.password}</div>
                     ) : null}
                   </div>
                   <div>
+                    
                     <Field
                       name="confirmPassword"
                       placeholder="confirmPassword"

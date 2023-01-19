@@ -10,9 +10,17 @@ import { addUserDetails } from "../../redux/actions/userAction"
 import { useDispatch } from "react-redux";
 // import { message, Alert,Space } from 'antd'
 import { responseHandler } from "../../utils/responseHandler"
+import HandlePassword from "../../components/handlePassword";
+
 
 
 const Login = () => {
+
+    // const [passwordVisible, setPasswordVisible] = useState(false);
+
+    // const togglePasswordVisibility = () => {
+    //     setPasswordVisible(!passwordVisible);
+    // };
 
     console.log(`${process.env.REACT_APP_API_URL}/login`)
     const dispatch = useDispatch()
@@ -47,20 +55,20 @@ const Login = () => {
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(values),
                                 };
-                                try{
+                                try {
                                     const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, requestOptions);
                                     const data = await response.json()
                                     const alertMessage = responseHandler(response, data.errorMsg)
                                     alert(alertMessage)
-                                        setTimeout(()=>{
-                                            dispatch(addUserDetails(data.userData))
-                                        },2500)
-                            //   resetForm({ values: '' })
+                                    setTimeout(() => {
+                                        dispatch(addUserDetails(data.userData))
+                                    }, 2500)
+                                    //   resetForm({ values: '' })
                                 }
-                                catch(error){
+                                catch (error) {
                                     alert(error)
                                 }
-                               
+
                             }}
                         >
 
@@ -77,7 +85,8 @@ const Login = () => {
                                             ) : null}
                                         </div>
                                         <div>
-                                            <Field name="password" placeholder="Password" type="password" />
+                                                {<HandlePassword />}
+
                                             {errors.password && touched.password ? (
                                                 <div className="validaton-message">{errors.password}</div>
                                             ) : null}
