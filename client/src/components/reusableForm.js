@@ -1,5 +1,6 @@
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { message } from 'antd';
 
 const ReusableForm =({isAdminEdit, item})=>{
   const itemSchema = Yup.object().shape({
@@ -30,9 +31,9 @@ const ReusableForm =({isAdminEdit, item})=>{
             );
             const data = await res.json();
             if (res.status === 200) {
-              alert(data.msg)
+              message.success(data.msg, [3])
             } else {
-              alert(data.msg);
+               message.error(data.msg, [3])
             }
             resetForm({ values: "" });
           }}
