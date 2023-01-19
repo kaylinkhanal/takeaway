@@ -13,7 +13,9 @@ const storage = multer.diskStorage({
 })
 
 const upload = multer({ storage: storage }).single('avatar')
-router.post('/profile', upload, function (req, res, next) {
+
+router.post('/profile', upload, async (req, res) =>{
+  const data = await Users.findByIdAndUpdate(req.body._id, {avatarName: req.file.filename})
 })
 router.post("/register", async (req, res) => {
   try {
@@ -67,5 +69,23 @@ router.post("/login", async (req, res) => {
     }
 
 });
+
+router.get("/users/:id", async (req, res) => {
+  try {
+      const data = await Users.findById(req.params.id)
+      if(data){
+          res.status(200).json({
+            userDetails:data
+          })
+      }else{
+          res.status(500).json({
+              msg: "something went wrong"
+          })
+      }
+  } catch (err) {
+      console.log(err);
+  }
+  });
+  
 
 module.exports = router;
