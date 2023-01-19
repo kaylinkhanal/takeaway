@@ -4,6 +4,8 @@
     box-sizing: border-box;
 }
 
+
+
 input,
 select {
     width: 100%;
@@ -121,7 +123,17 @@ select {
     height: auto;
 }
 
+.login-area .login-box .password-field {
+    display: flex;
+    align-items: center;
+}
 
+.login-area .login-box .password-field .show-password {
+    margin-top: 18px;
+    margin-left: -30px;
+    align-items: flex-end;
+    z-index: 999;
+}
 /* Style for Add Items at Admin panel */
 .form-group label {
     font-size: 17px;
@@ -159,7 +171,8 @@ select {
     border-radius: 15px;
     box-shadow: 0 0 3px 0px rgb(117, 104, 104);
     transition: 0.3s;
-    
+    color: #fff;
+
 }
 
 .category:hover {
@@ -187,7 +200,7 @@ select {
 
 }
 
-.adminCard{
+.adminCard {
     margin: 10px 10px;
     display: flex;
     flex-wrap: wrap;
@@ -295,7 +308,8 @@ select {
 
 .adminDrawer:hover {
     cursor: pointer;
-    color: rgb(32, 147, 248);;
+    color: rgb(32, 147, 248);
+    ;
 }
 
 .addItems {
@@ -311,24 +325,29 @@ select {
 .addItems:hover {
     background-color: white;
 }
-#adminTheme{
-background-color: #78290f
-}
-#adminThemeBackground{
-    /* background-color: #ff9c9c */
-    }
 
-#userTheme{
-background-color: #15616d
+#adminTheme {
+    background-color: #78290f
 }
-#userThemeBackground{
+
+#adminThemeBackground {
+    /* background-color: #ff9c9c */
+}
+
+#userTheme {
+    background-color: #15616d
+}
+
+#userThemeBackground {
     background-color: #efefef
-    }
-#adminCardTheme{
-background-color: #fb5607
 }
-#userCardTheme{
-background-color: #7eb2ba
+
+#adminCardTheme {
+    background-color: #fb5607
+}
+
+#userCardTheme {
+    background-color: #7eb2ba
 }
 
 @media screen and (max-width:768px) {

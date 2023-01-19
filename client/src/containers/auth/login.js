@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 // import "./login.css";
 import { CustomButton } from "../../components/customButton";
 import { Formik, Form, Field } from "formik";
@@ -6,15 +6,19 @@ import img from "../../image/login.png";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import {addUserDetails} from "../../redux/actions/userAction"
-import {useDispatch} from "react-redux";
+import { addUserDetails } from "../../redux/actions/userAction"
+import { useDispatch } from "react-redux";
+import { message } from 'antd';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 const Login = () => {
     console.log(`${process.env.REACT_APP_API_URL}/login`)
-    const dispatch= useDispatch()
-    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    const [showPassword, setShowPassword] = useState(true)
     const usersSchema = Yup.object().shape({
         email: Yup.string()
-            .min(5, "Too Short!")
+            .min(3, "Too Short!")
             .max(100, "Too Long!")
             .required("Required"),
 
@@ -23,6 +27,8 @@ const Login = () => {
             .max(100, "Too Long!")
             .required("Required"),
     });
+
+
 
     return (
         <>
@@ -36,7 +42,7 @@ const Login = () => {
                                 password: "",
                             }}
                             validationSchema={usersSchema}
-                            onSubmit={async(values, { resetForm }) => {
+                            onSubmit={async (values, { resetForm }) => {
                                 const requestOptions = {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
@@ -44,34 +50,34 @@ const Login = () => {
                                 };
                                 const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, requestOptions);
                                 const data = await res.json()
-                                if(res.status===200){
+                                if (data.isLogedin) {
                                     dispatch(addUserDetails(data.userData))
-                                }else{
-                                    alert(data.msg)
+                                    message.success(data.msg, [3])
+                                } else {
+                                    message.error(data.errorMsg, [3])
                                 }
                                 resetForm({ values: '' })
                             }}
                         >
 
                             {({ errors, touched }) => (
-                                <div style={{display:"flex",alignItem:'center',justifyContent:'center'}}>
-                                <Form >
-
-                                    <div>
-                                        <Field name="email" placeholder="email" />
-                                        {errors.email && touched.email ? (
+                                <div style={{ display: "flex", alignItem: 'center', justifyContent: 'center' }}>
+                                    <Form >
+                                        <div>
+                                            <Field name="email" placeholder="email" />
+                                            {errors.email && touched.email ? (
                                                 <div className="validaton-message">{errors.email}</div>
-                                        ) : null}
-                                    </div>
-                                    <div>
-                                        <Field name="password" placeholder="Password" type="password" />
+                                            ) : null}
+                                        </div>
+                                        <div className="password-field">
+                                            <Field name="password" placeholder="Password" type={showPassword ? 'password' : 'text'} />
+                                            <FontAwesomeIcon onClick={() => setShowPassword(!showPassword)} icon={showPassword ? faEye : faEyeSlash} className="show-password" />
+                                        </div>
                                         {errors.password && touched.password ? (
-                                                <div className="validaton-message">{errors.password}</div>
+                                            <div className="validaton-message">{errors.password}</div>
                                         ) : null}
-                                    </div>
-
-                                    <CustomButton name='Submit' type="submit" />
-                                </Form>
+                                        <CustomButton name='Submit' type="submit" />
+                                    </Form>
                                 </div>
                             )}
                         </Formik>
@@ -79,7 +85,7 @@ const Login = () => {
                     <div className="right-side">
 
                         <div className="img-box">
-                            <img src={img} alt="Logo"width={300}/>
+                            <img src={img} alt="Logo" width={300} />
                             <div className="">
                                 <span><Link to='/register'>Create an account </Link></span>
                             </div>
