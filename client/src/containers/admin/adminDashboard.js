@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Drawer, Modal, Button,Table } from "antd";
+import { Drawer, Modal, Button,Table, Space } from "antd";
 import {faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "../../App.css";
@@ -10,7 +10,6 @@ import * as Yup from 'yup';
 import {useDispatch} from "react-redux";
 import ReusableForm from '../../components/reusableForm'
 // import {logoutResetDetails} from "../../redux/actions/userAction"
-
 const AdminDashboard = () => {
   const [orders, setOrders]= useState([])
   const [columns, setColumns]=useState([
@@ -71,6 +70,7 @@ const AdminDashboard = () => {
   const onClose = () => {
     setOpen(false);
   };
+  
   const fetchAvailableItems= ()=>{
     axios.get(`${process.env.REACT_APP_API_URL}/orders`).then((response) => {
         setOrders(response.data.orders)
@@ -104,8 +104,13 @@ useEffect(()=>{
         onClose={onClose}
         open={open}
       >
-        <Link to="/items"><li>Delivery Items</li></Link>
-        <li>Update crendentials</li>
+
+        <Button type="primary">
+        Delivery
+        <Link to="/items"><li></li>
+          </Link>
+        </Button> 
+        <li></li>
       </Drawer>
    
       <div>
