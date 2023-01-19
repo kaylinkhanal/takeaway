@@ -5,7 +5,8 @@ import {faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {useSelector} from 'react-redux';
 import  Card  from '../../components/card';
-import { Link } from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
+
 
 const Items = ()=> {
     const {role} = useSelector(state=> state.user)
@@ -28,7 +29,10 @@ const Items = ()=> {
   const onClose = () => {
     setOpen(false);
   };
-
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate('/');
+  };
 return (
     <div className='home'id={role==="admin"?"adminThemeBackground":"userThemeBackground"}>
     <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
@@ -38,6 +42,7 @@ return (
      onClose={onClose}
      open={open}> 
     </Drawer>
+    <Button type="primary" onClick={handleClick}>Navigate to home</Button>
 </div>
 
 )
