@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 import {addUserDetails} from "../../redux/actions/userAction"
 import {useDispatch} from "react-redux";
 const Login = () => {
-    console.log(`${process.env.REACT_APP_API_URL}/login`)
     const dispatch= useDispatch()
     const navigate = useNavigate();
     const usersSchema = Yup.object().shape({

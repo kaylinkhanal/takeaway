@@ -9,6 +9,7 @@ import AdminDashboard from "./containers/admin/adminDashboard";
 import NavBar from "./components/navBar";
 import Items from "./containers/sharedScreens/items"
 import { useSelector } from "react-redux";
+import Profile from "./containers/sharedScreens/profile";
 
 function App() {
   const {role} =useSelector(state=>state.user)
@@ -36,6 +37,8 @@ const AdminScreens = () => {
     <Routes>
     <Route exact path="/" element={<AdminDashboard />} />
     <Route exact path="/items" element={<Items />} />
+    <Route exact path="/profile" element={<Profile />} />
+
     </Routes>
   )
 }

@@ -2,7 +2,19 @@ const express = require("express");
 const router = express.Router();
 const Users = require("../models/Users");
 const bcrypt = require("bcrypt")
+const multer  = require('multer')
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../client/src/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
 
+const upload = multer({ storage: storage }).single('avatar')
+router.post('/profile', upload, function (req, res, next) {
+})
 router.post("/register", async (req, res) => {
   try {
     const hash = await bcrypt.hashSync(req.body.password, 10);

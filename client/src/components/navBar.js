@@ -1,5 +1,6 @@
 
 import "../App.css";
+import {Link} from 'react-router-dom';
 import { faUser} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux'
@@ -19,7 +20,7 @@ const NavBar = () => {
             <div className="navBox2"id={role==='admin'?'adminTheme':'userTheme'}>
                 <div className="icon">
                     <div className="user_details">
-                        <div className="user_name">{name}</div>
+                        <Link to="/profile" className="user_name">{name}</Link>
                         <button className="button_logout" onClick={() => triggerLogout()}>Logout</button>
                     </div>
                     <FontAwesomeIcon icon={faUser} className="user_icon" />

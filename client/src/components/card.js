@@ -21,17 +21,18 @@ const Card = (props) => {
    ]
  const [delItems,setDelItems]=useState([])
 
-   const triggerDelete = async(_id)=>{
-      //fetch -> 
-     Items.findByIdAndDelete(_id)
-     .then(response => {
-       // If the deletion is successful, update the component's state to remove the item from the list
-       const newItems = delItems.filter(item => item._id !== _id);
-       setDelItems(newItems);
-     })
-     .catch(error => {
-       console.log(error);
-     });
+   const triggerDelete = async()=>{
+   
+      const requestOptions = {
+         method:"DELETE",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({_id: props.item._id}),
+       };
+       const res = await fetch(
+         "http://localhost:3005/items",
+         requestOptions
+       );
+      if(res.status == 204) props.fetchAvailableItems()
    }
    return (
       <>
