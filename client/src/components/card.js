@@ -21,17 +21,18 @@ const Card = (props) => {
    ]
  const [delItems,setDelItems]=useState([])
 
-   const triggerDelete = async(_id)=>{
-      //fetch -> 
-     Items.findByIdAndDelete(_id)
-     .then(response => {
-       // If the deletion is successful, update the component's state to remove the item from the list
-       const newItems = delItems.filter(item => item._id !== _id);
-       setDelItems(newItems);
-     })
-     .catch(error => {
-       console.log(error);
-     });
+   const triggerDelete = async()=>{
+   
+      const requestOptions = {
+         method:"DELETE",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify({_id: props.item._id}),
+       };
+       const res = await fetch(
+         "http://localhost:3005/items",
+         requestOptions
+       );
+      if(res.status == 204) props.fetchAvailableItems()
    }
    return (
       <>
@@ -44,7 +45,7 @@ const Card = (props) => {
               props.role === 'admin' ? <ReusableForm item={props.item} isAdminEdit={true}/> : <CustomForm endpoint="orders" itemDetails={itemDetails} senderDetails={senderDetails} /> 
             }
          </Modal>
-         <div className='category'id={props.role==='admin'?'adminCardTheme':'userCardTheme'}>
+         <div onClick={()=>props.role === 'admin'? null: setIsModalOpen(true) } className='category'id={props.role==='admin'?'adminCardTheme':'userCardTheme'}>
             <button onClick={() => setIsModalOpen(true) }>Edit</button>
             <button onClick={() => triggerDelete()}>Delete</button>
             <div className='categoryName'> {props.item.catagoryName} </div>

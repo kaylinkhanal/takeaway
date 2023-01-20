@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {useSelector} from 'react-redux';
 import  Card  from '../../components/card';
 import { Link } from "react-router-dom";
-
+import ReusableForm from '../../components/reusableForm'
 const Items = ()=> {
     const {role} = useSelector(state=> state.user)
 
@@ -28,6 +28,14 @@ const Items = ()=> {
   const onClose = () => {
     setOpen(false);
   };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
 return (
     <div className='home'id={role==="admin"?"adminThemeBackground":"userThemeBackground"}>
@@ -38,6 +46,19 @@ return (
      onClose={onClose}
      open={open}> 
     </Drawer>
+    <Modal
+        title="Add Items"
+        footer={null}
+        open={isModalOpen}
+        onCancel={handleCancel}
+      >
+        <ReusableForm handleCancel={handleCancel}/>
+      </Modal>
+      
+    <Button onClick={()=>showModal()} >Add Items</Button>
+    {validItems.map((item)=>{
+       return( <Card item={item} role={role} fetchAvailableItems={fetchAvailableItems}/>)
+    })}
 </div>
 
 )

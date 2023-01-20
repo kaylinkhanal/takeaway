@@ -9,14 +9,15 @@ import AdminDashboard from "./containers/admin/adminDashboard";
 import NavBar from "./components/navBar";
 import Items from "./containers/sharedScreens/items"
 import { useSelector } from "react-redux";
+import Profile from "./containers/sharedScreens/profile";
 
 function App() {
-  const {role} =useSelector(state=>state.user)
-    if(role==='rider'){
+  const {role , token} =useSelector(state=>state.user)
+    if(role==='rider' &&  token){
       return <><NavBar/><RiderScreens/></>
-    }else if(role === 'user'){
+    }else if(role === 'user' && token){
       return <><NavBar/><UserScreens/></>
-    }else if(role === 'admin'){
+    }else if(role === 'admin' && token){
     return <><NavBar/><AdminScreens/></>
     }
       return <AuthScreens/>
@@ -36,6 +37,8 @@ const AdminScreens = () => {
     <Routes>
     <Route exact path="/" element={<AdminDashboard />} />
     <Route exact path="/items" element={<Items />} />
+    <Route exact path="/profile" element={<Profile />} />
+
     </Routes>
   )
 }

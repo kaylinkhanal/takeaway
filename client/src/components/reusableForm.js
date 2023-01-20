@@ -1,7 +1,7 @@
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 
-const ReusableForm =({isAdminEdit, item})=>{
+const ReusableForm =({isAdminEdit, item, handleCancel})=>{
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
       .min(5, "Too Short!")
@@ -34,6 +34,7 @@ const ReusableForm =({isAdminEdit, item})=>{
             } else {
               alert(data.msg);
             }
+            handleCancel();
             resetForm({ values: "" });
           }}
         >

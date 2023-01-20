@@ -7,7 +7,7 @@ router.post("/items", async (req, res) => {
       Items.findOne({ catagoryName: req.body.catagoryName }).then((item) => {
         if(!item){
           const itemData =  Items.create(req.body);
-           console.log(itemData);
+          
           if (itemData) {
             res.json({ msg: "Item is added" });
           } else {
@@ -59,7 +59,6 @@ router.delete("/items", async (req, res) => {
     if(data){
       res.status(204).json({msg: 'deleted successfully'})
     }
-     console.log(req.body)
   } catch (err) {
       console.log(err);
   }
