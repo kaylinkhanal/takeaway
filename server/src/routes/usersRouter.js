@@ -3,6 +3,8 @@ const router = express.Router();
 const Users = require("../models/Users");
 const bcrypt = require("bcrypt")
 const multer  = require('multer')
+var jwt = require('jsonwebtoken');
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, '../client/src/uploads')
@@ -15,7 +17,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single('avatar')
 
 router.post('/profile', upload, async (req, res) =>{
-  const data = await Users.findByIdAndUpdate(req.body._id, {avatarName: req.file.filename})
+  console.log(req.file)
+  const data = await Users.findByIdAndUpdate(req.body._id, {avatarName: req.file.filename}).lean()
+  if(data){
+    res.status(200).json({
+      msg:"imageUploaded Successfully",
+    })
+  }
 })
 router.post("/register", async (req, res) => {
   try {
@@ -45,8 +53,10 @@ router.post("/login", async (req, res) => {
     const {email,password} = user;
     const isMatched= bcrypt.compareSync(req.body.password, password)
     if(email && isMatched){
+      const token = jwt.sign({email: req.body.email}, process.env.SECRET_TOKEN);
+      user.token = token
       const {password, ...refactoredUserObj} = user
-      res.status(200).json({
+       res.status(200).json({
         msg:"logged in successfully",
         isLogedin:true,
         userData: refactoredUserObj

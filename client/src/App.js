@@ -12,12 +12,12 @@ import { useSelector } from "react-redux";
 import Profile from "./containers/sharedScreens/profile";
 
 function App() {
-  const {role} =useSelector(state=>state.user)
-    if(role==='rider'){
+  const {role , token} =useSelector(state=>state.user)
+    if(role==='rider' &&  token){
       return <><NavBar/><RiderScreens/></>
-    }else if(role === 'user'){
+    }else if(role === 'user' && token){
       return <><NavBar/><UserScreens/></>
-    }else if(role === 'admin'){
+    }else if(role === 'admin' && token){
     return <><NavBar/><AdminScreens/></>
     }
       return <AuthScreens/>

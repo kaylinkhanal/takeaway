@@ -1,8 +1,7 @@
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { message } from 'antd';
 
-const ReusableForm =({isAdminEdit, item})=>{
+const ReusableForm =({isAdminEdit, item, handleCancel})=>{
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
       .min(5, "Too Short!")
@@ -31,10 +30,11 @@ const ReusableForm =({isAdminEdit, item})=>{
             );
             const data = await res.json();
             if (res.status === 200) {
-              message.success(data.msg, [3])
+              alert(data.msg)
             } else {
-               message.error(data.msg, [3])
+              alert(data.msg);
             }
+            handleCancel();
             resetForm({ values: "" });
           }}
         >

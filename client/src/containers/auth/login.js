@@ -5,7 +5,6 @@ import { Formik, Form, Field } from "formik";
 import img from "../../image/login.png";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
-import { useNavigate } from "react-router-dom";
 import { addUserDetails } from "../../redux/actions/userAction"
 import { useDispatch } from "react-redux";
 import { message } from 'antd';
@@ -26,9 +25,6 @@ const Login = () => {
             .max(100, "Too Long!")
             .required("Required"),
     });
-
-
-
     return (
         <>
             <div className="login-area">
@@ -42,12 +38,13 @@ const Login = () => {
                             }}
                             validationSchema={usersSchema}
                             onSubmit={async (values, { resetForm }) => {
+                                // console.log(process.env.REACT_APP_API_URL)
                                 const requestOptions = {
                                     method: "POST",
                                     headers: { "Content-Type": "application/json" },
                                     body: JSON.stringify(values),
                                 };
-                                const res = await fetch(`${process.env.REACT_APP_API_URL}/login`, requestOptions);
+                                const res = await fetch('http://localhost:3005/login', requestOptions);
                                 const data = await res.json()
                                 if (data.isLogedin) {
                                     dispatch(addUserDetails(data.userData))
@@ -58,7 +55,6 @@ const Login = () => {
                                 resetForm({ values: '' })
                             }}
                         >
-
                             {({ errors, touched }) => (
                                 <div style={{ display: "flex", alignItem: 'center', justifyContent: 'center' }}>
                                     <Form >
@@ -82,7 +78,6 @@ const Login = () => {
                         </Formik>
                     </div>
                     <div className="right-side">
-
                         <div className="img-box">
                             <img src={img} alt="Logo" width={300} />
                             <div className="">

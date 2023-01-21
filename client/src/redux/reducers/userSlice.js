@@ -14,11 +14,12 @@ const initialState = {
 const userSlice = (state = initialState, action) => {
   switch (action.type) {
     case ADD_USER_DETAILS:
-      const { name, role, email, _id } = action.payload;
+      const { name, role, email, _id , token } = action.payload;
       return {
         ...state,
         name,
         role,
+        token,
         email,
         _id
       };
@@ -28,6 +29,7 @@ const userSlice = (state = initialState, action) => {
         name: "",
         role: "",
         email: "",
+        token:"",
         _id: ""
       };
     default:
