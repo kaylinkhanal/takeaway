@@ -16,8 +16,8 @@ router.post("/orders", async (req, res) => {
   });
 
   router.get("/orders", async (req, res) => {
-      const bearerToken =req.headers.authorization.split(' ')[1]
-console.log(bearerToken)
+    //   const bearerToken =req.headers.authorization.split(' ')[1]
+    // console.log(bearerToken)
     try {
         const data = await Orders.find()
         if(data){
