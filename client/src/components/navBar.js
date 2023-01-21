@@ -5,12 +5,15 @@ import { faUser} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSelector } from 'react-redux'
 import { logoutResetDetails } from "../redux/actions/userAction"
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
 const NavBar = () => {
+    const navigate=useNavigate()
     const dispatch = useDispatch()
     const { name,role } = useSelector(state => state.user)
     const triggerLogout = () => {
         dispatch(logoutResetDetails())
+        navigate('/')
     }
     return (
         <>
