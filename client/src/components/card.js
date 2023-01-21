@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import './button.css'
-import axios from "axios";
-import { Drawer, Modal, Button } from "antd";
+import { Modal } from "antd";
 import CustomForm from "../components/customForm"
 import ReusableForm from "../components/reusableForm"
-import Items from '../containers/sharedScreens/items';
 
 const Card = (props) => {
    const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,7 +17,6 @@ const Card = (props) => {
       'receiverName',
       'receiverPhoneNo'
    ]
- const [delItems,setDelItems]=useState([])
 
    const triggerDelete = async()=>{
    
@@ -32,7 +29,7 @@ const Card = (props) => {
          "http://localhost:3005/items",
          requestOptions
        );
-      if(res.status == 204) props.fetchAvailableItems()
+      if(res.status === 204) props.fetchAvailableItems()
    }
    return (
       <>

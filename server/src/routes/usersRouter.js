@@ -17,7 +17,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage }).single('avatar')
 
 router.post('/profile', upload, async (req, res) =>{
-  const data = await Users.findByIdAndUpdate(req.body._id, {avatarName: req.file.filename})
+  console.log(req.file)
+  const data = await Users.findByIdAndUpdate(req.body._id, {avatarName: req.file.filename}).lean()
+  if(data){
+    res.status(200).json({
+      msg:"imageUploaded Successfully",
+    })
+  }
 })
 router.post("/register", async (req, res) => {
   try {

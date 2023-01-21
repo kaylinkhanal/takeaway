@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Drawer, Modal, Button,Table } from "antd";
+import { Drawer,Button,Table } from "antd";
 import {faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import "../../App.css";
-
 import { Link } from "react-router-dom";
-import * as Yup from 'yup';
-import {useDispatch} from "react-redux";
-
 // import {logoutResetDetails} from "../../redux/actions/userAction"
 
 const AdminDashboard = () => {
@@ -54,7 +50,6 @@ const AdminDashboard = () => {
       ),
     },
   ])
-  const dispatch= useDispatch()
   const [open, setOpen] = useState(false);
 
 
