@@ -10,6 +10,7 @@ import NavBar from "./components/navBar";
 import Items from "./containers/sharedScreens/items";
 import { useSelector } from "react-redux";
 import Profile from "./containers/sharedScreens/profile";
+import AccountingSettings from "./containers/sharedScreens/accountSettings";
 import NotFoundPage from "./components/notFoundPage";
 
 function App() {
@@ -37,10 +38,11 @@ const AuthScreens = () => {
 const AdminScreens = () => {
   return (
     <Routes>
-      <Route path="*" element={<NotFoundPage />} />
-      <Route exact path="/" element={<AdminDashboard />} />
-      <Route exact path="/items" element={<Items />} />
-      <Route exact path="/profile" element={<Profile />} />
+    <Route exact path="/" element={<AdminDashboard />} />
+    <Route exact path="/items" element={<Items />} />
+    <Route exact path="/profile" element={<Profile />} />
+    <Route exact path="/settings" element={<AccountingSettings />} />
+    <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

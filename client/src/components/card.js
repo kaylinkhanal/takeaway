@@ -43,8 +43,8 @@ const Card = (props) => {
             }
          </Modal>
          <div onClick={()=>props.role === 'admin'? null: setIsModalOpen(true) } className='category'id={props.role==='admin'?'adminCardTheme':'userCardTheme'}>
-            <button onClick={() => setIsModalOpen(true) }>Edit</button>
-            <button onClick={() => triggerDelete()}>Delete</button>
+         {props.role === 'admin' ?  <button onClick={() => setIsModalOpen(true) }>Edit</button>: ''}
+         {props.role === 'admin' ?  <button onClick={() => triggerDelete()}>Delete</button>: ''}
             <div className='categoryName'> {props.item.catagoryName} </div>
          </div>
       </>

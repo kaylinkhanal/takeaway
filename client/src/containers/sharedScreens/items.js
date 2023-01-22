@@ -54,7 +54,7 @@ return (
         <ReusableForm handleCancel={handleCancel}/>
       </Modal>
       
-    <Button onClick={()=>showModal()} >Add Items</Button>
+   {role==="admin" ? <Button onClick={()=>showModal()} >Add Items</Button>:""}
     {validItems.map((item)=>{
        return( <Card item={item} role={role} fetchAvailableItems={fetchAvailableItems}/>)
     })}
