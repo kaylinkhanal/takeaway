@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
+import { Link } from "react-router-dom";
 const Profile = () => {
   const { _id } = useSelector((state) => state.user);
   const [file, setFile] = useState(null);
@@ -37,6 +38,7 @@ const Profile = () => {
       <button onClick={()=>triggerImgSave()}>Save avatar</button>
       {imageName &&<img src={require(`../../uploads/${imageName}`)} alt="Uploaded Image" />}
       {JSON.stringify(userDetails)}
+      <Link to="/settings"><div>Account Settings</div></Link>
     </>
   );
 };

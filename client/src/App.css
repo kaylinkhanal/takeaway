@@ -212,7 +212,7 @@ select {
 
 .navBox1 {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
     width: 25%;
     height: 55px;
@@ -239,7 +239,32 @@ select {
     float: right;
     /* box-shadow: 10px 0 5px 2px black; */
 }
-
+.account_settings{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.account_settings button{
+    margin: 0 20px;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    padding: 10px 20px;
+    transition: 0.5s;
+}
+.account_settings button:nth-child(4){
+    color:red
+}
+.account_settings button:hover{
+    transition: 0.5s;
+    scale: 1.1;
+    cursor: pointer;
+}
+.name_admin{position: absolute;
+    margin-top: 10px;
+    margin-left: 65%;
+    font-size: 1.4rem;
+}
 .user_icon {
     position: absolute;
     margin-top: -20px;
@@ -253,7 +278,7 @@ select {
     align-items: center;
     margin-top: 25px;
     float: right;
-    margin-right: 10%;
+    margin-right: 15%;
     width: 25px;
     height: 25px;
 }
@@ -378,7 +403,12 @@ select {
         margin-left: 75%;
 
     }
-
+.name_admin{position: absolute;
+    margin-top: 10px;
+    margin-left: -55%;
+    font-size: 1.4rem;
+    color: red;
+}
     .addItems {
         margin-left: 50%;
         background-color: rgb(231, 111, 81);
