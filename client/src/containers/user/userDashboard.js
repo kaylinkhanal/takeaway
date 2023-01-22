@@ -7,8 +7,6 @@ function UserDashboard() {
          Welcome to home
     </div> 
     <Items/>
-    <CustomTable/>
-
     </>
   )
 }

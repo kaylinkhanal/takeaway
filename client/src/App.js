@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import Profile from "./containers/sharedScreens/profile";
 import AccountingSettings from "./containers/sharedScreens/accountSettings";
 import NotFoundPage from "./components/notFoundPage";
+import UserOrders from "./containers/user/userOrders";
 
 function App() {
   const {role , token} =useSelector(state=>state.user)
@@ -51,6 +52,8 @@ const UserScreens = () => {
   return (
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
+      <Route path="/orders" element={<UserOrders />} />
+
       <Route exact path="/" element={<UserDashboard />} />
     </Routes>
   );

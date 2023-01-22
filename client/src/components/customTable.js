@@ -8,6 +8,9 @@ import { useSelector } from "react-redux";
 const CustomTable = () => {
   const {role} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
+  const triggerDelete = (id)=>{
+  ///to hit the enndpoint and delete
+  }
   const [columns, setColumns]=useState([
     {
       title: 'Pickup Date',
@@ -37,12 +40,12 @@ const CustomTable = () => {
       title: 'Actions',
       key: 'key',
       dataIndex: 'key',
-      render: () => (
+      render: (_, item) => (
         <>
         <Button>
          {role==='admin'?'Accept':'Edit'}
        </Button>
-       <Button>
+       <Button onClick={()=> triggerDelete(item._id)}>
          {'Delete'}
        </Button>
         </>

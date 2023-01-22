@@ -38,13 +38,6 @@ const Items = ()=> {
 
 return (
     <div className='home'id={role==="admin"?"adminThemeBackground":"userThemeBackground"}>
-    <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
-    <Drawer 
-    title="Welcome to items"
-     placement="left"
-     onClose={onClose}
-     open={open}> 
-    </Drawer>
     <Modal
         title="Add Items"
         footer={null}
