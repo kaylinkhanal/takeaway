@@ -29,6 +29,7 @@ const userSlice = (state = initialState, action) => {
         name: "",
         role: "",
         email: "",
+        token:"",
         _id: ""
       };
     default:
