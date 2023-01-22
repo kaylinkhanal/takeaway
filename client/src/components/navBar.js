@@ -1,12 +1,14 @@
-
+import React, { useState, useEffect } from "react";
+import { Drawer} from "antd";
 import "../App.css";
 import { Link } from 'react-router-dom';
-import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser,faBars } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux'
 import { logoutResetDetails } from "../redux/actions/userAction"
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
+import navItems from '../config/navItems.json'
 const NavBar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -15,11 +17,28 @@ const NavBar = () => {
         dispatch(logoutResetDetails())
         navigate('/')
     }
+    const [open, setOpen] = useState(false);
+    const showDrawer = () => {
+      setOpen(true);
+    };
+    const onClose = () => {
+      setOpen(false);
+    };
     return (
         <>
             <div className="navBox1">
                 <div>Take Away</div>
             </div>
+            <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
+
+                <Drawer
+                title="Features"
+                placement="left"
+                onClose={onClose}
+                open={open}
+                >
+                {navItems[role].map(item=>  <Link to={item.link}><li onClick={()=>setOpen(false)}>{item.label}</li></Link> )}
+                </Drawer>
             <div className="navBox2" id={role === 'admin' ? 'adminTheme' : 'userTheme'}>
 
                 <div className="icon">
