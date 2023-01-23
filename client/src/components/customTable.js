@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 
 
 const CustomTable = () => {
-  const {role} =useSelector(state=>state.user)
+  const {role, token} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
   const triggerDelete = (id)=>{
   ///to hit the enndpoint and delete
@@ -54,7 +54,12 @@ const CustomTable = () => {
   ])
 
   const fetchAvailableItems= ()=>{
-    axios.get(`${process.env.REACT_APP_API_URL}/orders`).then((response) => {
+    const requestOptions = {
+      headers: {
+        'authorization': `Bearer ${token}`
+      }
+    }
+    axios.get(`${process.env.REACT_APP_API_URL}/orders`, requestOptions).then((response) => {
         setOrders(response.data.orders)
       });
 }

@@ -163,6 +163,20 @@ select {
   color: #fff;
 }
 
+.orderCategory{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px 5px;
+  width: 600px;
+  height: 50px;
+  border-radius: 15px;
+  box-shadow: 0 0 3px 0px rgb(117, 104, 104);
+  transition: 0.3s;
+  color: #fff;
+}
+
 .category:hover {
   box-shadow: 0 0 10px 0px rgb(45, 44, 44);
   scale: 1.1;

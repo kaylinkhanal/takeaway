@@ -16,21 +16,25 @@ router.post("/orders",  async (req, res) => {
   });
 
   const tokenValidator = (req, res, next)=> {
-    const token = req.headers.authorization.split(' ')[1]
-    jwt.verify(token, process.env.SECRET_TOKEN, function(err, decoded) {
-      if(err) return res.sendStatus(403)
-      if(decoded)  next()
-    });
+    if(req.headers.authorization){
+      const token = req.headers.authorization.split(' ')[1]
+      jwt.verify(token, process.env.SECRET_TOKEN, function(err, decoded) {
+        if(err) return res.sendStatus(403)
+        if(decoded)  next()
+      });
+    }else return res.sendStatus(403)
   }
 
-  router.get("/orders", tokenValidator, async (req, res) => {
-    //   const bearerToken =req.headers.authorization.split(' ')[1]
-    // console.log(bearerToken)
+  router.get("/orders", async (req, res) => {
+    console.log(req.query)
+
     try {
-        const data = await Orders.find()
+        const totalOrdersLength = await Orders.find()
+        const data = await Orders.find().limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
         if(data){
             res.status(200).json({
-                orders:data
+                orders:data,
+                totalOrdersCount: totalOrdersLength.length
             })
         }
     } catch (err) {

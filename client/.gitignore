@@ -3,6 +3,7 @@
 .eslintcache
 # dependencies
 /node_modules
+/src/uploads
 /.pnp
 .pnp.js
 
