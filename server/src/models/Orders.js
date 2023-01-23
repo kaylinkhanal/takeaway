@@ -12,6 +12,7 @@ const ordersSchema = new mongoose.Schema(
     weight: {type: Number},
     catagoryName: { type: String },
     minimumDeliveryPrice: { type: Number },
+    userId:{type:String}
   },
   { collection: "orders" }
 );

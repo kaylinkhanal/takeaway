@@ -1,7 +1,9 @@
 import { Formik, Field, Form } from 'formik';
+import { useSelector } from 'react-redux';
 import * as Yup from 'yup';
 
 const ReusableForm =({isAdminEdit, item, handleCancel})=>{
+  const {_id}=useSelector(state=>state.user)
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
       .min(5, "Too Short!")
@@ -19,6 +21,7 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
           initialValues={item || {}}
           validationSchema={itemSchema}
           onSubmit={async (values, { resetForm }) => {
+            values.id=_id
             const requestOptions = {
               method: isAdminEdit ? "PUT" : "POST",
               headers: { "Content-Type": "application/json" },
