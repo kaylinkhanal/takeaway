@@ -13,12 +13,12 @@ const CustomTable = () => {
   }
   const [columns, setColumns]=useState([
     {
-      title: 'Pickup Date',
-      dataIndex: 'pickupDate',
+      title:'Pickup Date',
+      dataIndex:'pickupDate',
     },
     {
       title: 'Max Length',
-      dataIndex: 'maxLength',
+      dataIndex:'maxLength',
     },
     {
       title: 'Pickup Time',
@@ -39,6 +39,10 @@ const CustomTable = () => {
     {
       title: 'Weight',
       dataIndex: 'weight',
+    },
+    {
+      title: 'User Id',
+      dataIndex: 'userId'
     },
     {
       title: 'Actions',
