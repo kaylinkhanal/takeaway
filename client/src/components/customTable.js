@@ -17,6 +17,10 @@ const CustomTable = () => {
       dataIndex: 'pickupDate',
     },
     {
+      title: 'Max Length',
+      dataIndex: 'maxLength',
+    },
+    {
       title: 'Pickup Time',
       dataIndex: 'pickupTime',
     },
