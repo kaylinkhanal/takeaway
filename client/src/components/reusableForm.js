@@ -21,7 +21,7 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
           initialValues={item || {}}
           validationSchema={itemSchema}
           onSubmit={async (values, { resetForm }) => {
-            values.id=_id
+            values.userId=_id
             const requestOptions = {
               method: isAdminEdit ? "PUT" : "POST",
               headers: { "Content-Type": "application/json" },

@@ -41,10 +41,6 @@ const CustomTable = () => {
       dataIndex: 'weight',
     },
     {
-      title:'User Id',
-      dataIndex:'userId'
-    },
-    {
       title: 'Actions',
       key: 'key',
       dataIndex: 'key',
