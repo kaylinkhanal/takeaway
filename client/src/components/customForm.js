@@ -49,7 +49,7 @@ const CustomForm = (props) => {
                         name={item}
                         key={item}
                         placeholder={item}
-                        type={item === "password" ? "password" : "text"}
+                        type={item === "password" ? "password":item==="pickupDate"?'date':item==="pickupTime"?'time' :"text"}
                       />
                       {errors[item] && touched[item] ? (
                         <div className="validaton-message">{errors[item]}</div>
