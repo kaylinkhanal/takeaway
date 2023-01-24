@@ -6,7 +6,6 @@ const Profile = () => {
   const { _id } = useSelector((state) => state.user);
   const [file, setFile] = useState(null);
   const [userDetails, setUserDetails] = useState({});
-  const [imageName, setImageName]=useState('')
   const triggerImgSave = async () => {
     const formdata = new FormData();
     formdata.append("avatar", file);
@@ -16,6 +15,9 @@ const Profile = () => {
       body: formdata,
     });
     const data = await res.json();
+    if(data){
+      fetchUserDetails()
+    }
   };
   const fetchUserDetails = () => {
     axios
@@ -28,16 +30,13 @@ const Profile = () => {
     fetchUserDetails();
   }, []);
   console.log(file)
-  console.log(imageName) 
   return (
     <>
       <input type="file" onChange={(e) => {
         setFile(e.target.files[0])
-        setImageName(e.target.files[0].name)
         }} />
       <button onClick={()=>triggerImgSave()}>Save avatar</button>
-      {imageName &&<img src={require(`../../uploads/${imageName}`)} alt="Uploaded Image" />}
-      {JSON.stringify(userDetails)}
+      {userDetails.avatarName &&<img src={require(`../../uploads/${userDetails.avatarName}`)} alt="Uploaded Image" />}
       <Link to="/settings"><div>Account Settings</div></Link>
     </>
   );
