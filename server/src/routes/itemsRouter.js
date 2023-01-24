@@ -53,10 +53,14 @@ try {
 });
 
 router.delete("/items", async (req, res) => {
+  console.log(req)
   try {
-    const data = await Items.findByIdAndDelete(req.body._id)
-    if(data){
-      res.status(204).json({msg: 'deleted successfully'})
+    const result = await Items.findByIdAndDelete(req.body._id)
+    if(result){
+      res.status(200).json({msg: 'deleted successfully'})
+    }
+    else{
+      res.status(500).json({msg:"something went wrong"})
     }
   } catch (err) {
       console.log(err);

@@ -25,10 +25,7 @@ const Card = (props) => {
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify({_id: props.item._id}),
        };
-       const res = await fetch(
-         "http://localhost:3005/items",
-         requestOptions
-       );
+       const res = await fetch(`${process.env.REACT_APP_API_URL}/items`,requestOptions)
       if(res.status === 204) props.fetchAvailableItems()
    }
    return (

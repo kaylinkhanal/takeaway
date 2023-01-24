@@ -41,4 +41,19 @@ router.post("/orders",  async (req, res) => {
       console.log(err);
     }
   });
+
+  router.delete("/orders", async (req, res) => {
+    try {
+      const result = await Orders.findByIdAndDelete(req.body._id)
+      if(result){
+        res.status(200).json({msg: 'deleted successfully'})
+      }
+      else{
+        res.status(500).json({msg:"something went wrong"})
+      }
+    } catch (err) {
+        console.log(err);
+    }
+    });
+    
 module.exports = router;

@@ -5,12 +5,29 @@ import "../App.css";
 import { useSelector } from "react-redux";
 
 
-const CustomTable = () => {
+const CustomTable = (props) => {
   const {role, token} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
-  const triggerDelete = (id)=>{
-  ///to hit the enndpoint and delete
+
+  const triggerDelete =async(id)=>{
+  const requestOptions = {
+    method:"DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({_id: id}),
+  };
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/orders`,requestOptions);
+  if(res.status===200){
+    fetchAvailableItems()
   }
+  }
+  //   fetch(`${process.env.REACT_APP_API_URL}/orders/${id}`, {
+  //     method: 'DELETE',
+  // }).then((result)=>{
+  //   result.json().then((resp)=>{
+  //     console.log(resp)
+  //   })
+  // })
+  //  }
   const [columns, setColumns]=useState([
     {
       title: 'Pickup Date',
@@ -76,4 +93,5 @@ useEffect(()=>{
     </>
   );
 };
+
 export default CustomTable;

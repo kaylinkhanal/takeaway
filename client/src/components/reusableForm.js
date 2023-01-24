@@ -1,5 +1,6 @@
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
+import { message } from 'antd';
 
 const ReusableForm =({isAdminEdit, item, handleCancel})=>{
   const itemSchema = Yup.object().shape({
@@ -24,15 +25,12 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(values),
             };
-            const res = await fetch(
-              "http://localhost:3005/items",
-              requestOptions
-            );
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/items`,requestOptions);
             const data = await res.json();
             if (res.status === 200) {
-              alert(data.msg)
+              message.success("Items added successfully",[2])
             } else {
-              alert(data.msg);
+              message.error("Unable to add items",[2])
             }
             handleCancel();
             resetForm({ values: "" });

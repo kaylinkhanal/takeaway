@@ -7,6 +7,8 @@ import { CustomButton } from "../../components/customButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { responseHandler } from "../../utils/responseHandler"
+import { message } from 'antd';
+
 const Register = () => {
   const usersSchema = Yup.object().shape({
     name: Yup.string()
