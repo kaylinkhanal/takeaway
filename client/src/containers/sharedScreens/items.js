@@ -48,9 +48,13 @@ return (
       </Modal>
       
    {role==="admin" ? <Button onClick={()=>showModal()} >Add Items</Button>:""}
+   <div class="flex-container">
     {validItems.map((item)=>{
-       return( <Card item={item} role={role} fetchAvailableItems={fetchAvailableItems}/>)
+       return(
+         <Card item={item} role={role} fetchAvailableItems={fetchAvailableItems}/>
+         )
     })}
+    </div>
 </div>
 
 )
