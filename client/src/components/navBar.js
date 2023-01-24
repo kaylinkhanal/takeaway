@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Drawer} from "antd";
 import "../App.css";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser,faBars } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux'
@@ -27,7 +27,7 @@ const NavBar = () => {
     return (
         <>
             <div className="navBox1">
-                <div>Take Away</div>
+                <NavLink to='/' style={{ color: 'white', textDecoration: 'none' }} >Take Away</NavLink>
             </div>
             <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
 
