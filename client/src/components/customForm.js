@@ -18,10 +18,15 @@ const CustomForm = (props) => {
       setFormStep(formStep - 1);
     }
   };
-
+// const[orderLists,setOrderLists]=useState({})
+// props.orderLists.map(item=>setOrderLists(item))
+alert(JSON.stringify(props.orderLists))
   return (
     <Formik
-      initialValues={{}}
+      // initialValues={{orderLists}}
+      initialValues={{
+        pickupDate:"heelo"
+      }}
       // validationSchema={usersSchema}
       onSubmit={async (values, { resetForm }) => {
         if (formStep === 1) {
@@ -49,7 +54,7 @@ const CustomForm = (props) => {
                         name={item}
                         key={item}
                         placeholder={item}
-                        type={item === "password" ? "password" : "text"}
+                        type={item === "password" ? "password":item==="pickupDate"?'date':item==="pickupTime"?'time' :"text"}
                       />
                       {errors[item] && touched[item] ? (
                         <div className="validaton-message">{errors[item]}</div>

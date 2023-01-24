@@ -31,7 +31,7 @@ router.post("/register", async (req, res) => {
     Users.findOne({ email: req.body.email }).then((user) => {
       if (!user) {
         req.body.password = hash
-        const userData =  Users.create(req.body);
+        const userData = Users.create(req.body);
         if (userData) {
           res.json({ msg: "user is added" });
         } else {
@@ -51,9 +51,9 @@ router.post("/login", async (req, res) => {
   if(user){
     try{
     const {email,password} = user;
-    const isMatched= bcrypt.compareSync(req.body.password, password)
+    const isMatched= await bcrypt.compareSync(req.body.password, password)
     if(email && isMatched){
-      const token = jwt.sign({email: req.body.email}, process.env.SECRET_TOKEN);
+      const token =await jwt.sign({email: req.body.email}, process.env.SECRET_TOKEN);
       user.token = token
       const {password, ...refactoredUserObj} = user
        res.status(200).json({

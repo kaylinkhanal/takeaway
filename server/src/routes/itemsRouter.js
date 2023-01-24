@@ -47,7 +47,6 @@ try {
             msg: "something went wrong"
         })
     }
-   console.log(data)
 } catch (err) {
     console.log(err);
 }

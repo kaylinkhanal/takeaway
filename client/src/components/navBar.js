@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Drawer} from "antd";
 import "../App.css";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser,faBars } from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux'
