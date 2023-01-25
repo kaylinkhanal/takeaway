@@ -6,7 +6,7 @@ const usersSchema = new mongoose.Schema(
     address: { type: String},
     email: { type: String },
     password: { type: String },
-    role: { type: String },
+    role: { type: String},
     avatarName: {type: String}
   },
   { collection: "users" }

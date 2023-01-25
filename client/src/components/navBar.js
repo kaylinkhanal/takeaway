@@ -27,7 +27,7 @@ const NavBar = () => {
     return (
         <>
             <div className="navBox1">
-                <NavLink to='/' style={{ color: 'white', textDecoration: 'none' }} >Take Away</NavLink>
+            <div><Link to="/" style={{textDecoration:"none", color:"white"}}>Take Away</Link></div>
             </div>
             <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
 

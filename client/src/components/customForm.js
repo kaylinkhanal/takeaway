@@ -3,8 +3,11 @@ import { Formik, Form, Field } from "formik";
 import { CustomButton } from "./customButton";
 import * as Yup from "yup";
 import axios from "axios";
+import { useSelector } from "react-redux";
+
 
 const CustomForm = (props) => {
+  const {_id} =useSelector(state=>state.user)
   const usersSchema = Yup.object().shape({
     password: Yup.string()
       .min(5, "Too Short!")
@@ -20,18 +23,17 @@ const CustomForm = (props) => {
   };
 // const[orderLists,setOrderLists]=useState({})
 // props.orderLists.map(item=>setOrderLists(item))
-alert(JSON.stringify(props.orderLists))
+
   return (
     <Formik
       // initialValues={{orderLists}}
-      initialValues={{
-        pickupDate:"heelo"
-      }}
+      initialValues={props.orderList || {}}
       // validationSchema={usersSchema}
       onSubmit={async (values, { resetForm }) => {
         if (formStep === 1) {
           setFormStep(formStep + 1);
         } else {
+          values.senderId = _id
           axios.post(`http://localhost:3005/${props.endpoint}`, values);
         }
       }}
