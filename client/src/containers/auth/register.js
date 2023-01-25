@@ -7,6 +7,9 @@ import { CustomButton } from "../../components/customButton";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { responseHandler } from "../../utils/responseHandler"
+import {toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 const Register = () => {
   const usersSchema = Yup.object().shape({
     name: Yup.string()
@@ -69,11 +72,11 @@ const Register = () => {
                 try {
                   const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, requestOptions)
                   const data = await response.json()
-                  const alertMessage = responseHandler(response, data.errorMsg)
-                  alert(alertMessage)
+                  const notify = responseHandler(response, data.errorMsg)
+                  toast(notify)
                   // resetForm({ values: "" });
-                } catch (err) {
-                  alert(err);
+                } catch (error) {
+                  toast.error('error',{position:toast.POSITION.TOP_CENTER});
                 }
               }}
             >

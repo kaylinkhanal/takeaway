@@ -13,6 +13,7 @@ import Profile from "./containers/sharedScreens/profile";
 import AccountingSettings from "./containers/sharedScreens/accountSettings";
 import NotFoundPage from "./components/notFoundPage";
 import UserOrders from "./containers/user/userOrders";
+// import ForgotPassword from "./components/forgotPassword";
 
 function App() {
   const {role , token} =useSelector(state=>state.user)
@@ -32,6 +33,7 @@ const AuthScreens = () => {
       <Route path="*" element={<NotFoundPage />} />
       <Route path="/register" element={<Register />} />
       <Route path="/" element={<Login />} />
+      {/* <Route path="/forgot" element={<ForgotPassword/>}/> */}
     </Routes>
   );
 };

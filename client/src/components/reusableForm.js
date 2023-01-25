@@ -1,4 +1,6 @@
 import { Formik, Field, Form } from 'formik';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 
 const ReusableForm =({isAdminEdit, item, handleCancel})=>{
@@ -30,9 +32,9 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
             );
             const data = await res.json();
             if (res.status === 200) {
-              alert(data.msg)
+              toast.success(data.msg)
             } else {
-              alert(data.msg);
+              toast.error(data.msg);
             }
             handleCancel();
             resetForm({ values: "" });

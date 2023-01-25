@@ -3,7 +3,9 @@ import { Formik, Form, Field } from "formik";
 import { CustomButton } from "./customButton";
 import * as Yup from "yup";
 import axios from "axios";
-
+import {toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+// toast.configure()
 const CustomForm = (props) => {
   const usersSchema = Yup.object().shape({
     password: Yup.string()
@@ -20,7 +22,7 @@ const CustomForm = (props) => {
   };
 // const[orderLists,setOrderLists]=useState({})
 // props.orderLists.map(item=>setOrderLists(item))
-alert(JSON.stringify(props.orderLists))
+  toast.success(JSON.stringify(props.orderLists))
   return (
     <Formik
       // initialValues={{orderLists}}
