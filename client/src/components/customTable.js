@@ -4,14 +4,25 @@ import { Drawer, Modal, Button,Table } from "antd";
 import "../App.css";
 import { useSelector } from "react-redux";
 import CustomForm from "../components/customForm"
+import { message } from 'antd';
 
 const CustomTable = () => {
   const {role, _id, token} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
-  const [itemSelectedForEdit, setItemSelectedForEdit] = useState({})
-  const triggerDelete = (id)=>{
-  ///to hit the enndpoint and delete
+
+  const triggerDelete = async(id)=>{
+   const requestOptions = {
+    method:"DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({_id: id}),
+  };
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/orders`,requestOptions);
+  if(res.status===200){
+    fetchAvailableItems()
+    message.success("Orders deleted successfully",[2])
   }
+  }
+
   const itemDetails = [
      'pickupDate',
      'pickupTime',
