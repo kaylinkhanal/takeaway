@@ -433,3 +433,10 @@ select {
     background-color: rgb(231, 111, 81);
   }
 }
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: DodgerBlue;
+  justify-content: space-around;
+}
