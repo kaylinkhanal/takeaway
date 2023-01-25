@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 // toast.configure()
 const CustomForm = (props) => {
+  const {_id} =useSelector(state=>state.user)
   const usersSchema = Yup.object().shape({
     password: Yup.string()
       .min(5, "Too Short!")
@@ -22,18 +23,21 @@ const CustomForm = (props) => {
   };
 // const[orderLists,setOrderLists]=useState({})
 // props.orderLists.map(item=>setOrderLists(item))
+<<<<<<< HEAD
   toast.success(JSON.stringify(props.orderLists))
+=======
+
+>>>>>>> 3f618714531b83af90be96a3e95b2fc4a1147b02
   return (
     <Formik
       // initialValues={{orderLists}}
-      initialValues={{
-        pickupDate:"heelo"
-      }}
+      initialValues={props.orderList || {}}
       // validationSchema={usersSchema}
       onSubmit={async (values, { resetForm }) => {
         if (formStep === 1) {
           setFormStep(formStep + 1);
         } else {
+          values.senderId = _id
           axios.post(`http://localhost:3005/${props.endpoint}`, values);
         }
       }}

@@ -4,7 +4,7 @@ import axios from "axios";
 import OrdersBox from './ordersBox'
 import { Pagination } from 'antd';
 const AllOrdersList = ()=>{
-    const {token} =useSelector(state=>state.user)
+    const {token, role} =useSelector(state=>state.user)
     const [orders, setOrders]= useState([])
     const [loading, setLoading]= useState(false)
     const [ordersCount, setTotalOrdersCount]= useState(0)

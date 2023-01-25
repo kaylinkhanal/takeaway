@@ -66,7 +66,7 @@ const Login = () => {
                                         </div>
                                         <div className="password-field">
                                             <Field name="password" placeholder="Password" type={showPassword ? 'password' : 'text'} />
-                                            <FontAwesomeIcon onClick={() => setShowPassword(!showPassword)} icon={showPassword ? faEye : faEyeSlash} className="show-password" />
+                                            <FontAwesomeIcon onClick={() => setShowPassword(!showPassword)} icon={showPassword ? faEyeSlash : faEye} className="show-password" />
                                         </div>
                                         {errors.password && touched.password ? (
                                             <div className="validaton-message">{errors.password}</div>
