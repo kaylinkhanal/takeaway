@@ -1,3 +1,4 @@
+import './profile.css'
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
@@ -15,7 +16,7 @@ const Profile = () => {
       body: formdata,
     });
     const data = await res.json();
-    if(data){
+    if (data) {
       fetchUserDetails()
     }
   };
@@ -32,12 +33,35 @@ const Profile = () => {
   console.log(file)
   return (
     <>
-      <input type="file" onChange={(e) => {
-        setFile(e.target.files[0])
-        }} />
-      <button onClick={()=>triggerImgSave()}>Save avatar</button>
-      {userDetails.avatarName &&<img src={require(`../../uploads/${userDetails.avatarName}`)} alt="Uploaded Image" />}
-      <Link to="/settings"><div>Account Settings</div></Link>
+    
+      <div class="card">
+        <div className='ram'>
+
+          <input type="file" onChange={(e) => {
+            setFile(e.target.files[0])
+          }} className='setFile'/>
+          </div>
+       
+        <div class="imgbx">
+          {userDetails.avatarName && <img src={require(`../../uploads/${userDetails.avatarName}`)} alt="Loading.." />}
+        </div>
+        <div class="contain">
+          <div class="detail">
+            <h2>{userDetails.name}<div></div>
+              <span>{userDetails._id}</span>
+            </h2>
+            <div class="data">
+              <h3>email<div></div><span>{userDetails.email}</span></h3>
+
+              <h3>Phone Number<div></div><span>984780000</span></h3>
+            </div>
+            <div class="actionBtn">
+              <button onClick={() => triggerImgSave()}>Save</button>
+              <button><Link to='/settings'> Settings</Link></button>
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
