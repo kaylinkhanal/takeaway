@@ -7,7 +7,7 @@ import CustomForm from "../components/customForm"
 import { message } from 'antd';
 
 const CustomTable = () => {
-  const {role, token} =useSelector(state=>state.user)
+  const {role, _id, token} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
 
   const triggerDelete = async(id)=>{
@@ -52,6 +52,11 @@ const CustomTable = () => {
     setIsModalOpen(false);
   };
 
+  const setIdAndShowModal = (item) => {
+    setItemSelectedForEdit(item)
+    showModal()
+  }
+
   const [columns, setColumns]=useState([
     {
       title: 'Pickup Date',
@@ -83,7 +88,7 @@ const CustomTable = () => {
       dataIndex: 'key',
       render: (_, item) => (
         <>
-        <Button onClick={()=>showModal()}>
+        <Button onClick={()=>setIdAndShowModal(item)}>
          {role==='admin'?'Accept':'Edit'}
        </Button>
        <Button onClick={()=> triggerDelete(item._id)}>
@@ -100,7 +105,8 @@ const CustomTable = () => {
         'authorization': `Bearer ${token}`
       }
     }
-    axios.get(`${process.env.REACT_APP_API_URL}/orders`, requestOptions).then((response) => {
+
+    axios.get(`${process.env.REACT_APP_API_URL}/orders?senderId=${_id}`, requestOptions).then((response) => {
         setOrders(response.data.orders)
       });
 }
@@ -120,7 +126,7 @@ useEffect(()=>{
         onCancel={handleCancel}
       >
         
-        <CustomForm itemDetails={itemDetails} senderDetails={senderDetails}orderLists={orders}/> 
+        <CustomForm itemDetails={itemDetails} senderDetails={senderDetails} orderList={itemSelectedForEdit}/> 
         
       </Modal>
 

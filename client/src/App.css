@@ -4,6 +4,9 @@
   box-sizing: border-box;
 }
 
+a{
+  text-decoration: none;
+}
 input,
 select {
   width: 100%;
@@ -429,4 +432,11 @@ select {
     margin-left: 50%;
     background-color: rgb(231, 111, 81);
   }
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: DodgerBlue;
+  justify-content: space-around;
 }

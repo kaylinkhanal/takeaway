@@ -26,17 +26,23 @@ router.post("/orders",  async (req, res) => {
   }
 
   router.get("/orders", async (req, res) => {
-    console.log(req.query)
-
     try {
         const totalOrdersLength = await Orders.find()
-        const data = await Orders.find().limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
-        if(data){
-            res.status(200).json({
-                orders:data,
-                totalOrdersCount: totalOrdersLength.length
-            })
+        if(req.query.senderId){
+          const data = await Orders.find({"senderId":req.query.senderId})
+          res.status(200).json({
+            orders: data
+        })
+        }else{
+         const data = await Orders.find().limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
+          if(data){
+              res.status(200).json({
+                  orders:data,
+                  totalOrdersCount: totalOrdersLength.length
+              })
+          }
         }
+       
     } catch (err) {
       console.log(err);
     }
