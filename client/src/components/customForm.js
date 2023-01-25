@@ -3,9 +3,9 @@ import { Formik, Form, Field } from "formik";
 import { CustomButton } from "./customButton";
 import * as Yup from "yup";
 import axios from "axios";
-import { useSelector } from "react-redux";
-
-
+import {toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+// toast.configure()
 const CustomForm = (props) => {
   const {_id} =useSelector(state=>state.user)
   const usersSchema = Yup.object().shape({
@@ -23,7 +23,11 @@ const CustomForm = (props) => {
   };
 // const[orderLists,setOrderLists]=useState({})
 // props.orderLists.map(item=>setOrderLists(item))
+<<<<<<< HEAD
+  toast.success(JSON.stringify(props.orderLists))
+=======
 
+>>>>>>> 3f618714531b83af90be96a3e95b2fc4a1147b02
   return (
     <Formik
       // initialValues={{orderLists}}
