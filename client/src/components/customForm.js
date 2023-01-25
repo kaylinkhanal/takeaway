@@ -21,18 +21,12 @@ const CustomForm = (props) => {
       setFormStep(formStep - 1);
     }
   };
-// const[orderLists,setOrderLists]=useState({})
-// props.orderLists.map(item=>setOrderLists(item))
-<<<<<<< HEAD
-  toast.success(JSON.stringify(props.orderLists))
-=======
 
->>>>>>> 3f618714531b83af90be96a3e95b2fc4a1147b02
+  toast.success(JSON.stringify(props.orderLists))
+
   return (
     <Formik
-      // initialValues={{orderLists}}
       initialValues={props.orderList || {}}
-      // validationSchema={usersSchema}
       onSubmit={async (values, { resetForm }) => {
         if (formStep === 1) {
           setFormStep(formStep + 1);
