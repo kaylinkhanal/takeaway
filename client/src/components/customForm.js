@@ -6,7 +6,6 @@ import axios from "axios";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
-
 // toast.configure()
 const CustomForm = (props) => {
   const {_id} =useSelector(state=>state.user)

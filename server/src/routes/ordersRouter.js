@@ -62,4 +62,19 @@ router.post("/orders",  async (req, res) => {
     }
     });
 
+    router.put("/orders", async (req, res) => {
+      try {
+        const data = await Orders.findByIdAndUpdate(req.body._id, req.body)
+        if(data){
+          res.status(200).json({msg: "updated successfully!"})
+        }
+        else{
+          res.status(500).json({msg:"something went wrong"})
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    });
+      
+
 module.exports = router;
