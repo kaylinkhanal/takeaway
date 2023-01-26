@@ -229,6 +229,10 @@ select {
     text-align: center;
 }
 
+.navBox1 > div {
+  margin-right: 20px;
+}
+
 .navBox1 {
   cursor: pointer;
 }
@@ -437,6 +441,6 @@ select {
 .flex-container {
   display: flex;
   flex-wrap: wrap;
-  background-color: DodgerBlue;
+  background-color: white;
   justify-content: space-around;
 }

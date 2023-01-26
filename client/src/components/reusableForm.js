@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 const ReusableForm =({isAdminEdit, item, handleCancel})=>{
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
-      .min(5, "Too Short!")
+      .min(2, "Too Short!")
       .max(100, "Too Long!")
       .required("Required"),
 
@@ -27,7 +27,7 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
               body: JSON.stringify(values),
             };
             const res = await fetch(
-              "http://localhost:3005/items",
+              `${process.env.REACT_APP_API_URL}/items`,
               requestOptions
             );
             const data = await res.json();

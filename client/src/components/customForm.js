@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import axios from "axios";
 import {toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
+
 // toast.configure()
 const CustomForm = (props) => {
   const {_id} =useSelector(state=>state.user)
@@ -32,7 +34,7 @@ const CustomForm = (props) => {
           setFormStep(formStep + 1);
         } else {
           values.senderId = _id
-          axios.post(`http://localhost:3005/${props.endpoint}`, values);
+          axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values);
         }
       }}
     >

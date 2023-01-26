@@ -11,7 +11,7 @@ const Profile = () => {
     const formdata = new FormData();
     formdata.append("avatar", file);
     formdata.append("_id", _id);
-    const res = await fetch('http://localhost:3005/profile', {
+    const res = await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
       method: "POST",
       body: formdata,
     });
@@ -22,7 +22,7 @@ const Profile = () => {
   };
   const fetchUserDetails = () => {
     axios
-      .get(`http://localhost:3005/users/${_id}`)
+      .get(`${process.env.REACT_APP_API_URL}/users/${_id}`)
       .then((response) => {
         setUserDetails(response.data.userDetails);
       });
