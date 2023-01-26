@@ -9,7 +9,7 @@ import { message } from 'antd';
 const CustomTable = () => {
   const {role, _id, token} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
-
+  const [itemSelectedForEdit, setItemSelectedForEdit] = useState({})
   const triggerDelete = async(id)=>{
    const requestOptions = {
     method:"DELETE",
