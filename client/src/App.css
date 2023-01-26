@@ -173,7 +173,7 @@ select {
   flex-direction: column;
   margin: 5px 5px;
   width: 600px;
-  height: 50px;
+  height: 150px;
   border-radius: 15px;
   box-shadow: 0 0 3px 0px rgb(117, 104, 104);
   transition: 0.3s;

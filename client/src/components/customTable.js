@@ -23,13 +23,7 @@ const CustomTable = () => {
   }
   }
 
-  const itemDetails = [
-     'pickupDate',
-     'pickupTime',
-     'weight',
-     'unitItems',
-     'maxLength'
-  ]
+
   const senderDetails = [
      'receiverName',
      'receiverPhoneNo'
@@ -53,7 +47,7 @@ const CustomTable = () => {
   };
 
   const setIdAndShowModal = (item) => {
-    setItemSelectedForEdit(item)
+
     showModal()
   }
 
@@ -105,7 +99,6 @@ const CustomTable = () => {
         'authorization': `Bearer ${token}`
       }
     }
-
     axios.get(`${process.env.REACT_APP_API_URL}/orders?senderId=${_id}`, requestOptions).then((response) => {
         setOrders(response.data.orders)
       });
@@ -126,7 +119,7 @@ useEffect(()=>{
         onCancel={handleCancel}
       >
         
-        <CustomForm itemDetails={itemDetails} senderDetails={senderDetails} orderList={itemSelectedForEdit}/> 
+        <CustomForm itemDetails={itemDetails} senderDetails={senderDetails} /> 
         
       </Modal>
 
