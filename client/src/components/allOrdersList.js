@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import axios from "axios";
 import OrdersBox from './ordersBox'
 import { Pagination } from 'antd';
+import Loading from "./loading";
 const AllOrdersList = ()=>{
     const {token, role} =useSelector(state=>state.user)
     const [orders, setOrders]= useState([])
@@ -37,9 +38,7 @@ return (
     })}
     <Pagination  total={ordersCount} onChange={(page,size)=>fetchAvailableItems(page,size)}/>
     </>
-    ): 'loading'}
-
-
+    ): <Loading/>}
     </>
 )
 }
