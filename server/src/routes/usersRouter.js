@@ -33,7 +33,10 @@ router.post("/register", async (req, res) => {
         req.body.password = hash
         const userData = Users.create(req.body);
         if (userData) {
-          res.json({ msg: "user is added" });
+          res.json({ 
+            isRegistered:true,
+            msg: "Your account is successfully Added" 
+          });
         } else {
           res.json({ errorMsg: "something went worng" });
         }
