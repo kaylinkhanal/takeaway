@@ -33,7 +33,7 @@ const CustomForm = (props) => {
           setFormStep(formStep + 1);
         } else {
           values.senderId = _id
-          axios.put(`http://localhost:3005/orders`, values);
+          axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values);
         }
       }}
     >

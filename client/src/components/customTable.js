@@ -53,7 +53,7 @@ const CustomTable = () => {
   };
 
   const setIdAndShowModal = (item) => {
-    setItemSelectedForEdit(item)
+    // setItemSelectedForEdit(item)
     showModal()
   }
 
@@ -126,7 +126,7 @@ useEffect(()=>{
         onCancel={handleCancel}
       >
         
-        <CustomForm itemDetails={itemDetails} senderDetails={senderDetails} orderList={itemSelectedForEdit}/> 
+        <CustomForm itemDetails={itemDetails} senderDetails={senderDetails} /> 
         
       </Modal>
 

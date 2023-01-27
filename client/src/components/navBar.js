@@ -27,12 +27,13 @@ const NavBar = () => {
     return (
         <>
             <div className="navBox1">
-            <div><Link to="/" style={{textDecoration:"none", color:"white"}}>Take Away</Link></div>
+            <div style={{textDecoration:"none", color:"white"}}>Take Away</div>
+            <Link to="/" style={{ textDecoration:"underline",color:"#04F87E" }}>Home</Link>
             </div>
             <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
 
                 <Drawer
-                title="Features"
+                title="Admin Panel"
                 placement="left"
                 onClose={onClose}
                 open={open}
