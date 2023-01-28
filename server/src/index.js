@@ -14,8 +14,6 @@ const usersRouter = require('./routes/usersRouter')
 const ordersRouter = require('./routes/ordersRouter')
 const itemsRouter = require('./routes/itemsRouter')
 require('dotenv').config()
-
-
 io.on('connection', (socket) => {
   socket.on('orderRequest', (orderRequest)=>{
     io.emit('orderRequest', orderRequest)
