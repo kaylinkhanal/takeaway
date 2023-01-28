@@ -17,8 +17,12 @@ require('dotenv').config()
 
 
 io.on('connection', (socket) => {
-  console.log('a user connected',socket.id);
+  socket.on('orderRequest', (orderRequest)=>{
+    io.emit('orderRequest', orderRequest)
+    // mongoose query
+  })
 });
+
 
 app.use(express.json())
 app.use(cors())
