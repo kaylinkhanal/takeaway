@@ -18,13 +18,18 @@
     height: 190px;
     background-color: white;
     transition: 0.5s;
-    box-shadow: 0 30px 80px rgb(60, 55, 55);
+    box-shadow: 0 0 8px rgb(60, 55, 55);
     border-radius: 15px;
 }
 
 .card:hover {
     height: 400px;
 }
+
+.card:hover .setFile {
+    display: block;
+}
+
 .imgbx {
     position: absolute;
     width: 150px;
@@ -34,14 +39,14 @@
     left: 50%;
     transform: translateX(-50%);
     top: -50px;
-    box-shadow: 0 35px 80px rgb(60, 58, 58);
+    box-shadow: 0 0 10px rgb(210, 138, 138);
     overflow: hidden;
     transition: 0.5s;
     z-index: -1;
 }
 
 .card:hover .imgbx {
-    width:200px;
+    width: 200px;
     height: 200px;
 }
 
@@ -62,7 +67,6 @@
     justify-content: center;
     align-items: flex-end;
     overflow: hidden;
-    margin-top: -100px;
 
 }
 
@@ -74,7 +78,8 @@
 
     transform: translateY(150px);
 }
-.card:hover .contain .detail { 
+
+.card:hover .contain .detail {
     transform: translateY(0px);
 }
 
@@ -108,14 +113,15 @@
     font-weight: 400;
     opacity: 0.5;
 }
-.card .contain .detail .actionBtn{
+
+.card .contain .detail .actionBtn {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    
+
 }
 
-.card .contain .detail .actionBtn button{
+.card .contain .detail .actionBtn button {
     padding: 10px 30px;
     border: none;
     outline: none;
@@ -127,16 +133,24 @@
     cursor: pointer;
     transition: 0.5s;
 }
-.card .contain .detail .actionBtn button:nth-child(2){
-border: 1px solid gray;
-color: gray;
-background: white;
+
+.card .contain .detail .actionBtn button:nth-child(2) {
+    border: 1px solid gray;
+    color: gray;
+    background: white;
 }
-.card .contain .detail .actionBtn button:hover{
+
+.card .contain .detail .actionBtn button:hover {
     scale: 1.1;
     transition: 0.5s;
 }
-.setFile{
+
+.setFile {
+    position: absolute;
     margin-left: 100px;
-    margin-top: 55px;
+    margin-top: 100px;
+    width: 30px;
+    height: 30px;
+    color: rgb(8, 128, 233);
+    display: none;
 }
