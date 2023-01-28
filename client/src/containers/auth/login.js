@@ -71,7 +71,7 @@ const Login = () => {
                                         {errors.password && touched.password ? (
                                             <div className="validaton-message">{errors.password}</div>
                                         ) : null}
-                                        <span><Link to ={'/forgot'}> Forgot password? </Link> </span>
+                                        <span><Link to ={'/forgotPassword'}> Forgot password? </Link> </span>
                                         <CustomButton name='Submit' type="submit" />
                                         
                                     </Form>

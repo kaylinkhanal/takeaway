@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux'
 import { logoutResetDetails } from "../redux/actions/userAction"
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux'
+import img from "../image/logo22.png";
 import navItems from '../config/navItems.json'
 const NavBar = () => {
     const navigate = useNavigate()
@@ -27,12 +28,15 @@ const NavBar = () => {
     return (
         <>
             <div className="navBox1">
-            <div><Link to="/" style={{textDecoration:"none", color:"white"}}>Take Away</Link></div>
+            <div style={{textDecoration:"none", color:"white"}}>
+            {/* <img src={img} alt="Logo" width={200} height={100} margin-bottom={100}/> */}
+            </div>
+            <Link to="/" style={{color:"#FFFFFF" }}>Home</Link>
             </div>
             <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
 
                 <Drawer
-                title="Features"
+                title="Admin Panel"
                 placement="left"
                 onClose={onClose}
                 open={open}
