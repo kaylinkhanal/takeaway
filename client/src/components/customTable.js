@@ -5,11 +5,25 @@ import "../App.css";
 import { useSelector } from "react-redux";
 import CustomForm from "../components/customForm"
 import { message } from 'antd';
+import io from 'socket.io-client';
+const socket = io(process.env.REACT_APP_API_URL);
 
 const CustomTable = () => {
   const {role, _id, token} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
-
+  useEffect(()=>{
+    socket.on('orderRequest',(orderRequest)=>{
+   
+      const bckUpOrderList = [...orders]
+      bckUpOrderList.map((item,id)=>{
+        if(item._id === orderRequest.id){
+          item.orderStatus = orderRequest.status
+        }
+        return item
+      })
+      setOrders(bckUpOrderList)
+    })
+  })
   const triggerDelete = async(id)=>{
    const requestOptions = {
     method:"DELETE",
@@ -63,6 +77,10 @@ const CustomTable = () => {
     {
       title: 'Reciver Name',
       dataIndex: "receiverName"
+    },
+    {
+      title: 'Order Status',
+      dataIndex: "orderStatus"
     },
     {
       title: 'Phone Number',
