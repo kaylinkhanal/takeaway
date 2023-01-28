@@ -78,14 +78,14 @@ useEffect(()=>{
     console.log(firstOrder)
   for (const key in updatedOrder) {
     const col={
-      title:key.toUpperCase(),
+      title:key,
       dataIndex:key,
     }
     cols.push(col)
   }
   const col2=[{
     title:'Actions',
-    key: 'key',
+     key: 'key',
     dataIndex:'key',
     render: (_, item) => (
       <>
@@ -101,8 +101,11 @@ useEffect(()=>{
   const newCol=cols.concat(col2)
   setColumns(newCol)
 }, [])
+
+
   return (
     <>   
+
 
 <Modal
         title="Edit Items"

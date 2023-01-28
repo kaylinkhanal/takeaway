@@ -4,8 +4,9 @@ import { CustomButton } from "./customButton";
 import * as Yup from "yup";
 import axios from "axios";
 import {toast} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
+
+import 'react-toastify/dist/ReactToastify.css';
 // toast.configure()
 const CustomForm = (props) => {
   const {_id} =useSelector(state=>state.user)

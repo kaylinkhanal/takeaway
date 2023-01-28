@@ -11,6 +11,7 @@ const ordersSchema = new mongoose.Schema(
     unitItems:{type: String},
     weight: {type: Number},
     catagoryName: { type: String },
+    orderStatus: { type: String, default:'Pending' },
     minimumDeliveryPrice: { type: Number },
   },
   { collection: "orders" }

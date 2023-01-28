@@ -15,6 +15,16 @@ router.post("/orders",  async (req, res) => {
     }
   });
 
+  router.patch("/orders/status",  async (req, res) => {
+    try {
+       console.log(req.body)
+        const data =await  Orders.findByIdAndUpdate(req.body.id, {"orderStatus": "Accepted"})
+        
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
   const tokenValidator = (req, res, next)=> {
     if(req.headers.authorization){
       const token = req.headers.authorization.split(' ')[1]
