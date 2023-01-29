@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Drawer, Modal, Button,Table } from "antd";
+import {Modal, Button,Table } from "antd";
 import "../App.css";
 import { useSelector } from "react-redux";
 import CustomForm from "../components/customForm"
 import { message } from 'antd';
-
+import io from 'socket.io-client';
+const socket = io(process.env.REACT_APP_API_URL);
 const CustomTable = () => {
   const {role, _id, token} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
-  const [itemSelectedForEdit, setItemSelectedForEdit] = useState({})
+  useEffect(async()=>{
+    await socket.on('orderRequest',(orderRequest)=>{
+      const bckUpOrderList = [...orders]
+      bckUpOrderList.map((item,id)=>{
+        if(item._id === orderRequest.id){
+          item.orderStatus = orderRequest.status
+        }
+        return item
+      })
+      setOrders(bckUpOrderList)
+    })
+  })
   const triggerDelete = async(id)=>{
    const requestOptions = {
     method:"DELETE",
@@ -22,7 +34,6 @@ const CustomTable = () => {
     message.success("Orders deleted successfully",[2])
   }
   }
-  const title=["Pickup Date", "Pickup Time", "Weight", "unitItems", "Max Length"]
 
   const itemDetails = [
      'pickupDate',
@@ -35,15 +46,6 @@ const CustomTable = () => {
      'receiverName',
      'receiverPhoneNo'
   ]
-
-  const [open, setOpen] = useState(false);
-
-  const showDrawer = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
   const [isModalOpen, setIsModalOpen] = useState(false);
   const showModal = () => {
     setIsModalOpen(true);
@@ -70,9 +72,9 @@ const CustomTable = () => {
         setOrders(response.data.orders)
       });
 }
-useEffect(()=>{
-    fetchAvailableItems()
-    const firstOrder=orders[0]||{} 
+useEffect( ()=>{
+     fetchAvailableItems()
+    const firstOrder=orders[0] 
     const {_id, __v,...updatedOrder}=firstOrder
     const cols=[] 
     console.log(firstOrder)
@@ -101,11 +103,8 @@ useEffect(()=>{
   const newCol=cols.concat(col2)
   setColumns(newCol)
 }, [])
-
-
   return (
     <>   
-
 
 <Modal
         title="Edit Items"

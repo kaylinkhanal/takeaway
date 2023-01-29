@@ -3,6 +3,7 @@ const app = express()
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
+const Orders=require('./models/Orders')
 const io = new Server(server,{
   cors: {
       origin: "*"
@@ -15,13 +16,15 @@ const ordersRouter = require('./routes/ordersRouter')
 const itemsRouter = require('./routes/itemsRouter')
 require('dotenv').config()
 io.on('connection', (socket) => {
+  console.log("socket is connected")
   socket.on('orderRequest', (orderRequest)=>{
     io.emit('orderRequest', orderRequest)
-    // mongoose query
+    console.log(orderRequest)
+    console.log(orderRequest.id)
+// mongoose query
+    Orders.findByIdAndUpdate(orderRequest.id, {"orderStatus": orderRequest.status})
   })
 });
-
-
 app.use(express.json())
 app.use(cors())
 app.use(usersRouter);

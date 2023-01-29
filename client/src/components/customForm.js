@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { CustomButton } from "./customButton";
-import * as Yup from "yup";
 import axios from "axios";
 import {toast} from "react-toastify";
 import { useSelector } from "react-redux";
@@ -10,12 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 // toast.configure()
 const CustomForm = (props) => {
   const {_id} =useSelector(state=>state.user)
-  const usersSchema = Yup.object().shape({
-    password: Yup.string()
-      .min(5, "Too Short!")
-      .max(100, "Too Long!")
-      .required("Required"),
-  });
   const [formStep, setFormStep] = useState(1);
 
   const handleBackClick = () => {

@@ -2,6 +2,9 @@ import React, { useState } from 'react'
 import './button.css'
 import {Button, Popover} from 'antd'
 import axios from 'axios'
+import io from 'socket.io-client';
+const socket = io(process.env.REACT_APP_API_URL);
+
 const OrdersBox = (props) => {
    const selectDynamicColor = () => {
      
@@ -12,14 +15,14 @@ const OrdersBox = (props) => {
        }else{
          return 'red'
        }
-
    }
+
    const changeStatus = (status)=>{
-     const statusDetails ={
-      status,
-      id: props.item._id
-     }
-      axios.patch(`http://localhost:3005/orders/status`, statusDetails);
+      const orderDetails = {
+         status: status,
+         id: props.item._id
+      }
+    socket.emit('orderRequest',orderDetails )
    }
    const content = (
       <div>

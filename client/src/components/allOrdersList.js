@@ -17,10 +17,6 @@ const AllOrdersList = ()=>{
         socket.on('connection');
       }, []);
     
-      const sendPing = () => {
-        socket.emit('ping');
-      }
-
     const fetchAvailableItems= (page, size)=>{
         setLoading(true)
         const requestOptions = {
