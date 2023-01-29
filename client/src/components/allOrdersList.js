@@ -4,13 +4,19 @@ import axios from "axios";
 import OrdersBox from './ordersBox'
 import { Pagination } from 'antd';
 import Loading from "./loading";
+import io from 'socket.io-client';
+const socket = io(process.env.REACT_APP_API_URL);
+
 const AllOrdersList = ()=>{
     const {token, role} =useSelector(state=>state.user)
     const [orders, setOrders]= useState([])
     const [loading, setLoading]= useState(false)
     const [ordersCount, setTotalOrdersCount]= useState(0)
-
-
+  
+    useEffect(() => {
+        socket.on('connection');
+      }, []);
+    
     const fetchAvailableItems= (page, size)=>{
         setLoading(true)
         const requestOptions = {
