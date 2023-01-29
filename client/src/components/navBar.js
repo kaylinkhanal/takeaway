@@ -28,7 +28,6 @@ const NavBar = () => {
         <>
             <div className="navBox1">
             <div style={{textDecoration:"none", color:"white"}}>Take Away</div>
-            <Link to="/" style={{ textDecoration:"underline",color:"#04F87E" }}>Home</Link>
             </div>
             <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
 
@@ -41,7 +40,7 @@ const NavBar = () => {
                 {navItems[role].map(item=>  <Link to={item.link}><li onClick={()=>setOpen(false)}>{item.label}</li></Link> )}
                 </Drawer>
             <div className="navBox2" id={role === 'admin' ? 'adminTheme' : 'userTheme'}>
-
+            <Link to="/" style={{ textDecoration:"underline",color:"#04F87E", paddingLeft:"20px", fontSize:"30px"}}>Home</Link>
                 <div className="icon">
                     <div className="user_details">
                         <Link to="/profile" className="user_name">{name}</Link>

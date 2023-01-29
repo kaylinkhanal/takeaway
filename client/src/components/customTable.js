@@ -4,12 +4,14 @@ import { Drawer, Modal, Button,Table } from "antd";
 import "../App.css";
 import { useSelector } from "react-redux";
 import CustomForm from "../components/customForm"
-import { message } from 'antd';
+import { message,Popconfirm } from 'antd';
 
 const CustomTable = () => {
   const {role, _id, token} =useSelector(state=>state.user)
   const [orders, setOrders]= useState([])
   const [itemSelectedForEdit, setItemSelectedForEdit] = useState({})
+
+
   const triggerDelete = async(id)=>{
    const requestOptions = {
     method:"DELETE",
@@ -91,9 +93,20 @@ const CustomTable = () => {
         <Button onClick={()=>setIdAndShowModal(item)}>
          {role==='admin'?'Accept':'Edit'}
        </Button>
-       <Button onClick={()=> triggerDelete(item._id)}>
+       <Popconfirm
+    title="Delete the task"
+    description="Are you sure to delete this task?"
+    okText="Yes"
+    cancelText="No"
+    onConfirm={()=>triggerDelete(item._id)}
+  >
+    <Button>
+    Delete
+  </Button>
+  </Popconfirm>
+       {/* <Button onClick={()=> triggerDelete(item._id)}>
          {'Delete'}
-       </Button>
+       </Button> */}
         </>
       ),
     },

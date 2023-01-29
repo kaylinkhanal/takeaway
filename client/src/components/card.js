@@ -3,6 +3,7 @@ import './button.css'
 import { Modal } from "antd";
 import CustomForm from "../components/customForm"
 import ReusableForm from "../components/reusableForm"
+import { Popconfirm } from 'antd';
 
 const Card = (props) => {
    const [isModalOpen, setIsModalOpen] = useState(false)
@@ -44,7 +45,19 @@ const Card = (props) => {
          </Modal>
          <div onClick={()=>props.role === 'admin'? null: setIsModalOpen(true) } className='category'id={props.role==='admin'?'adminCardTheme':'userCardTheme'}>
          {props.role === 'admin' ?  <button onClick={() => setIsModalOpen(true) }>Edit</button>: ''}
-         {props.role === 'admin' ?  <button onClick={() => triggerDelete()}>Delete</button>: ''}
+         {props.role === 'admin' ? (
+        <Popconfirm
+          title="Delete the task"
+          description="Are you sure to delete this task?"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={triggerDelete}
+        >
+          <button>Delete</button>
+        </Popconfirm>
+      ) : (
+        ''
+      )}
             <div className='categoryName'> {props.item.catagoryName} </div>
          </div>
       </>
