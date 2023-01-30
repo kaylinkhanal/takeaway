@@ -220,7 +220,7 @@ select {
     /* justify-content: space-around; */
     align-items: center;
     width: 25%;
-    height: 55px;
+    height: 80px;
     color: white;
     background: linear-gradient(135deg, #561750 0%, #152d87 100%);
     /* box-shadow: 5px 0 5px 2px black; */
@@ -233,15 +233,22 @@ select {
 .navBox1 {
   cursor: pointer;
 }
+.logo{
+  margin-top: 10px;
+  margin-left: -15px;
+  text-decoration:"none";
+   color:"white"
+}
 
 .navBox2 {
   margin-left: 25%;
-  margin-top: -55px;
+  margin-top: -80px;
   width: 75%;
-  height: 55px;
+  height: 80px;
   color: white;
   background-color: rgb(32, 147, 248);
   float: right;
+  text-align: bottom;
   /* box-shadow: 10px 0 5px 2px black; */
 }
 .account_settings{
@@ -265,7 +272,8 @@ select {
     scale: 1.1;
     cursor: pointer;
 }
-.name_admin{position: absolute;
+.name_admin{
+    position: absolute;
     margin-top: 10px;
     margin-left: 65%;
     font-size: 1.4rem;
@@ -329,8 +337,8 @@ select {
 
 .adminDrawer {
   position: absolute;
-  margin-top: -42px;
-  margin-left: 19%;
+  margin-top: -52px;
+  margin-left: 10px;
   width: 27px;
   height: 27px;
   color: white;
@@ -402,6 +410,7 @@ select {
     width: 100%;
     text-align: left;
   }
+
 
   .navBox2 {
     width: 0%;
