@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 const Profile = () => {
   const { _id } = useSelector((state) => state.user);
   const [file, setFile] = useState(null);
@@ -33,15 +36,13 @@ const Profile = () => {
   console.log(file)
   return (
     <>
-    
       <div class="card">
-        <div className='ram'>
-
-          <input type="file" onChange={(e) => {
-            setFile(e.target.files[0])
-          }} className='setFile'/>
-          </div>
-       
+        <input type="file" onChange={(e) => {
+          setFile(e.target.files[0])
+        }} id="upload" hidden />
+        <label htmlFor="upload">
+          <FontAwesomeIcon icon={faCamera} className='setFile' />
+        </label>
         <div class="imgbx">
           {userDetails.avatarName && <img src={require(`../../uploads/${userDetails.avatarName}`)} alt="Loading.." />}
         </div>
