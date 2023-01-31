@@ -4,7 +4,7 @@ import {Modal, Button,Table } from "antd";
 import "../App.css";
 import { useSelector } from "react-redux";
 import CustomForm from "../components/customForm"
-import { message } from 'antd';
+import { message,Popconfirm } from 'antd';
 import io from 'socket.io-client';
 const socket = io(process.env.REACT_APP_API_URL);
 const CustomTable = () => {
@@ -59,8 +59,58 @@ const CustomTable = () => {
     // setItemSelectedForEdit(item)
     showModal()
   }
-  const [columns, setColumns]=useState([
-  ])
+const columns = [
+  {
+    title: 'Pickup Date',
+    dataIndex: 'pickupDate',
+  },
+  {
+    title: 'Pickup Time',
+    dataIndex: 'pickupTime',
+  },
+  {
+    title: 'Reciver Name',
+    dataIndex: "receiverName"
+  },
+  {
+    title: 'Phone Number',
+    dataIndex: "receiverPhoneNo",
+  },
+  {
+    title: 'Unit Items',
+    dataIndex: 'unitItems',
+  },
+  {
+    title: 'Weight',
+    dataIndex: 'weight',
+  },
+  {
+    title: 'Actions',
+    key: 'key',
+    dataIndex: 'key',
+    render: (_, item) => (
+      <>
+      <Button onClick={()=>setIdAndShowModal(item)}>
+       {role==='admin'?'Accept':'Edit'}
+     </Button>
+     <Popconfirm
+  title="Delete the task"
+  description="Are you sure to delete this task?"
+  okText="Yes"
+  cancelText="No"
+  onConfirm={()=>triggerDelete(item._id)}
+>
+  <Button>
+  Delete
+</Button>
+</Popconfirm>
+     {/* <Button onClick={()=> triggerDelete(item._id)}>
+       {'Delete'}
+     </Button> */}
+      </>
+    ),
+  },
+]
 
   const fetchAvailableItems= ()=>{
     const requestOptions = {
@@ -74,35 +124,8 @@ const CustomTable = () => {
 }
 useEffect( ()=>{
      fetchAvailableItems()
-    const firstOrder=orders[0] 
-    const {_id, __v,...updatedOrder}=firstOrder
-    const cols=[] 
-    console.log(firstOrder)
-  for (const key in updatedOrder) {
-    const col={
-      title:key,
-      dataIndex:key,
-    }
-    cols.push(col)
-  }
-  const col2=[{
-    title:'Actions',
-     key: 'key',
-    dataIndex:'key',
-    render: (_, item) => (
-      <>
-      <Button onClick={()=>setIdAndShowModal(item)}>
-       {role==='admin'?'Accept':'Edit'}
-     </Button>
-     <Button onClick={()=> triggerDelete(item._id)}>
-       {'Delete'}
-     </Button>
-      </>
-    ),
-  }]
-  const newCol=cols.concat(col2)
-  setColumns(newCol)
 }, [])
+
   return (
     <>   
 
@@ -112,7 +135,7 @@ useEffect( ()=>{
         open={isModalOpen}
         onCancel={handleCancel}
       >
-        
+      
         <CustomForm itemDetails={itemDetails} senderDetails={senderDetails} /> 
         
       </Modal>

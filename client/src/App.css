@@ -229,10 +229,6 @@ select {
     text-align: center;
 }
 
-.navBox1 > div {
-  margin-right: 20px;
-}
-
 .navBox1 {
   cursor: pointer;
 }
@@ -245,6 +241,10 @@ select {
   color: white;
   background-color: rgb(32, 147, 248);
   float: right;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   /* box-shadow: 10px 0 5px 2px black; */
 }
 .account_settings{

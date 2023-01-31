@@ -3,8 +3,10 @@ import './button.css'
 import { Modal } from "antd";
 import CustomForm from "../components/customForm"
 import ReusableForm from "../components/reusableForm"
+import { Popconfirm } from 'antd';
 
 const Card = (props) => {
+   
    const [isModalOpen, setIsModalOpen] = useState(false)
    const itemDetails = [
       'pickupDate',
@@ -39,12 +41,24 @@ const Card = (props) => {
             open={isModalOpen}>
             {props.item.catagoryName}
             {
-              props.role === 'admin' ? <ReusableForm item={props.item} isAdminEdit={true}/> : <CustomForm endpoint="orders" itemDetails={itemDetails} senderDetails={senderDetails} /> 
+              props.role === 'admin' ? <ReusableForm item={props.item} isAdminEdit={true}/> : <CustomForm endpoint="orders" basePrice={props.item.minimumDeliveryPrice} categoryName={props.item.catagoryName} itemDetails={itemDetails} senderDetails={senderDetails} /> 
             }
          </Modal>
          <div onClick={()=>props.role === 'admin'? null: setIsModalOpen(true) } className='category'id={props.role==='admin'?'adminCardTheme':'userCardTheme'}>
          {props.role === 'admin' ?  <button onClick={() => setIsModalOpen(true) }>Edit</button>: ''}
-         {props.role === 'admin' ?  <button onClick={() => triggerDelete()}>Delete</button>: ''}
+         {props.role === 'admin' ? (
+        <Popconfirm
+          title="Delete the task"
+          description="Are you sure to delete this task?"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={triggerDelete}
+        >
+          <button>Delete</button>
+        </Popconfirm>
+      ) : (
+        ''
+      )}
             <div className='categoryName'> {props.item.catagoryName} </div>
          </div>
       </>
