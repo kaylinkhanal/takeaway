@@ -1,0 +1,8 @@
+{
+    "supercars":{
+        "discoutPerUnitPrice":0.10
+    },
+    "superbike":{
+        "discoutPerUnitPrice":0.5
+    }
+}
