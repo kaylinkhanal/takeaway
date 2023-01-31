@@ -15,15 +15,25 @@ router.post("/orders",  async (req, res) => {
     }
   });
 
-  const tokenValidator = (req, res, next)=> {
-    if(req.headers.authorization){
-      const token = req.headers.authorization.split(' ')[1]
-      jwt.verify(token, process.env.SECRET_TOKEN, function(err, decoded) {
-        if(err) return res.sendStatus(403)
-        if(decoded)  next()
-      });
-    }else return res.sendStatus(403)
-  }
+  // router.patch("/orders/status",  async (req, res) => {
+  //   try {
+  //      console.log(req.body)
+  //       const data =await  Orders.findByIdAndUpdate(req.body.id, {"orderStatus": "Accepted"})
+        
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // });
+
+  // const tokenValidator = (req, res, next)=> {
+  //   if(req.headers.authorization){
+  //     const token = req.headers.authorization.split(' ')[1]
+  //     jwt.verify(token, process.env.SECRET_TOKEN, function(err, decoded) {
+  //       if(err) return res.sendStatus(403)
+  //       if(decoded)  next()
+  //     });
+  //   }else return res.sendStatus(403)
+  // }
 
   router.get("/orders", async (req, res) => {
     try {

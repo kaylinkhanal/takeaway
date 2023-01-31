@@ -1,22 +1,17 @@
 import React, { useState } from "react";
 import { Formik, Form, Field } from "formik";
 import { CustomButton } from "./customButton";
-import * as Yup from "yup";
 import axios from "axios";
 import {toast} from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from "react-redux";
+import priceMap from "../config/priceMap.json"
+
+import 'react-toastify/dist/ReactToastify.css';
 // toast.configure()
 const CustomForm = (props) => {
   const {_id} =useSelector(state=>state.user)
-  const usersSchema = Yup.object().shape({
-    password: Yup.string()
-      .min(5, "Too Short!")
-      .max(100, "Too Long!")
-      .required("Required"),
-  });
   const [formStep, setFormStep] = useState(1);
-
+  const [totalPrice, setTotalPrice] = useState(0);
   const handleBackClick = () => {
     if (formStep !== 1) {
       setFormStep(formStep - 1);
@@ -29,11 +24,17 @@ const CustomForm = (props) => {
     <Formik
       initialValues={props.orderList || {}}
       onSubmit={async (values, { resetForm }) => {
+          const {weight, unitItems, maxLength} = values
+          const finalPrice= weight* unitItems* maxLength * props.basePrice 
+          setTotalPrice(finalPrice - finalPrice * priceMap[props.categoryName].discountPerUnitPrice)
         if (formStep === 1) {
           setFormStep(formStep + 1);
         } else {
           values.senderId = _id
-          axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values);
+          values.totalPrice = totalPrice
+          console.log(values)
+
+          // axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values);
         }
       }}
     >
@@ -63,9 +64,11 @@ const CustomForm = (props) => {
                     </div>
                   );
                 })}
+             
               </>
             ) : (
               <>
+              {totalPrice}
                 {props.senderDetails.map((item) => {
                   return (
                     <div>

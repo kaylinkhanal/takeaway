@@ -2,6 +2,7 @@ import React from "react";
 // import "./register.css";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { message } from 'antd';
 import img from "../../image/register.jpg";
 import { CustomButton } from "../../components/customButton";
 import { Link } from "react-router-dom";
@@ -75,6 +76,13 @@ const Register = () => {
                   const notify = responseHandler(response, data.errorMsg)
                   toast(notify)
                   // resetForm({ values: "" });
+                  console.log(data.msg)
+                  if (data.isRegistered) {
+                    message.success(data.msg, [2])
+                    navigate('/')
+                  } else {
+                    message.error(data.errorMsg, [2])
+                  }
                 } catch (error) {
                   toast.error('error',{position:toast.POSITION.TOP_CENTER});
                 }
