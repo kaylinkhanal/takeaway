@@ -98,7 +98,7 @@ const CustomForm = (props) => {
                 type="submit"
               />
             <CustomButton
-              name={formStep === 1 ? "Next" : "Submit"}
+              name={formStep <= 2 ? "Next" : "Submit"}
               type="submit"
             />
           </Form>
