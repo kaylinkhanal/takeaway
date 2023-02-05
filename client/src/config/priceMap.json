@@ -1,8 +1,8 @@
 {
     "jwellery": {
-        "discountPerUnitPrice": 0.10
+        "discountPerUnitPrice": 10
     },
     "document": {
-        "discountPerUnitPrice": 0.5
+        "discountPerUnitPrice": 10
     }
 }

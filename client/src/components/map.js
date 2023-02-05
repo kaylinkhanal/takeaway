@@ -2,7 +2,7 @@ import {useState, useMemo, useCallback, useRef} from "react";
 import {useMapEvents, MapContainer, TileLayer,Marker, Popup} from "react-leaflet"
 import "leaflet/dist/leaflet.css"
 import {useDispatch, useSelector} from "react-redux"
-import {setSenderLocationLatLng,setReceiverLocationLatLng} from "../redux/reducers/locationSlice"
+import {setSenderLocationLatLng,setReceiverLocationLatLng, setDistance} from "../redux/reducers/locationSlice"
 import L from 'leaflet';
 import '../App.css'
 
@@ -24,8 +24,8 @@ const dragReceiverMarker = L.icon({
   iconSize: [30, 45],
   iconAnchor: [10, 41],
   popupAnchor: [2, -40],
-  iconUrl: "https://unpkg.com/leaflet@1.6/dist/images/marker-icon.png",
-  className: "drag-receiver-marker",
+  iconUrl: "https://th.bing.com/th/id/R.98930f0bb073c0fa078eecf278c1b858?rik=GSK1CfbT1ev8%2bQ&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2015%2f01%2fgoogle-map-marker-icon_20956.png&ehk=0KooYND%2bRTNJnhHR%2f2YlG%2bUHBVBF6bFmU8%2bEInF1gaY%3d&risl=&pid=ImgRaw&r=0",
+ 
 });
 const Map = ()=> {
     const {senderLocationLatLng} = useSelector(state=> state.location)
@@ -94,8 +94,7 @@ const Map = ()=> {
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
   const distance = R * c;
-  console.log(distance);
-  alert(distance)
+  dispatch(setDistance(distance))
 
       // const receiver = L.latLng(receiverLocationLatLng);
       // const sender = L.latLng(senderLocationLatLng);
