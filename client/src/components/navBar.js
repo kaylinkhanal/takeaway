@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux'
 import navItems from '../config/navItems.json'
 import { ImHome } from 'react-icons/im';
 
+import img from "../image/logoFi.png"
 const NavBar = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -29,7 +30,9 @@ const NavBar = () => {
     return (
         <>
             <div className="navBox1">
-            <div style={{textDecoration:"none", color:"white"}}>Take Away</div>
+            <div className="logo">
+            <img src={img} alt="Logo" width={250} height={200}/>
+            </div>
             </div>
             <FontAwesomeIcon icon={faBars}  onClick={showDrawer}className="adminDrawer"></FontAwesomeIcon>
 

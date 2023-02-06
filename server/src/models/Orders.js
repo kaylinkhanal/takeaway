@@ -13,6 +13,9 @@ const ordersSchema = new mongoose.Schema(
     catagoryName: { type: String },
     orderStatus: { type: String, default:'Pending' },
     minimumDeliveryPrice: { type: Number },
+    distance:{type: Number},
+    discount:{type: Number},
+ 
   },
   { collection: "orders" }
 );
