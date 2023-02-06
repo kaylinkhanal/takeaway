@@ -1,9 +1,11 @@
 import { Formik, Field, Form } from 'formik';
+import {useState} from 'react'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import * as Yup from 'yup';
 
 const ReusableForm =({isAdminEdit, item, handleCancel})=>{
+  const [file, setFile] = useState(null)
   const itemSchema = Yup.object().shape({
     catagoryName: Yup.string()
       .min(2, "Too Short!")
@@ -12,6 +14,11 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
 
     minimumDeliveryPrice: Yup.string()
       .required("Required"),
+      file: Yup.mixed().test("hasFile", "Image required", values=> {
+        if(file) return true
+        console.log(file)
+        return false
+      })
   });
     return(
         <>
@@ -20,28 +27,13 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
         <Formik
           initialValues={item || {}}
           validationSchema={itemSchema}
-          onSubmit={async (values,actions, { resetForm }) => {
-            const requestOptions = {
-              method: isAdminEdit ? "PUT" : "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(values),
-            };
-            const res = await fetch(
-              `${process.env.REACT_APP_API_URL}/items`,
-              requestOptions
-            );
-            const data = await res.json();
-            if (res.status === 200) {
-              toast.success(data.msg)
-            } else {
-              toast.error(data.msg);
-            }
-          
-            handleCancel();
-            resetForm({ values: "" });
+          onSubmit={async (values, { resetForm }) => {
+            //
+            //
+           
           }}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, handleChange }) => (
             <div>
               <Form>
                 <div>
@@ -60,6 +52,13 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
                     <div className="validaton-message">{errors.minimumDeliveryPrice}</div>
                   ) : null}
                 </div>
+                <input type="file" onChange={(e)=>{
+                  setFile(e.target.files[0])
+                  handleChange()
+                  }} name="file"/>
+                {errors.file && touched.file ? (
+                    <div className="validaton-message">{errors.file}</div>
+                  ) : null}
                 <button className="button" name="Sumbit" type="submit" >{isAdminEdit ? 'Save Item' :'Add Item'}</button>
               </Form>
             </div>
