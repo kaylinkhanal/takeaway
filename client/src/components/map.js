@@ -24,7 +24,7 @@ const dragReceiverMarker = L.icon({
   iconSize: [30, 45],
   iconAnchor: [10, 41],
   popupAnchor: [2, -40],
-  iconUrl: "https://th.bing.com/th/id/R.98930f0bb073c0fa078eecf278c1b858?rik=GSK1CfbT1ev8%2bQ&riu=http%3a%2f%2fwww.newdesignfile.com%2fpostpic%2f2015%2f01%2fgoogle-map-marker-icon_20956.png&ehk=0KooYND%2bRTNJnhHR%2f2YlG%2bUHBVBF6bFmU8%2bEInF1gaY%3d&risl=&pid=ImgRaw&r=0",
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/1180/1180058.png?w=740&t=st=1675612962~exp=1675613562~hmac=72aeaef81f5c310472a9da30bdcdfee7807d60f8593016c05f9460f1037eae64",
  
 });
 const Map = ()=> {
