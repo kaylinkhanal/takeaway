@@ -20,7 +20,7 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
         <Formik
           initialValues={item || {}}
           validationSchema={itemSchema}
-          onSubmit={async (values, { resetForm }) => {
+          onSubmit={async (values,actions, { resetForm }) => {
             const requestOptions = {
               method: isAdminEdit ? "PUT" : "POST",
               headers: { "Content-Type": "application/json" },
@@ -36,6 +36,7 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
             } else {
               toast.error(data.msg);
             }
+          
             handleCancel();
             resetForm({ values: "" });
           }}
@@ -59,7 +60,7 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
                     <div className="validaton-message">{errors.minimumDeliveryPrice}</div>
                   ) : null}
                 </div>
-                <button className="button" name="Sumbit" type="submit">{isAdminEdit ? 'Save Item' :'Add Item'}</button>
+                <button className="button" name="Sumbit" type="submit" >{isAdminEdit ? 'Save Item' :'Add Item'}</button>
               </Form>
             </div>
           )}
