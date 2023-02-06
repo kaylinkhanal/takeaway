@@ -12,6 +12,8 @@ import "leaflet/dist/leaflet.css"
 // toast.configure()
 const CustomForm = (props) => {
   const {_id} =useSelector(state=>state.user)
+  const {distance} =useSelector(state=>state.location)
+
   const [formStep, setFormStep] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
   const handleBackClick = () => {
@@ -30,12 +32,12 @@ const CustomForm = (props) => {
         } else {
           values.senderId = _id
           values.totalPrice = totalPrice
-          console.log(values)
           axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values);
         }
-        const {weight, unitItems, maxLength} = values
-        const finalPrice= weight* unitItems* maxLength * props.basePrice 
-        setTotalPrice(finalPrice - finalPrice * priceMap[props.categoryName].discountPerUnitPrice)
+        const {weight, unitItems} = values
+        const finalPrice= weight* unitItems* props.basePrice * distance
+        setTotalPrice(finalPrice -((finalPrice * priceMap[props.categoryName].discountPerUnitPrice)/100))
+        debugger;
       }}
     >
       {({ errors, touched }) => (
@@ -61,20 +63,28 @@ const CustomForm = (props) => {
                       {errors[item] && touched[item] ? (
                         <div className="validaton-message">{errors[item]}</div>
                       ) : null}
+                       
                     </div>
                   );
                 })}
-             
               </>
             ) : null}
             {
               formStep ===2 && (
+                <>
                <Map/>
+               <CustomButton
+               name="Back"
+               onClick={handleBackClick}
+             />
+               Total distance is: {distance} km
+               Rs. {totalPrice || 0}
+               </>
               )
             }
             {formStep ===3  && (
                 <>
-                {totalPrice}
+         
                   {props.senderDetails.map((item) => {
                     return (
                       <div>
@@ -90,15 +100,15 @@ const CustomForm = (props) => {
                       </div>
                     );
                   })}
+                     <CustomButton
+               name="Back"
+               onClick={handleBackClick}
+             />
                 </>
             )}
-                <CustomButton
-                name="Back"
-                onClick={handleBackClick}
-                type="submit"
-              />
+             
             <CustomButton
-              name={formStep === 1 ? "Next" : "Submit"}
+              name={formStep <= 2 ? "Next" : "Submit"}
               type="submit"
             />
           </Form>
