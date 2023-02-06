@@ -30,14 +30,19 @@ const CustomForm = (props) => {
         if (formStep <=2) {
           setFormStep(formStep + 1);
         } else {
+          values.minimumDeliveryPrice = props.basePrice
+          values.categoryName  = props.categoryName
           values.senderId = _id
           values.totalPrice = totalPrice
+          values.distance = distance
+          values.discount =  priceMap[props.categoryName].discountPerUnitPrice
           axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values);
+          console.log(values)
         }
         const {weight, unitItems} = values
         const finalPrice= weight* unitItems* props.basePrice * distance
         setTotalPrice(finalPrice -((finalPrice * priceMap[props.categoryName].discountPerUnitPrice)/100))
-        debugger;
+        
       }}
     >
       {({ errors, touched }) => (
@@ -80,6 +85,7 @@ const CustomForm = (props) => {
                Total distance is: {distance} km
                Rs. {totalPrice || 0}
                </>
+              
               )
             }
             {formStep ===3  && (
@@ -111,6 +117,7 @@ const CustomForm = (props) => {
               name={formStep <= 2 ? "Next" : "Submit"}
               type="submit"
             />
+            
           </Form>
         </div>
       )}
