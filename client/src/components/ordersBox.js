@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
 import './button.css'
 import {Button, Popover} from 'antd'
+import { AiOutlineSend } from 'react-icons/ai';
 import axios from 'axios'
 import io from 'socket.io-client';
 const socket = io(process.env.REACT_APP_API_URL);
 
+
 const OrdersBox = (props) => {
    const selectDynamicColor = () => {
      
-       if(props.item.orderStatus=="Pending"){
+       if(props.item.orderStatus==="Pending"){
          return 'orange'
-       }else if(props.item.orderStatus=="Accepted"){
+       }else if(props.item.orderStatus==="Accepted"){
          return '#4BB543'
        }else{
          return 'red'
@@ -25,8 +27,8 @@ const OrdersBox = (props) => {
     socket.emit('orderRequest',orderDetails )
    }
    const content = (
-      <div>
-       Reasons: <input placeholder="reasons for rejection"/>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+       <input placeholder="reasons for rejection" />{<AiOutlineSend size={30} marginLeft={8} />}
       </div>
     );
    return (
@@ -40,9 +42,9 @@ const OrdersBox = (props) => {
          {props.item.receiverPhoneNo}
          {props.item.pickupTime}
          <Button onClick={()=>changeStatus('accept')}>Accept</Button>
-         {/* <Popover content={content} title="Title"> */}
+         <Popover content={content} >
             <Button  onClick={()=>changeStatus('reject')} type="primary">Reject</Button>
-         {/* </Popover> */}
+         </Popover>
    
             <div className='categoryName'>  {props.item.receiverName} </div>
          </div>

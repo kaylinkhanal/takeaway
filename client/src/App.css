@@ -450,6 +450,7 @@ select {
   flex-wrap: wrap;
   background-color: white;
   justify-content: space-around;
+  margin-top: 100px;
 }
 
 .drag-receiver-marker {

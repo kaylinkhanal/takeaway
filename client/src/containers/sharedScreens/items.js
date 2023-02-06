@@ -1,11 +1,11 @@
 import React,{useEffect, useState} from 'react'
 import axios from "axios";
-import { Drawer, Modal, Button,Table } from "antd";
-import {faBars } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Modal, Button } from "antd";
 import {useSelector} from 'react-redux';
 import  Card  from '../../components/card';
 import ReusableForm from '../../components/reusableForm'
+import { MdOutlineAddCircle } from 'react-icons/md';
+
 const Items = ()=> {
     const {role} = useSelector(state=> state.user)
 
@@ -46,8 +46,13 @@ return (
       >
         <ReusableForm handleCancel={handleCancel}/>
       </Modal>
-      
-   {role==="admin" ? <Button onClick={()=>showModal()} >Add Items</Button>:""}
+
+      <div style={{display: 'flex', justifyContent: 'center'}}>
+   {role==="admin" ? <Button onClick={()=>showModal()} 
+   style={{marginTop:"20px",  height: '10vh', width: '10vw', 
+   backgroundColor: '#306660', color: 'white', fontSize: '20px', borderRadius: '10px' }}
+   >Add Items <MdOutlineAddCircle /></Button>:""}
+   </div>
    <div class="flex-container">
     {validItems.map((item)=>{
        return(
