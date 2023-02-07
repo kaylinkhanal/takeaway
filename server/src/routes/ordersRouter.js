@@ -6,7 +6,7 @@ router.post("/orders",  async (req, res) => {
     try {
         const dbResponse = await Orders.create(req.body)
         if(dbResponse){
-            res.status(200).json({
+            res.status(200).json({ 
                 msg: "orders dispatched successfully"
             })
         }

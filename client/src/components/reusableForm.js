@@ -20,24 +20,8 @@ const ReusableForm =({isAdminEdit, item, handleCancel})=>{
         <Formik
           initialValues={item || {}}
           validationSchema={itemSchema}
-          onSubmit={async (values, { resetForm }) => {
-            const requestOptions = {
-              method: isAdminEdit ? "PUT" : "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(values),
-            };
-            const res = await fetch(
-              `${process.env.REACT_APP_API_URL}/items`,
-              requestOptions
-            );
-            const data = await res.json();
-            if (res.status === 200) {
-              toast.success(data.msg)
-            } else {
-              toast.error(data.msg);
-            }
-            handleCancel();
-            resetForm({ values: "" });
+          onSubmit={ (values, { resetForm }) => {
+            console.log('hi');
           }}
         >
           {({ errors, touched }) => (
