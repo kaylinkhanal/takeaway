@@ -115,7 +115,7 @@ const columns = [
   const fetchAvailableItems= ()=>{
     const requestOptions = {
       headers: {
-        'authorization': `Bearer ${token}`
+        'authorization': `Bearer ${token}`  
       }
     }
     axios.get(`${process.env.REACT_APP_API_URL}/orders?senderId=${_id}`, requestOptions).then((response) => {

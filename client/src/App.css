@@ -4,9 +4,10 @@
   box-sizing: border-box;
 }
 
-a{
+a {
   text-decoration: none;
 }
+
 input,
 select {
   width: 100%;
@@ -127,6 +128,7 @@ select {
   align-items: flex-end;
   z-index: 999;
 }
+
 /* Style for Add Items at Admin panel */
 .form-group label {
   font-size: 17px;
@@ -166,7 +168,7 @@ select {
   color: #fff;
 }
 
-.orderCategory{
+.orderCategory {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -214,26 +216,26 @@ select {
 
 /* For navBaar design*/
 
-.logo{
+.logo {
   margin-top: 10px;
   margin-left: 15px;
 }
 
 .navBox1 {
-    display: flex;
-    /* justify-content: space-around; */
-    align-items: center;
-    width: 25%;
-    height: 80px;
-    color: white;
-    background: linear-gradient(135deg, #561750 0%, #152d87 100%);
-    /* box-shadow: 5px 0 5px 2px black; */
-    padding: 10px;
-    font-size: 1.7rem;
-    font-family: "Sofia";
-    text-align: center;
-    margin-bottom: -14px;
-    
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  width: 25%;
+  height: 80px;
+  color: white;
+  background: linear-gradient(135deg, #561750 0%, #152d87 100%);
+  /* box-shadow: 5px 0 5px 2px black; */
+  padding: 10px;
+  font-size: 1.7rem;
+  font-family: "Sofia";
+  text-align: center;
+  margin-bottom: -14px;
+
 }
 
 .navBox1 {
@@ -254,32 +256,39 @@ select {
 
   /* box-shadow: 10px 0 5px 2px black; */
 }
-.account_settings{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.account_settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.account_settings button{
-    margin: 0 20px;
-    outline: none;
-    border: none;
-    font-size: 1rem;
-    padding: 10px 20px;
-    transition: 0.5s;
+
+.account_settings button {
+  margin: 0 20px;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  padding: 10px 20px;
+  transition: 0.5s;
 }
-.account_settings button:nth-child(4){
-    color:red
+
+.account_settings button:nth-child(4) {
+  color: red
 }
-.account_settings button:hover{
-    transition: 0.5s;
-    scale: 1.1;
-    cursor: pointer;
+
+.account_settings button:hover {
+  transition: 0.5s;
+  scale: 1.1;
+  cursor: pointer;
 }
-.name_admin{position: absolute;
-    margin-top: 10px;
-    margin-left: 65%;
-    font-size: 1.4rem;
+
+.name_admin {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 65%;
+  font-size: 1.4rem;
 }
+
 .user_icon {
   position: absolute;
   margin-top: -20px;
@@ -288,14 +297,14 @@ select {
 }
 
 .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25px;
-    float: right;
-    margin-right: 15%;
-    width: 25px;
-    height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  float: right;
+  margin-right: 15%;
+  width: 25px;
+  height: 25px;
 }
 
 .icon:hover {
@@ -397,6 +406,7 @@ select {
   background-image: url("../src/image/5183268.jpg");
   background-size: cover;
 }
+
 .fourofour {
   font-size: 6rem;
   margin: 40px 0;
@@ -428,16 +438,18 @@ select {
   }
 
 
-.name_admin{position: absolute;
+  .name_admin {
+    position: absolute;
     margin-top: 10px;
     margin-left: -55%;
     font-size: 1.4rem;
     color: red;
-}
-    .addItems {
-        margin-left: 50%;
-        background-color: rgb(231, 111, 81);
-    }
+  }
+
+  .addItems {
+    margin-left: 50%;
+    background-color: rgb(231, 111, 81);
+  }
 
   .addItems {
     margin-left: 50%;
@@ -455,4 +467,144 @@ select {
 
 .drag-receiver-marker {
   background-color: rgb(235, 13, 13);
+}
+/* card */
+
+.card-box{
+  width: 220px;
+  height: 200px;
+  border: 3px solid lavender;
+  transition: .5s;
+ 
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  
+}
+
+.card-box:hover{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.card-box .card-img{
+    margin-bottom: 25px;
+    
+  align-content: center;
+  width: 70%;
+  /* height: 130px; */
+}
+.card-box .card-img img{
+  width: 100%;
+}
+
+
+/* pagination */
+.pagination {
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+/* order list box */
+.order-list-box h3 {
+  width: 70%;
+  padding: .5rem 1rem;
+  background-color: #efefef;
+  margin: 30px 15%;
+}
+
+/* ============order box ============== */
+.order-icon {
+  color: rgb(83, 83, 138);
+  /* font-size: 2rem; */
+}
+
+.flex {
+  display: flex;
+  gap: .8rem;
+
+  align-items: center;
+}
+
+.order-box {
+  width: 60%;
+  margin: 2rem auto;
+  background-color: #efefef;
+
+}
+
+.order-box .order-body .order-tilte-box h2,
+.order-box .order-body .order-tilte-box h4 {
+  text-transform: capitalize;
+}
+
+.order-box .order-body h4 {
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .order-box {
+    width: 80%;
+  }
+
+  .order-box .order-body .order-tilte-box h2 {
+    font-size: 1.4rem;
+  }
+
+  .order-box .order-body h4 {
+    font-size: .9rem;
+  }
+
+  .order-subtitle-box {
+    font-size: .9rem;
+  }
+}
+
+.order-body {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem
+}
+
+.order-letter {
+  text-align: center;
+  padding: 1rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fff;
+  text-transform: uppercase;
+}
+
+.order-head {
+  padding: .4rem 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ef9064;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.order-head span {
+  padding: .3rem 1rem;
+  font-weight: bold;
+  background-color: red;
+  border: 2px solid rgb(242, 239, 239);
+}
+
+.order-subtitle-box {
+  color: #333232a0;
+  font-size: 1rem;
+  font-weight: bold;
+  justify-content: space-around;
+}
+
+
+
+.order-footer {
+  background-color: #e1dad6;
+  padding: 1rem;
 }
