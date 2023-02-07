@@ -168,18 +168,32 @@ select {
 
 .orderCategory{
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  flex-direction: column;
-  margin: 5px 5px;
-  width: 600px;
-  height: 150px;
+  width: 90%;
+  height: 120px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
   border-radius: 15px;
-  box-shadow: 0 0 3px 0px rgb(117, 104, 104);
   transition: 0.3s;
-  color: #fff;
+  color: #000000;
+  padding: 10px;
+  background-color: #d3c86b;
 }
-
+.categoryName{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.categoryName .orderStatus{
+  background-color: rgb(255, 230, 0);
+}
+.categoryName button{
+  margin:5px
+}
 .category:hover {
   box-shadow: 0 0 10px 0px rgb(45, 44, 44);
   scale: 1.1;
@@ -253,6 +267,21 @@ select {
   align-items: center;
 
   /* box-shadow: 10px 0 5px 2px black; */
+}
+.naveItems{
+  border: 1px solid #152d87;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  font-size: 1.1rem;
+  background-color: #f5f1f1;
+  transition: 0.2s;
+}
+.naveItems:hover{
+  scale: 1.02;
+  transition: 0.2s;
+  background-color: #2705d3;
+  color: #fff;
 }
 .account_settings{
     display: flex;
