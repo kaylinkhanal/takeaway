@@ -4,9 +4,10 @@
   box-sizing: border-box;
 }
 
-a{
+a {
   text-decoration: none;
 }
+
 input,
 select {
   width: 100%;
@@ -127,6 +128,7 @@ select {
   align-items: flex-end;
   z-index: 999;
 }
+
 /* Style for Add Items at Admin panel */
 .form-group label {
   font-size: 17px;
@@ -161,27 +163,55 @@ select {
   width: 200px;
   height: 200px;
   border-radius: 15px;
-  box-shadow: 0 0 3px 0px rgb(117, 104, 104);
   transition: 0.3s;
-  color: #fff;
 }
 
-.orderCategory{
+.category .editDelete {
+  padding: 10px;
+  margin-top: 130px;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column;
-  margin: 5px 5px;
-  width: 600px;
-  height: 150px;
+}
+
+.category .editDelete .delete {
+  color: red;
+}
+
+.orderCategory {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 90%;
+  height: 120px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-top: 20px;
   border-radius: 15px;
-  box-shadow: 0 0 3px 0px rgb(117, 104, 104);
   transition: 0.3s;
-  color: #fff;
+  color: #000000;
+  padding: 10px;
+  background-color: #d3c86b;
+}
+
+.categoryName {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.categoryName .orderStatus {
+  background-color: rgb(255, 230, 0);
+}
+
+.categoryName button {
+  margin: 5px
 }
 
 .category:hover {
-  box-shadow: 0 0 10px 0px rgb(45, 44, 44);
   scale: 1.1;
   cursor: pointer;
   transition: 0.3s;
@@ -214,26 +244,26 @@ select {
 
 /* For navBaar design*/
 
-.logo{
+.logo {
   margin-top: 10px;
   margin-left: 15px;
 }
 
 .navBox1 {
-    display: flex;
-    /* justify-content: space-around; */
-    align-items: center;
-    width: 25%;
-    height: 80px;
-    color: white;
-    background: linear-gradient(135deg, #561750 0%, #152d87 100%);
-    /* box-shadow: 5px 0 5px 2px black; */
-    padding: 10px;
-    font-size: 1.7rem;
-    font-family: "Sofia";
-    text-align: center;
-    margin-bottom: -14px;
-    
+  display: flex;
+  /* justify-content: space-around; */
+  align-items: center;
+  width: 25%;
+  height: 80px;
+  color: white;
+  background: linear-gradient(135deg, #561750 0%, #152d87 100%);
+  /* box-shadow: 5px 0 5px 2px black; */
+  padding: 10px;
+  font-size: 1.7rem;
+  font-family: "Sofia";
+  text-align: center;
+  margin-bottom: -14px;
+
 }
 
 .navBox1 {
@@ -254,32 +284,56 @@ select {
 
   /* box-shadow: 10px 0 5px 2px black; */
 }
-.account_settings{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
+.naveItems {
+  border: 1px solid #152d87;
+  border-radius: 5px;
+  margin: 5px;
+  padding: 5px;
+  font-size: 1.1rem;
+  background-color: #f5f1f1;
+  transition: 0.2s;
 }
-.account_settings button{
-    margin: 0 20px;
-    outline: none;
-    border: none;
-    font-size: 1rem;
-    padding: 10px 20px;
-    transition: 0.5s;
+
+.naveItems:hover {
+  scale: 1.02;
+  transition: 0.2s;
+  background-color: #2705d3;
+  color: #fff;
 }
-.account_settings button:nth-child(4){
-    color:red
+
+.account_settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.account_settings button:hover{
-    transition: 0.5s;
-    scale: 1.1;
-    cursor: pointer;
+
+.account_settings button {
+  margin: 0 20px;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  padding: 10px 20px;
+  transition: 0.5s;
 }
-.name_admin{position: absolute;
-    margin-top: 10px;
-    margin-left: 65%;
-    font-size: 1.4rem;
+
+.account_settings button:nth-child(4) {
+  color: red
 }
+
+.account_settings button:hover {
+  transition: 0.5s;
+  scale: 1.1;
+  cursor: pointer;
+}
+
+.name_admin {
+  position: absolute;
+  margin-top: 10px;
+  margin-left: 65%;
+  font-size: 1.4rem;
+}
+
 .user_icon {
   position: absolute;
   margin-top: -20px;
@@ -288,14 +342,14 @@ select {
 }
 
 .icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 25px;
-    float: right;
-    margin-right: 15%;
-    width: 25px;
-    height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 25px;
+  float: right;
+  margin-right: 15%;
+  width: 25px;
+  height: 25px;
 }
 
 .icon:hover {
@@ -382,7 +436,7 @@ select {
 }
 
 #adminCardTheme {
-  background-color: #fb5607;
+  border: 3px solid rgb(37, 4, 247);
 }
 
 #userCardTheme {
@@ -397,6 +451,7 @@ select {
   background-image: url("../src/image/5183268.jpg");
   background-size: cover;
 }
+
 .fourofour {
   font-size: 6rem;
   margin: 40px 0;
@@ -428,16 +483,18 @@ select {
   }
 
 
-.name_admin{position: absolute;
+  .name_admin {
+    position: absolute;
     margin-top: 10px;
     margin-left: -55%;
     font-size: 1.4rem;
     color: red;
-}
-    .addItems {
-        margin-left: 50%;
-        background-color: rgb(231, 111, 81);
-    }
+  }
+
+  .addItems {
+    margin-left: 50%;
+    background-color: rgb(231, 111, 81);
+  }
 
   .addItems {
     margin-left: 50%;

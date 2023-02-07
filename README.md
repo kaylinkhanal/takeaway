@@ -1,4 +1,4 @@
-# TAKEAWEY
+# TAKEAWAY
 
 ## Technology Stack
 * React JS
@@ -35,6 +35,5 @@
   - [x] Admin Profile
 - [x] Rider
 
-Screenshot (12).png
 
   
