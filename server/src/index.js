@@ -17,12 +17,10 @@ const itemsRouter = require('./routes/itemsRouter')
 require('dotenv').config()
 io.on('connection', (socket) => {
   console.log("socket is connected")
-  socket.on('orderRequest', (orderRequest)=>{
+  socket.on('orderRequest', async(orderRequest)=>{
     io.emit('orderRequest', orderRequest)
-    console.log(orderRequest)
-    console.log(orderRequest.id)
 // mongoose query
-    Orders.findByIdAndUpdate(orderRequest.id, {"orderStatus": orderRequest.status})
+   await Orders.findByIdAndUpdate(orderRequest.id, {"orderStatus": orderRequest.status})
   })
 });
 app.use(express.json())
