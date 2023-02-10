@@ -7,7 +7,7 @@ import Loading from "./loading";
 import io from 'socket.io-client';
 const socket = io(process.env.REACT_APP_API_URL);
 
-const AllOrdersList = () => {
+const AllOrdersList = (props) => {
   const { token, role } = useSelector(state => state.user)
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(false)
@@ -24,7 +24,7 @@ const AllOrdersList = () => {
         'authorization': `Bearer ${token}`
       }
     }
-    axios.get(`${process.env.REACT_APP_API_URL}/orders?page=${page || 1}&size=${size || 10}`, requestOptions).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/orders?page=${page || 1}&size=${size || 10}&orderStatus=${props.filterStatus || ''}`, requestOptions).then((response) => {
       setOrders(response.data.orders)
       setTotalOrdersCount(response.data.totalOrdersCount)
     });
@@ -42,7 +42,7 @@ const AllOrdersList = () => {
             <h3 >Order List</h3>
             {orders.map((item, id) => {
               console.log(item)
-              return <OrdersBox item={item} key={id} />
+              return <OrdersBox isRider={props.isRider} item={item} key={id} />
             })}
             <Pagination className="pagination" total={ordersCount} onChange={(page, size) => fetchAvailableItems(page, size)} />
           </div>

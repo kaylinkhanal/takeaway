@@ -54,7 +54,16 @@ const Map = ()=> {
       lat: 27.68564550564005,
       lng: 85.3445145828365,
     }
+
+
+
     
+  const geoCodeLatLng =(lat, lng)=> {
+    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
+    .then((res)=> res.json())
+    .then((data)=> alert(data.features[0].properties.formatted))
+  }
+
   function DraggableMarker() {
 
     const {senderLocationLatLng,} = useSelector(state=> state.location)
@@ -74,6 +83,7 @@ const Map = ()=> {
               }
             dispatch(setSenderLocationLatLng(latLngObj))
             calculateDistance()
+            geoCodeLatLng(marker.getLatLng().lat, marker.getLatLng().lng)
           }
         },
       }),
@@ -150,7 +160,8 @@ const Map = ()=> {
                 />
              <DraggableMarker/>
              <ReceiverDraggableMarker/>
-             <Polyline color="#003312" positions={[senderLocationLatLng, receiverLocationLatLng]} />
+             {lat &&  <Polyline color="#003312" positions={[senderLocationLatLng, receiverLocationLatLng]} /> }
+            
    </MapContainer>
     </>
   )

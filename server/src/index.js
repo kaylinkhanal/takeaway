@@ -19,8 +19,6 @@ io.on('connection', (socket) => {
   console.log("socket is connected")
   socket.on('orderRequest', async(orderRequest)=>{
     io.emit('orderRequest', orderRequest)
-// mongoose query
-   await Orders.findByIdAndUpdate(orderRequest.id, {"orderStatus": orderRequest.status})
   })
 });
 app.use(express.json())
