@@ -285,6 +285,12 @@ select {
   /* box-shadow: 10px 0 5px 2px black; */
 }
 
+.account_settings {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .naveItems {
   border: 1px solid #152d87;
   border-radius: 5px;
@@ -512,4 +518,143 @@ select {
 
 .drag-receiver-marker {
   background-color: rgb(235, 13, 13);
+}
+/* card */
+
+.card-box{
+  width: 220px;
+  height: 200px;
+  border: 3px solid lavender;
+  transition: .5s;
+ 
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;  
+}
+
+.card-box:hover{
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.card-box .card-img{
+    margin-bottom: 25px;
+    
+  align-content: center;
+  width: 70%;
+  /* height: 130px; */
+}
+.card-box .card-img img{
+  width: 100%;
+}
+
+
+/* pagination */
+.pagination {
+  margin: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+
+
+/* order list box */
+.order-list-box h3 {
+  width: 70%;
+  padding: .5rem 1rem;
+  background-color: #efefef;
+  margin: 30px 15%;
+}
+
+/* ============order box ============== */
+.order-icon {
+  color: rgb(83, 83, 138);
+  /* font-size: 2rem; */
+}
+
+.flex {
+  display: flex;
+  gap: .8rem;
+
+  align-items: center;
+}
+
+.order-box {
+  width: 60%;
+  margin: 2rem auto;
+  background-color: #efefef;
+
+}
+
+.order-box .order-body .order-tilte-box h2,
+.order-box .order-body .order-tilte-box h4 {
+  text-transform: capitalize;
+}
+
+.order-box .order-body h4 {
+  font-size: 1rem;
+}
+
+@media only screen and (max-width: 1024px) {
+  .order-box {
+    width: 80%;
+  }
+
+  .order-box .order-body .order-tilte-box h2 {
+    font-size: 1.4rem;
+  }
+
+  .order-box .order-body h4 {
+    font-size: .9rem;
+  }
+
+  .order-subtitle-box {
+    font-size: .9rem;
+  }
+}
+
+.order-body {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem
+}
+
+.order-letter {
+  text-align: center;
+  padding: 1rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #fff;
+  text-transform: uppercase;
+}
+
+.order-head {
+  padding: .4rem 1rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  letter-spacing: 1px;
+  text-transform: capitalize;
+}
+
+.order-head span {
+  padding: .3rem 1rem;
+  font-weight: bold;
+  background-color: red;
+  border: 2px solid rgb(242, 239, 239);
+}
+
+.order-subtitle-box {
+  color: #333232a0;
+  font-size: 1rem;
+  font-weight: bold;
+  justify-content: space-around;
+}
+
+
+
+.order-footer {
+  background-color: #e1dad6;
+  padding: 1rem;
 }
