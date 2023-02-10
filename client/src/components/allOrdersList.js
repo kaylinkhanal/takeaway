@@ -24,7 +24,7 @@ const AllOrdersList = (props) => {
         'authorization': `Bearer ${token}`
       }
     }
-    axios.get(`${process.env.REACT_APP_API_URL}/orders?page=${page || 1}&size=${size || 10}&orderStatus=${props.filterStatus || ''}`, requestOptions).then((response) => {
+    axios.get(`${process.env.REACT_APP_API_URL}/orders?page=${page || 1}&size=${size || 10}&role=${role || 'user'}`, requestOptions).then((response) => {
       setOrders(response.data.orders)
       setTotalOrdersCount(response.data.totalOrdersCount)
     });

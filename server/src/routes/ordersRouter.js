@@ -37,7 +37,6 @@ router.post("/orders",  async (req, res) => {
 
   router.get("/orders", async (req, res) => {
     try {
-      console.log(req.query)
         const totalOrdersLength = await Orders.find()
         if(req.query.senderId){
           const data = await Orders.find({"senderId":req.query.senderId})
@@ -45,7 +44,7 @@ router.post("/orders",  async (req, res) => {
             orders: data
         })
         }else{
-          const docsFilteredByStatus =  req.query.orderStatus ? {orderStatus:req.query.orderStatus} : {}
+         const docsFilteredByStatus =  req.query.role == 'admin' ? {orderStatus:req.query.orderStatus} : { orderStatus: { $nin:[ 'Pending']} }
          const data = await Orders.find(docsFilteredByStatus).limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
           if(data){
               res.status(200).json({

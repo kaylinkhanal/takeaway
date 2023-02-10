@@ -42,7 +42,7 @@ const NavBar = () => {
                 onClose={onClose}
                 open={open}
                 >
-                {navItems[role].map(item=>  <Link to={item.link}><li onClick={()=>setOpen(false)}>{item.label}</li></Link> )}
+                {navItems[role].map(item=>  <Link to={item.link}><div onClick={()=>setOpen(false)} className="naveItems">{item.label}</div></Link> )}
                 </Drawer>
             <div className="navBox2" id={role === 'admin' ? 'adminTheme' : 'userTheme'}>
             <Link to="/" style={{ textDecoration:"underline",color:"#04F87E", paddingLeft:"20px", fontSize:"30px"}}><ImHome /></Link>
