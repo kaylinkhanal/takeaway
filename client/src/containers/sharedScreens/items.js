@@ -44,7 +44,7 @@ return (
         open={isModalOpen}
         onCancel={handleCancel}
       >
-        <ReusableForm handleCancel={handleCancel}/>
+        <ReusableForm handleCancel={handleCancel} fetchAvailableItems={fetchAvailableItems}/>
       </Modal>
 
       <div style={{display: 'flex', justifyContent: 'center'}}>
