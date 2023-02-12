@@ -15,7 +15,7 @@ router.post("/orders",  async (req, res) => {
     }
   });
 
-  // router.patch("/orders/status",  async (req, res) => {
+ // router.patch("/orders/status",  async (req, res) => {
   //   try {
   //      console.log(req.body)
   //       const data =await  Orders.findByIdAndUpdate(req.body.id, {"orderStatus": "Accepted"})
@@ -23,7 +23,7 @@ router.post("/orders",  async (req, res) => {
   //   } catch (err) {
   //     console.log(err);
   //   }
-  // });
+  // }); 
 
   // const tokenValidator = (req, res, next)=> {
   //   if(req.headers.authorization){
@@ -44,7 +44,8 @@ router.post("/orders",  async (req, res) => {
             orders: data
         })
         }else{
-         const data = await Orders.find().limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
+         const docsFilteredByStatus =  req.query.role == 'admin' ? {orderStatus:req.query.orderStatus} : { orderStatus: { $nin:[ 'Pending']} }
+         const data = await Orders.find(docsFilteredByStatus).limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
           if(data){
               res.status(200).json({
                   orders:data,

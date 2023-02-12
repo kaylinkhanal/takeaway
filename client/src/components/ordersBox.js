@@ -1,20 +1,24 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './button.css'
-import '../App.css'
 import { Button, Popover } from 'antd'
 import { AiOutlineSend } from 'react-icons/ai';
 import axios from 'axios'
 import io from 'socket.io-client';
+import { BsCalendar2Date } from 'react-icons/bs'
+import { BiTime, BiMobileAlt } from 'react-icons/bi'
+import { MdOutlineDeliveryDining } from 'react-icons/md'
+import { GiAirplaneArrival } from 'react-icons/gi'
 const socket = io(process.env.REACT_APP_API_URL);
 
 
 const OrdersBox = (props) => {
+
    const selectDynamicColor = () => {
 
       if (props.item.orderStatus === "Pending") {
-         return '#d3c86b'
+         return '#F29339'
       } else if (props.item.orderStatus === "Accepted") {
-         return '#4BB543'
+         return '#077E8C'
       } else {
          return 'red'
       }
@@ -34,27 +38,59 @@ const OrdersBox = (props) => {
    );
    return (
       <>
-         <div className='orderCategory' id={'adminCardTheme'} style={{ backgroundColor: selectDynamicColor() }}>
-            <div className='categoryName'>
-               <div>{"ID: " + props.item._id}</div>
-               <div>{"Name: " + props.item.receiverName}</div>
-               <div>{"Phone Number: " + props.item.receiverPhoneNo}</div>
-            </div>
-            <div className='categoryName'>
 
-               <div>{props.item.weight}{props.item.unitItems}</div>
-               <div>{"Pickup Date: " + props.item.pickupDate}</div>
-               <div>{"Pickup Time " + props.item.pickupTime}</div>
+         <div className='order-box'>
+            <div className='order-head' >
+               <h4 >order id # {props.item._id}</h4>
+               <span style={{ backgroundColor: selectDynamicColor() }}>{props.item.orderStatus}</span>
             </div>
-            <div className='categoryName'>
+            <div className="order-body">
+               <div className='order-letter'>
+                  <h1 >p</h1>
+               </div>
+               <div className='order-tilte-box'>
+                  <h2>{props.item.productName ? props.item.productName : "product name"} </h2>
+                  <div className='flex ' style={{ marginTop: '1rem' }} >
+                     <MdOutlineDeliveryDining size={25} className="order-icon" /><h4>{props.item.senderName}Sender Name</h4>
+                     <GiAirplaneArrival size={25} className="order-icon" /> <h4>{props.item.receiverName}</h4>
+                  </div>
+               </div >
+               <div>
+                  <div className='flex order-subtitle-box'>
+                     <p> Unit:   {props.item.unitItems}</p>
+                     <p> Weight:   {props.item.weight}</p>
+                  </div>
+                  <div class="flex order-subtitle-box ">
+                     <p> Distance:   {props.item.unitItems}</p>
+                     <p> Total Price:   {props.item.weight}</p>
 
-               <div >Status:  <span className='orderStatus'>{props.item.orderStatus}</span></div>
-               <Button onClick={() => changeStatus('accept')}>Accept</Button>
-               <Popover content={content} >
-                  <Button onClick={() => changeStatus('reject')} type="primary">Reject</Button>
-               </Popover>
+                  </div>
+               </div>
+               <div style={{ marginBottom: '20px', marginRight: '20px' }}>
+                  <div style={{ margin: '20px 0' }}>
+                     {props.isRider ? (
+                        <>
+                          <Button onClick={() => changeStatus('Rider Accepted')}>Accept</Button>
+                          <Button onClick={() => changeStatus('Picked Up')}>Picked Up</Button>
+                          <Button onClick={() => changeStatus('Takeaway Success')}>Takeaway Success</Button>
+                          </>
+                     ) : (
+                        <>  
+                        <Button onClick={() => changeStatus('accept')}>Accept</Button>
+                        <div><Button onClick={() => changeStatus('reject')} type="primary">Reject</Button></div>
+                        </>
+                     )} 
+                  </div>
+                 
+               </div>
             </div>
-
+            <div className="order-footer">
+               <div className='flex '>
+                  <BsCalendar2Date /><h4>{props.item.pickupDate}</h4>
+                  <BiTime /><h4>{props.item.pickupTime}</h4>
+                  <BiMobileAlt /><h4>+977 - {props.item.receiverPhoneNo}</h4>
+               </div>
+            </div>
          </div>
       </>
    )
