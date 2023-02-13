@@ -44,11 +44,20 @@ router.post("/orders",  async (req, res) => {
             orders: data
         })
         }else{
+
+          const { qSearch } = req.query;
+          const search = (validItems) => {
+            return validItems.filter((items) =>
+              items.receiverName.toLowerCase().includes(qSearch.toLowerCase())
+              //||..
+            )
+          }
+
          const docsFilteredByStatus =  req.query.role == 'admin' ? {orderStatus:req.query.orderStatus} : { orderStatus: { $nin:[ 'Pending']} }
          const data = await Orders.find(docsFilteredByStatus).limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
           if(data){
               res.status(200).json({
-                  orders:data,
+                  orders:search(data),
                   totalOrdersCount: totalOrdersLength.length
               })
           }

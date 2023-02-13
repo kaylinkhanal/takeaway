@@ -54,11 +54,19 @@ router.put("/items", async (req, res) => {
 });
 
 router.get("/items", async (req, res) => {
+  const { qSearch } = req.query;
+  const search = (validItems) => {
+    return validItems.filter((items) =>
+      items.catagoryName.toLowerCase().includes(qSearch.toLowerCase())
+     
+    )
+  }
+
   try {
     const data = await Items.find()
     if (data) {
       res.status(200).json({
-        validItemOptions: data
+        validItemOptions: search(data)
       })
     } else {
       res.status(500).json({
