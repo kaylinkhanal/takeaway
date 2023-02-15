@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const initialState = {
   senderLocationLatLng: {},
   receiverLocationLatLng: {},
-  distance: '',
+  distance: 0
 };
 
 const locationSlice = createSlice({

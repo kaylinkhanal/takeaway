@@ -1,11 +1,9 @@
 import React from 'react'
-
-const RiderDashboard=(name)=> {
+import AllOrdersList from '../../components/allOrdersList'
+const RiderDashboard=()=> {
   return (
     <div>
-    <h1>
-     Hii {name} !!
-    </h1>
+     <AllOrdersList isRider={true} filterStatus="Accepted"/>
     </div>
   )
 }

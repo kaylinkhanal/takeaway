@@ -1,65 +1,10 @@
-const express = require("express");
-const router = express.Router();
-const Items = require("../models/Items");
-  
-router.post("/items", async (req, res) => {
-    try {
-      Items.findOne({ catagoryName: req.body.catagoryName }).then((item) => {
-        if(!item){
-          const itemData =  Items.create(req.body);
-          
-          if (itemData) {
-            res.json({ msg: "Item is added" });
-          } else {
-            res.json({ msg: "something went worng" });
-          } 
-        }
-        else{
-          res.status(409).json({ error: "item already exists" });
-        }
-   
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  });
+const { Router } = require('express');
+const app = Router();
+const itemsController = require("../controllers/itemsController")
 
-router.put("/items", async (req, res) => {
-  try {
-    const data = await Items.findByIdAndUpdate(req.body._id, req.body)
-    if(data){
-      res.status(200).json({msg: "updated successfully!"})
-    }
-  } catch (err) {
-    console.log(err);
-  }
-});
-  
-router.get("/items", async (req, res) => {
-try {
-    const data = await Items.find()
-    if(data){
-        res.status(200).json({
-            validItemOptions: data
-        })
-    }else{
-        res.status(500).json({
-            msg: "something went wrong"
-        })
-    }
-} catch (err) {
-    console.log(err);
-}
-});
+app.post('/items',itemsController.PostItems)
+app.put('/items',itemsController.PutItems)
+app.get('/items',itemsController.GetItems)
+app.delete('/items',itemsController.DeleteItems)
 
-router.delete("/items", async (req, res) => {
-  try {
-    const data = await Items.findByIdAndDelete(req.body._id)
-    if(data){
-      res.status(204).json({msg: 'deleted successfully'})
-    }
-  } catch (err) {
-      console.log(err);
-  }
-  });
-module.exports = router;
+module.exports = app;

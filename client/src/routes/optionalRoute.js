@@ -64,6 +64,7 @@ const RiderScreens = () => {
     <Routes>
       <Route path="*" element={<NotFoundPage />} />
       <Route exact path="/" element={<RiderDashboard />} />
+      <Route exact path="/orders" element={<RiderDashboard />} />
       <Route exact path="/profile" element={<Profile />} />
       <Route exact path="/settings" element={<AccountingSettings />} />
     </Routes>

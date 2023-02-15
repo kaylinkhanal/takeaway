@@ -7,6 +7,10 @@
     "user": [
         {"label": "Orders", "link": "/orders"}, 
         {"label":"Analytics", "link":"/analytics"}
+    ],
+    "rider": [
+        {"label": "Orders", "link": "/orders"}, 
+        {"label":"Analytics", "link":"/analytics"}
     ]
 }
 

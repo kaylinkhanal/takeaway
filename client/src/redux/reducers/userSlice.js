@@ -6,6 +6,7 @@ import {
 const initialState = {
   role: "",
   email: "",
+  isFirstTimeUser: true,
   name: "",
   token: "",
   _id: ""
