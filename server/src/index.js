@@ -4,6 +4,10 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const Orders=require('./models/Orders')
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+// const fs = require('fs')
+// const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
 const io = new Server(server,{
   cors: {
       origin: "*"
@@ -27,6 +31,7 @@ app.use(cors())
 app.use(usersRouter);
 app.use(itemsRouter);
 app.use(ordersRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 connect()
 
