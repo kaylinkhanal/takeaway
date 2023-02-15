@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux"
 import {setSenderLocationLatLng,setReceiverLocationLatLng, setDistance} from "../redux/reducers/locationSlice"
 import L from 'leaflet';
 import '../App.css'
+import { notification } from 'antd';
 
 const iconPerson = new L.Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/512/17/17736.png",
@@ -41,10 +42,12 @@ const Map = ()=> {
       const a =
     Math.sin((lat2 - lat1) / 2) * Math.sin((lat2 - lat1) / 2) +
     Math.cos(lat1) * Math.cos(lat2) * Math.sin((lng2 - lng1) / 2) * Math.sin((lng2 - lng1) / 2);
-
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
   const distance = R * c;
+  notification.open({
+    message: `Distance between Sender and Receiver is: ${distance}`
+    
+  });
   dispatch(setDistance(distance))
     }
 
@@ -59,12 +62,12 @@ const Map = ()=> {
 
     
   const geoCodeLatLng =(lat, lng)=> {
-    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=a1dd45a7dfc54f55a44b69d125722fcb`)
+    fetch(`https://api.geoapify.com/v1/geocode/reverse?lat=${lat}&lon=${lng}&apiKey=${process.env.REACT_APP_MAP_API_KEY}`)
     .then((res)=> res.json())
-    .then((data)=> alert(data.features[0].properties.formatted))
+    .then((data)=> notification.open({ message: `${data.features[0].properties.formatted}` }))
   }
 
-  function DraggableMarker() {
+  function SenderDraggableMarker() {
 
     const {senderLocationLatLng,} = useSelector(state=> state.location)
     const dispatch = useDispatch()
@@ -158,7 +161,7 @@ const Map = ()=> {
                   attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-             <DraggableMarker/>
+             <SenderDraggableMarker/>
              <ReceiverDraggableMarker/>
              {lat &&  <Polyline color="#003312" positions={[senderLocationLatLng, receiverLocationLatLng]} /> }
             
