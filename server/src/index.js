@@ -12,8 +12,10 @@ const io = new Server(server,{
 const cors = require('cors')
 const connect = require('./db/connect')
 const usersRouter = require('./routes/usersRouter')
+const loginRouter = require('./routes/loginRouter')
 const ordersRouter = require('./routes/ordersRouter')
 const itemsRouter = require('./routes/itemsRouter')
+const registerRouter = require('./routes/registerRouter')
 require('dotenv').config()
 io.on('connection', (socket) => {
   console.log("socket is connected")
@@ -27,6 +29,8 @@ app.use(cors())
 app.use(usersRouter);
 app.use(itemsRouter);
 app.use(ordersRouter);
+app.use(loginRouter);
+app.use(registerRouter);
 
 connect()
 
