@@ -8,9 +8,9 @@ import '../App.css'
 import { notification } from 'antd';
 
 const iconPerson = new L.Icon({
-    iconUrl: "https://cdn-icons-png.flaticon.com/512/17/17736.png",
-    iconRetinaUrl: "https://cdn-icons-png.flaticon.com/512/17/17736.png",
-    iconSize: [10,20 ],
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/17/17736.png",
+  iconRetinaUrl: "https://cdn-icons-png.flaticon.com/512/17/17736.png",
+  iconSize: [10, 20],
 })
 
 const dragSenderMarker = L.icon({
@@ -82,8 +82,8 @@ const Map = ()=> {
           if (marker != null) {
             const latLngObj = {
               lat: marker.getLatLng().lat,
-               lng: marker.getLatLng().lng
-              }
+              lng: marker.getLatLng().lng
+            }
             dispatch(setSenderLocationLatLng(latLngObj))
             calculateDistance()
             geoCodeLatLng(marker.getLatLng().lat, marker.getLatLng().lng)
@@ -95,7 +95,7 @@ const Map = ()=> {
     const toggleDraggable = useCallback(() => {
       setDraggable((d) => !d)
     }, [])
-    
+
     return (
       <Marker
         draggable={true}
@@ -124,11 +124,11 @@ const Map = ()=> {
           if (marker != null) {
             const latLngObj = {
               lat: marker.getLatLng().lat,
-               lng: marker.getLatLng().lng
-              }
+              lng: marker.getLatLng().lng
+            }
             dispatch(setReceiverLocationLatLng(latLngObj))
-              calculateDistance()
-            
+
+
           }
         },
       }),
@@ -137,7 +137,7 @@ const Map = ()=> {
     const toggleDraggable = useCallback(() => {
       setDraggable((d) => !d)
     }, [])
-    
+
     return (
       <Marker
         draggable={true}
@@ -147,7 +147,7 @@ const Map = ()=> {
         ref={markerRef}>
         <Popup minWidth={90}>
           <span >
-           <input placeholder="enter sender name"/>
+            <input placeholder="enter sender name" />
           </span>
         </Popup>
       </Marker>
@@ -168,5 +168,5 @@ const Map = ()=> {
    </MapContainer>
     </>
   )
-  }
-  export default Map
+}
+export default Map
