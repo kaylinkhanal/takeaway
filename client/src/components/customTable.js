@@ -81,6 +81,10 @@ const columns = [
     dataIndex: 'unitItems',
   },
   {
+    title: 'Order Status',
+    dataIndex: 'orderStatus',
+  },
+  {
     title: 'Weight',
     dataIndex: 'weight',
   },

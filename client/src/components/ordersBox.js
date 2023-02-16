@@ -4,6 +4,7 @@ import { Button, Popover } from 'antd'
 import { AiOutlineSend } from 'react-icons/ai';
 import axios from 'axios'
 import io from 'socket.io-client';
+import orderStatusMap from "../config/orderStatusMap.json"
 import { BsCalendar2Date } from 'react-icons/bs'
 import { BiTime, BiMobileAlt } from 'react-icons/bi'
 import { MdOutlineDeliveryDining } from 'react-icons/md'
@@ -12,6 +13,7 @@ const socket = io(process.env.REACT_APP_API_URL);
 
 
 const OrdersBox = (props) => {
+   const [orderStatusId, setOrderStatusId] = useState(3)
 
    const selectDynamicColor = () => {
 
@@ -24,7 +26,27 @@ const OrdersBox = (props) => {
       }
    }
 
+   const generateStatusName = ()=> {
+      if(props.item?.orderStatus){
+         const onlyKeys = Object.keys(orderStatusMap)
+         const onlyValues = Object.values(orderStatusMap)
+          let tempId
+          let label
+          onlyValues.map((item,id)=>{
+          if(item?.status === orderStatusMap[props.item?.orderStatus]?.status){
+             tempId= id
+             label = item.label
+          }
+          })
+
+          return {label :label, orderStatus : onlyKeys[tempId]}
+      }
+   }
    const changeStatus = (status) => {
+      debugger;
+      if(orderStatusId>2){
+         setOrderStatusId(orderStatusId + 1)
+      }
       const orderDetails = {
          status: status,
          id: props.item._id
@@ -70,9 +92,7 @@ const OrdersBox = (props) => {
                   <div style={{ margin: '20px 0' }}>
                      {props.isRider ? (
                         <>
-                          <Button onClick={() => changeStatus('Rider Accepted')}>Accept</Button>
-                          <Button onClick={() => changeStatus('Picked Up')}>Picked Up</Button>
-                          <Button onClick={() => changeStatus('Takeaway Success')}>Takeaway Success</Button>
+                          <Button onClick={() => changeStatus(generateStatusName()?.orderStatus)}>{generateStatusName()?.label || '</'} {orderStatusId}</Button>
                           </>
                      ) : (
                         <>  
