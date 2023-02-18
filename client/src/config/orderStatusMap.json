@@ -4,9 +4,9 @@
     "RiderCancelled": { "color": "pink", "status": 0 },
     "Pending": { "color": "orange" , "status": 1 },
     "AdminAccepted": { "color": "grey", "status": 2 },
-    "Accept": { "color": "red", "status": 3, "flag": "rider", "icon":"MdOutlineDeliveryDining"},
-    "Picked Up": { "color": "aqua", "status": 4 , "icon": "GiAirplaneArrival"},
-    "Takeaway Success": { "color": "yellow", "status": 5, "icon": "BiMobileAlt" }
+    "RiderAccepted": { "color": "red", "status": 3, "label": "Accept", "flag": "rider", "icon":"MdOutlineDeliveryDining"},
+    "Picked Up": { "color": "aqua", "status": 4 ,"label": "Pick Up", "icon": "GiAirplaneArrival"},
+    "Takeaway Success": { "color": "yellow", "status": 5, "label": "Takeaway Success", "icon": "BiMobileAlt" }
 }
 
 
