@@ -1,10 +1,9 @@
 import Items from '../sharedScreens/items'
-import CustomTable from '../../components/customTable'
 function UserDashboard() {
   return (
     <>
     <div>
-         Welcome to home
+         <h1 style={{textAlign:"center", color:"Highlight"}}>Welcome to home</h1>
     </div> 
     <Items/>
     </>
