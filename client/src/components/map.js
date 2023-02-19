@@ -43,7 +43,7 @@ const Map = ()=> {
     Math.sin((lat2 - lat1) / 2) * Math.sin((lat2 - lat1) / 2) +
     Math.cos(lat1) * Math.cos(lat2) * Math.sin((lng2 - lng1) / 2) * Math.sin((lng2 - lng1) / 2);
   const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-  const distance = R * c;
+  const distance = Math.round(R * c);
   notification.open({
     message: `Distance between Sender and Receiver is: ${distance}`
     

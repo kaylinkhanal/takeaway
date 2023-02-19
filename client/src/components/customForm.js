@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import priceMap from "../config/priceMap.json"
 import 'react-toastify/dist/ReactToastify.css';
 import Map from "./map"
-import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 import "leaflet/dist/leaflet.css"
 // toast.configure()
 const CustomForm = (props) => {
@@ -41,8 +40,7 @@ const CustomForm = (props) => {
         }
         const {weight, unitItems} = values
         const finalPrice= weight* unitItems* props.basePrice * distance
-        setTotalPrice(finalPrice -((finalPrice * priceMap[props.categoryName].discountPerUnitPrice)/100))
-        
+        setTotalPrice(Math.round(finalPrice -((finalPrice * priceMap[props.categoryName].discountPerUnitPrice)/100)))
       }}
     >
       {({ errors, touched }) => (

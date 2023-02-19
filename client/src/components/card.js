@@ -15,8 +15,7 @@ const Card = (props) => {
       'pickupDate',
       'pickupTime',
       'weight',
-      'unitItems',
-      'maxLength'
+      'unitItems'
    ]
    const senderDetails = [
       'receiverName',

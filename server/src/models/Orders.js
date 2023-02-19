@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const ordersSchema = new mongoose.Schema(
   {
-    maxLength:{type: String},
     pickupDate:{type: String},
     pickupTime:{type: String},
     senderId:{type: String},

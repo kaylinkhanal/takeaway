@@ -4,5 +4,11 @@
     },
     "document": {
         "discountPerUnitPrice": 10
+    },
+    "Electronics": {
+        "discountPerUnitPrice": 10
+    },
+    "Documents": {
+        "discountPerUnitPrice": 10
     }
 }
