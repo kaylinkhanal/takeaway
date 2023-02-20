@@ -36,7 +36,7 @@ const ReusableForm = ({ isAdminEdit, item, handleCancel, fetchAvailableItems }) 
         validationSchema={itemSchema}
 
         onSubmit={async (values) => {
-
+          debugger;
           addItems(values, file, isAdminEdit, message, fetchAvailableItems, handleCancel)
 
         }}

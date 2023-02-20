@@ -4,5 +4,8 @@
     },
     "document": {
         "discountPerUnitPrice": 10
+    },
+    "furniture": {
+        "discountPerUnitPrice": 10
     }
 }
