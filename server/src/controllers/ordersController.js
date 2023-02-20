@@ -38,28 +38,32 @@ const PatchOrder = async (req, res) => {
   }
 
 const GetOrder = async (req, res) => {
-    try {
-        const totalOrdersLength = await Orders.find()
-        if(req.query.senderId){
-          const data = await Orders.find({"senderId":req.query.senderId})
+  try {
+    const totalOrdersLength = await Orders.find()
+    if(req.query.senderId){
+      const data = await Orders.find({"senderId":req.query.senderId})
+      res.status(200).json({
+        orders: data
+    })
+    }else{
+      const { qSearch } = req.query;
+      const search = (validItems) => {
+        return validItems.filter((items) =>
+          items.receiverName.toLowerCase().includes(qSearch.toLowerCase())
+        )
+      }
+     const docsFilteredByStatus =  req.query.role == 'admin' ? {orderStatus:req.query.orderStatus} : { orderStatus: { $nin:[ 'Pending']} }
+     const data = await Orders.find(docsFilteredByStatus).limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
+      if(data){
           res.status(200).json({
-            orders: data
-        })
-        }else{
-         const docsFilteredByStatus =  req.query.role == 'admin' ? {} : { orderStatus: { $nin:[ 'Pending' ]} }
-         const data = await Orders.find(docsFilteredByStatus).limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
- 
-          if(data){
-              res.status(200).json({
-                  orders:data,
-                  totalOrdersCount: totalOrdersLength.length
-              })
-          }
-        }
-       
-    } catch (err) {
-      console.log(err);
+              orders:search(data),
+              totalOrdersCount: totalOrdersLength.length
+          })
+      }
     }
+  } catch (err) {
+    console.log(err);
+  }
   };
 
   const DeleteOrder = async (req, res) => {
