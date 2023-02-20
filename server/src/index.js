@@ -16,6 +16,8 @@ const loginRouter = require('./routes/loginRouter')
 const ordersRouter = require('./routes/ordersRouter')
 const itemsRouter = require('./routes/itemsRouter')
 const registerRouter = require('./routes/registerRouter')
+const sendMailRouter = require('./routes/sendMailRouter')
+
 require('dotenv').config()
 io.on('connection', (socket) => {
   console.log("socket is connected")
@@ -31,6 +33,7 @@ app.use(itemsRouter);
 app.use(ordersRouter);
 app.use(loginRouter);
 app.use(registerRouter);
+app.use(sendMailRouter);
 
 connect()
 
