@@ -12,6 +12,7 @@ const ordersSchema = new mongoose.Schema(
     weight: {type: Number},
     catagoryName: { type: String },
     orderStatus: { type: String },
+    orderStatusId: {type: Number, default: 1 },
     minimumDeliveryPrice: { type: Number },
     distance:{type: Number},
     discount:{type: Number},
@@ -19,4 +20,6 @@ const ordersSchema = new mongoose.Schema(
   },
   { collection: "orders" }
 );
+
+
 module.exports = mongoose.model("Orders", ordersSchema);

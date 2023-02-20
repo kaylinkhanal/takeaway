@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const PostOrder = async (req, res) => {
     try {
         const dbResponse = await Orders.create(req.body)
+        console.log(dbResponse.orderStatusId)
         if(dbResponse){
             res.status(200).json({
                 msg: "orders dispatched successfully"
@@ -45,8 +46,9 @@ const GetOrder = async (req, res) => {
             orders: data
         })
         }else{
-         const docsFilteredByStatus =  req.query.role == 'admin' ? {orderStatus:req.query.orderStatus} : { orderStatus: { $nin:[ 'Pending']} }
+         const docsFilteredByStatus =  req.query.role == 'admin' ? {} : { orderStatus: { $nin:[ 'Pending' ]} }
          const data = await Orders.find(docsFilteredByStatus).limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
+ 
           if(data){
               res.status(200).json({
                   orders:data,
