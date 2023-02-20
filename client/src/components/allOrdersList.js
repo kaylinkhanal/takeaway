@@ -14,7 +14,7 @@ const AllOrdersList = (props) => {
   const [query, setQuery] = useState("")
   const { token, role } = useSelector(state => state.user)
   const [orders, setOrders] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [ordersCount, setTotalOrdersCount] = useState(0)
 
   useEffect(() => {
@@ -37,7 +37,24 @@ const AllOrdersList = (props) => {
   useEffect(() => {
     fetchAvailableItems()
   }, [query])
-
+  const skeletonOrData =()=>{
+    if(!loading && orders.length > 0) {
+      <>
+        <div className="order-list-box" >
+          <h3 >Order List</h3>
+          {orders.map((item, id) => {
+            console.log(item)
+            return <OrdersBox isRider={props.isRider} item={item} key={id} />
+          })}
+          <Pagination className="pagination" total={ordersCount} onChange={(page, size) => fetchAvailableItems(page, size)} />
+        </div>
+      </>
+     }else if(loading){
+      return  <Loading />
+     }else{
+      return "no data"
+     }
+  }
   return (
     <>
     <div className='search'>
@@ -46,18 +63,7 @@ const AllOrdersList = (props) => {
         />
         <FontAwesomeIcon icon={faSearch} className='search_icon' />
       </div>
-      {!loading && orders.length > 0 ? (
-        <>
-          <div className="order-list-box" >
-            <h3 >Order List</h3>
-            {orders.map((item, id) => {
-              console.log(item)
-              return <OrdersBox isRider={props.isRider} item={item} key={id} />
-            })}
-            <Pagination className="pagination" total={ordersCount} onChange={(page, size) => fetchAvailableItems(page, size)} />
-          </div>
-        </>
-      ) : <Loading />}
+      {skeletonOrData()}
     </>
   )
 }
