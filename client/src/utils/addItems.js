@@ -1,5 +1,6 @@
 export const addItems = async (values, file, isAdminEdit, message, fetchAvailableItems, handleCancel) => {
     const formData = new FormData()
+    debugger;
     formData.append('catagoryName', values.catagoryName)
     formData.append('minimumDeliveryPrice', values.minimumDeliveryPrice)
     formData.append('photo', file)

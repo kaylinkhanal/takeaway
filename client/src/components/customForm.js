@@ -26,7 +26,7 @@ const CustomForm = (props) => {
     <Formik
       initialValues={props.orderList || {}}
       onSubmit={async (values, { resetForm }) => {
-        
+        debugger;
         if (formStep <=2) {
           setFormStep(formStep + 1);
         } else {
@@ -36,7 +36,8 @@ const CustomForm = (props) => {
           values.totalPrice = totalPrice
           values.distance = distance
           values.discount =  priceMap[props.categoryName].discountPerUnitPrice
-          axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values);
+          values.orderStatus = 'Pending'
+          axios.post(`${process.env.REACT_APP_API_URL}/${props.endpoint}`, values)
           console.log(values)
         }
         const {weight, unitItems} = values
