@@ -12,7 +12,7 @@ const PostItems = async (req, res) => {
           const items = new Items({
             catagoryName: body.catagoryName,
             minimumDeliveryPrice: body.minimumDeliveryPrice,
-            photo: req.file.filename,
+            photo: req?.file?.filename,
           });
           items.save()
   
@@ -45,11 +45,17 @@ const PutItems = async (req, res) => {
 };
 
 const GetItems = async (req, res) => {
+  const { qSearch } = req.query;
+  const search = (validItems) => {
+    return validItems.filter((items) =>
+      items.catagoryName?.toLowerCase()?.includes(qSearch?.toLowerCase())
+    )
+  }
   try {
     const data = await Items.find()
     if (data) {
       res.status(200).json({
-        validItemOptions: data
+        validItemOptions: search(data)
       })
     } else {
       res.status(500).json({

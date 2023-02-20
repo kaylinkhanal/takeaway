@@ -1,24 +1,28 @@
-import React,{useEffect, useState} from 'react'
+import '../../App.css'
+import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { Modal, Button } from "antd";
-import {useSelector} from 'react-redux';
-import  Card  from '../../components/card';
+import { useSelector } from 'react-redux';
+import Card from '../../components/card';
 import ReusableForm from '../../components/reusableForm'
 import { MdOutlineAddCircle } from 'react-icons/md';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const Items = ()=> {
-    const {role} = useSelector(state=> state.user)
+const Items = () => {
+  const [query, setQuery] = useState("")
+  const { role } = useSelector(state => state.user)
 
-    const [validItems, setValidItems] = useState([])
-    const fetchAvailableItems= ()=>{
-        axios.get(`${process.env.REACT_APP_API_URL}/items`).then((response) => {
-            setValidItems(response.data.validItemOptions)
-          });      
-    }
-    
-    useEffect(()=>{
-        fetchAvailableItems()
-    }, [])
+  const [validItems, setValidItems] = useState([])
+  const fetchAvailableItems = () => {
+    axios.get(`${process.env.REACT_APP_API_URL}/items/?qSearch=${query}`).then((response) => {
+      setValidItems(response.data.validItemOptions)
+    });
+  }
+
+  useEffect(() => {
+    fetchAvailableItems()
+  }, [query])
   const [open, setOpen] = useState(false);
 
   const showDrawer = () => {
@@ -36,32 +40,39 @@ const Items = ()=> {
     setIsModalOpen(false);
   };
 
-return (
-    <div className='home'id={role==="admin"?"adminThemeBackground":"userThemeBackground"}>
-    <Modal
-        title="Add Items"
-        footer={null}
-        open={isModalOpen}
-        onCancel={handleCancel}
-      >
-        <ReusableForm handleCancel={handleCancel} fetchAvailableItems={fetchAvailableItems}/>
-      </Modal>
+  return (
+    <>
+      <div className='search'>
+        <input type="search" className='search_box' placeholder='Search'
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <FontAwesomeIcon icon={faSearch} className='search_icon' />
+      </div>
+      <div className='home' id={role === "admin" ? "adminThemeBackground" : "userThemeBackground"}>
+        <Modal
+          title="Add Items"
+          footer={null}
+          open={isModalOpen}
+          onCancel={handleCancel}
+        >
+          <ReusableForm handleCancel={handleCancel} fetchAvailableItems={fetchAvailableItems} />
+        </Modal>
 
-      <div style={{display: 'flex', justifyContent: 'center'}}>
-   {role==="admin" ? <Button onClick={()=>showModal()} 
-   style={{marginTop:"20px",  height: '10vh', width: '10vw', 
-   backgroundColor: '#306660', color: 'white', fontSize: '20px', borderRadius: '10px' }}
-   >Add Items <MdOutlineAddCircle /></Button>:""}
-   </div>
-   <div class="flex-container">
-    {validItems.map((item)=>{
-       return(
-         <Card item={item} role={role} fetchAvailableItems={fetchAvailableItems}/>
-         )
-    })}
-    </div>
-</div>
-
-)
+        {role === "admin" ? <Button onClick={() => showModal()}
+          style={{
+            marginTop: "20px", height: '10vh', width: '10vw',
+            backgroundColor: '#306660', color: 'white', fontSize: '20px', borderRadius: '10px'
+          }}
+        >Add Items <MdOutlineAddCircle /></Button> : ""}
+        <div class="flex-container">
+          {validItems.map((item) => {
+            return (
+              <Card item={item} role={role} fetchAvailableItems={fetchAvailableItems} />
+            )
+          })}
+        </div>
+      </div>
+    </>
+  )
 }
 export default Items
