@@ -235,7 +235,40 @@ select {
   margin-top: 10px;
   margin-left: 15px;
 }
+.logoImage{
+  width:250px;
+   height:200px;
+}
+@media screen and (max-width: 950px) {
+  .logoImage{
+    width:215px;
+     height:175px;
+  }
+}
 
+@media screen and (max-width: 850px) {
+  .logoImage{
+    width:200px;
+     height:160px;
+  }
+}
+@media screen and (max-width: 770px) {
+  .logoImage{
+    width:170px;
+     height:140px;
+  }
+}
+@media screen and (max-width: 680px) {
+  .logoImage{
+    width:150px;
+     height:120px;
+  }
+}
+@media screen and (max-width: 640px) {
+  .logoImage{
+    display: none;
+  }
+}
 .navBox1 {
   display: flex;
   align-items: center;
@@ -456,10 +489,6 @@ select {
   background-color: #78290f;
 }
 
-#adminThemeBackground {
-  /* background-color: #ff9c9c */
-}
-
 #userTheme {
   background-color: #15616d;
 }
@@ -493,10 +522,10 @@ select {
     text-align: left;
   }
 
-  .navBox2 {
+  /* .navBox2 {
     width: 0%;
     margin-left: 99%;
-  }
+  } */
 
   .icon {
     margin-right: 30px;
