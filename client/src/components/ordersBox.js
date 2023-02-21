@@ -22,6 +22,7 @@ const OrdersBox = (props) => {
       const onlyValues = Object.values(orderStatusMap)
       let updatedLabel
       onlyValues.map((item,id)=> {
+         console.log(item.status,updatedId)
       if(item.status ===updatedId){
          updatedLabel = onlyValues[id].label
       }

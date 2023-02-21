@@ -47,16 +47,28 @@ const GetOrder = async (req, res) => {
     })
     }else{
       const { qSearch } = req.query;
-      const search = (validItems) => {
-        return validItems.filter((items) =>
-          items.receiverName.toLowerCase().includes(qSearch.toLowerCase())
-        )
+      // const search = (validItems) => {
+      //   return validItems.filter((items) =>
+      //     items.receiverName.toLowerCase().includes(qSearch.toLowerCase())
+      //   )
+      // }
+      let docsFilteredByStatus
+      if( req.query.role == 'admin' && req.query.orderStatus){
+        docsFilteredByStatus =  {orderStatus:req.query.orderStatus} 
+      }else if(req.query.role != 'admin'){
+        docsFilteredByStatus ={ orderStatus: { $nin:[ 'Pending']} }
+      }else {
+        docsFilteredByStatus = {}
       }
-     const docsFilteredByStatus =  req.query.role == 'admin' ? {orderStatus:req.query.orderStatus} : { orderStatus: { $nin:[ 'Pending']} }
+   
+
+     console.log(docsFilteredByStatus)
      const data = await Orders.find(docsFilteredByStatus).limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
+
+   
       if(data){
           res.status(200).json({
-              orders:search(data),
+              orders:data,
               totalOrdersCount: totalOrdersLength.length
           })
       }

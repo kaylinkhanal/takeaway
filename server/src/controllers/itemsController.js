@@ -5,7 +5,9 @@ const multer = require('multer')
 
 const PostItems = async (req, res) => {
     try {
-      Items.findOne({ catagoryName: req.body.catagoryName }).then((item) => {
+      Items.find({ catagoryName: req.body.catagoryName }).then((item) => {
+        console.log(item)
+        
         if (!item) {
   
           const body = req.body;
