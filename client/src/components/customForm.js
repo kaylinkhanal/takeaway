@@ -26,7 +26,6 @@ const CustomForm = (props) => {
     <Formik
       initialValues={props.orderList || {}}
       onSubmit={async (values, { resetForm }) => {
-        debugger;
         if (formStep <=2) {
           setFormStep(formStep + 1);
         } else {

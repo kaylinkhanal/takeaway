@@ -8,7 +8,7 @@ import { addItems } from '../utils/addItems';
 const ReusableForm = ({ isAdminEdit, item, handleCancel, fetchAvailableItems }) => {
   const [file, setFile] = useState("")
   const itemSchema = Yup.object().shape({
-    catagoryName: Yup.string()
+    categoryName: Yup.string()
       .min(3, "Too Short!")
       .max(100, "Too Long!")
       .required("Required"),
@@ -28,7 +28,7 @@ const ReusableForm = ({ isAdminEdit, item, handleCancel, fetchAvailableItems }) 
       <Formik
         initialValues={item ||
         {
-          catagoryName: "",
+          categoryName: "",
           minimumDeliveryPrice: "",
           photo: ""
         }
@@ -36,7 +36,6 @@ const ReusableForm = ({ isAdminEdit, item, handleCancel, fetchAvailableItems }) 
         validationSchema={itemSchema}
 
         onSubmit={async (values) => {
-          debugger;
           addItems(values, file, isAdminEdit, message, fetchAvailableItems, handleCancel)
 
         }}
@@ -45,9 +44,9 @@ const ReusableForm = ({ isAdminEdit, item, handleCancel, fetchAvailableItems }) 
           <div>
             <Form>
               <div>
-                <Field name="catagoryName" placeholder="Catagory Name" />
-                {errors.catagoryName && touched.catagoryName ? (
-                  <div className="validaton-message">{errors.catagoryName}</div>
+                <Field name="categoryName" placeholder="Category Name" />
+                {errors.categoryName && touched.categoryName ? (
+                  <div className="validaton-message">{errors.categoryName}</div>
                 ) : null}
               </div>
               <div>

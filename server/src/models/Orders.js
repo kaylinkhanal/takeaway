@@ -10,7 +10,7 @@ const ordersSchema = new mongoose.Schema(
     receiverPhoneNo:{type: Number},
     unitItems:{type: String},
     weight: {type: Number},
-    catagoryName: { type: String },
+    categoryName: { type: String },
     orderStatus: { type: String },
     orderStatusId: {type: Number, default: 1 },
     minimumDeliveryPrice: { type: Number },
