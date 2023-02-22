@@ -14,7 +14,6 @@ const Profile = () => {
     const formdata = new FormData();
     formdata.append("avatar", file);
     formdata.append("_id", _id);
-    debugger;
     const res = await fetch(`${process.env.REACT_APP_API_URL}/profile`, {
       method: "POST",
       body: formdata,
