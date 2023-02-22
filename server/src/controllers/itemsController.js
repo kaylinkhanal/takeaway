@@ -5,14 +5,14 @@ const multer = require('multer')
 
 const PostItems = async (req, res) => {
     try {
-      Items.findOne({ catagoryName: req.body.catagoryName }).then((item) => {
+      Items.findOne({ categoryName: req.body.categoryName }).then((item) => {
         if (!item) {
   
           const body = req.body;
           const items = new Items({
-            catagoryName: body.catagoryName,
+            categoryName: body.categoryName,
             minimumDeliveryPrice: body.minimumDeliveryPrice,
-            photo: req.file.filename,
+            photo: req?.file?.filename,
           });
           items.save()
   
@@ -45,11 +45,17 @@ const PutItems = async (req, res) => {
 };
 
 const GetItems = async (req, res) => {
+  const { qSearch } = req.query;
+  const search = (validItems) => {
+    return validItems.filter((items) =>
+      items.categoryName?.toLowerCase()?.includes(qSearch?.toLowerCase())
+    )
+  }
   try {
     const data = await Items.find()
     if (data) {
       res.status(200).json({
-        validItemOptions: data
+        validItemOptions: search(data)
       })
     } else {
       res.status(500).json({

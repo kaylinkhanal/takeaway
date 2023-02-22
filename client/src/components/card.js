@@ -41,18 +41,18 @@ const Card = (props) => {
             footer={null}
             onCancel={() => setIsModalOpen(false)}
             open={isModalOpen}>
-            {props.item.catagoryName}
+            {props.item.categoryName}
             {
-               props.role === 'admin' ? <ReusableForm item={props.item} isAdminEdit={true} /> : <CustomForm endpoint="orders" basePrice={props.item.minimumDeliveryPrice} categoryName={props.item.catagoryName} itemDetails={itemDetails} senderDetails={senderDetails} />
+               props.role === 'admin' ? <ReusableForm item={props.item} isAdminEdit={true} /> : <CustomForm endpoint="orders" basePrice={props.item.minimumDeliveryPrice} categoryName={props.item.categoryName} itemDetails={itemDetails} senderDetails={senderDetails} />
             }
          </Modal>
          <div onClick={() => props.role === 'admin' ? null : setIsModalOpen(true)} className='category'>
             <div className='categoryImage'>
                {props.item.photo && <img src={require(`../uploads/${props.item.photo}`)} alt='Loading...' />}
             </div>
+            <div>{props.item.categoryName}</div>
             <div className='editDelete'>{props.role === 'admin' ? <div onClick={() => setIsModalOpen(true)}>
-               <FontAwesomeIcon icon={faEdit} className='edit_icon'/>
-
+               <FontAwesomeIcon icon={faEdit} className='edit_icon' />
             </div> : ''}
                {props.role === 'admin' ? (
                   <Popconfirm
@@ -62,7 +62,7 @@ const Card = (props) => {
                      cancelText="No"
                      onConfirm={triggerDelete}
                   >
-                     <div ><FontAwesomeIcon icon={faTrash} className='delete_icon'/></div>
+                     <div ><FontAwesomeIcon icon={faTrash} className='delete_icon' /></div>
                   </Popconfirm>
                ) : (
                   ''
