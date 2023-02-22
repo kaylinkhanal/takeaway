@@ -68,7 +68,7 @@ const OrdersBox = (props) => {
             </div>
             <div className="order-body">
                <div className='order-letter'>
-                  <h1 >p</h1>
+                  {props.item.photo && <img src={require(`../uploads/${props.item.photo}`)} alt='Loading...' />}
                </div>
                <div className='order-tilte-box'>
                   <h2>{props.item.productName ? props.item.productName : "product name"} </h2>

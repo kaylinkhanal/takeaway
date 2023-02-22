@@ -640,15 +640,20 @@ select {
 }
 
 .order-letter {
+  display: flex;
+  justify-content: center;
   text-align: center;
-  padding: 1rem;
   width: 80px;
   height: 80px;
-  border-radius: 50%;
+  border-radius: 15px;
   background-color: #fff;
   text-transform: uppercase;
+  overflow: hidden;
 }
-
+.order-letter img{
+  width: 100%;
+  height: 100%;
+}
 .order-head {
   padding: .4rem 1rem;
   width: 100%;
@@ -658,6 +663,7 @@ select {
   color: #fff;
   letter-spacing: 1px;
   text-transform: capitalize;
+  background-color: #a54005;
 }
 
 .order-head span {

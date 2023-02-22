@@ -56,7 +56,8 @@ const GetOrder = async (req, res) => {
      const data = await Orders.find(docsFilteredByStatus).limit(req.query.size).skip(req.query.size* req.query.page - req.query.size)
       if(data){
           res.status(200).json({
-              orders:search(data),
+              // orders:search(data),
+              orders:search(totalOrdersLength),
               totalOrdersCount: totalOrdersLength.length
           })
       }

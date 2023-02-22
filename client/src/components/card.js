@@ -44,7 +44,7 @@ const Card = (props) => {
             open={isModalOpen}>
             {props.item.categoryName}
             {
-               props.role === 'admin' ? <ReusableForm item={props.item} isAdminEdit={true} /> : <CustomForm endpoint="orders" basePrice={props.item.minimumDeliveryPrice} categoryName={props.item.categoryName} itemDetails={itemDetails} senderDetails={senderDetails} />
+               props.role === 'admin' ? <ReusableForm item={props.item} isAdminEdit={true} /> : <CustomForm endpoint="orders" basePrice={props.item.minimumDeliveryPrice} categoryName={props.item.categoryName} itemDetails={itemDetails} senderDetails={senderDetails} photo={props.item.photo}/>
             }
          </Modal>
          <div onClick={() => props.role === 'admin' ? null : setIsModalOpen(true)} className='category'>
