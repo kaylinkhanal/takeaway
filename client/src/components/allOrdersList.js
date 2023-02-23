@@ -40,7 +40,7 @@ const AllOrdersList = (props) => {
 
   return (
     <>
-    <div className='search'>
+      <div className='search'>
         <input type="search" className='search_box' placeholder='Search'
           onChange={(e) => setQuery(e.target.value)}
         />
