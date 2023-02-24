@@ -45,6 +45,32 @@ const Register = () => {
 
     role: Yup.string().required("Required"),
   });
+  const sendEmail =(data)=>{
+    fetch(`${process.env.REACT_APP_API_URL}/send-email`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                      to: data.email,
+                      // in above the sender email is written
+                      subject: 'Email Subject',
+                      text: 'Registered'
+                    })
+                  })
+                  .then(response => {
+                    if (!response.ok) {
+                      throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                  })
+                  .then(data => {
+                    console.log(data);
+                  })
+                  .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                  });
+  }
   const navigate = useNavigate();
   return (
     <>
@@ -70,7 +96,8 @@ const Register = () => {
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(updatedValues),
                 };
-                try {
+                try {                 
+                  
                   const response = await fetch(`${process.env.REACT_APP_API_URL}/register`, requestOptions)
                   const data = await response.json()
                   const notify = responseHandler(response, data.errorMsg)
@@ -79,6 +106,7 @@ const Register = () => {
                   console.log(data.msg)
                   if (data.isRegistered) {
                     message.success(data.msg, [2])
+                    sendEmail(data)
                     navigate('/')
                   } else {
                     message.error(data.errorMsg, [2])
