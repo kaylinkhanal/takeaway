@@ -78,12 +78,13 @@ const CustomForm = (props) => {
               formStep === 2 && (
                 <>
                   <Map />
+                  <h2> Total distance is: {distance} km
+                    Rs. {totalPrice || 0}</h2>
                   <CustomButton
                     name="Back"
                     onClick={handleBackClick}
                   />
-                  Total distance is: {distance} km
-                  Rs. {totalPrice || 0}
+                 
                 </>
 
               )

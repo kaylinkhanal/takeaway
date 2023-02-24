@@ -12,6 +12,7 @@ const Card = (props) => {
 
    const [isModalOpen, setIsModalOpen] = useState(false)
    const itemDetails = [
+      'productName',
       'pickupDate',
       'pickupTime',
       'weight',
