@@ -287,7 +287,7 @@ select {
 }
 
 .naveItems:hover {
-  
+
   transition: 0.2s;
   background-color: #2705d3;
   color: #fff;
@@ -330,11 +330,12 @@ select {
   font-size: 1.1rem;
 }
 
-.skeleton{
+.skeleton {
   margin-top: 30px;
   margin-left: 50%;
   transform: translateX(-50%);
 }
+
 .account_settings {
   display: flex;
   align-items: center;
@@ -663,7 +664,8 @@ select {
   color: #fff;
   letter-spacing: 1px;
   text-transform: capitalize;
-  background-color: #a54005;
+  background: #845207;
+
 }
 
 .order-head span {
@@ -685,4 +687,21 @@ select {
 .order-footer {
   background-color: #e1dad6;
   padding: 1rem;
+}
+
+/* custom table style */
+.customTable-box {
+  margin: 3rem 5rem;
+
+}
+
+.customTable-box h3 {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  font-size: 1rem;
+  background-color: #e1dad6;
+}
+
+.customTable-box .table {
+  border: 2px solid #e4dede;
 }

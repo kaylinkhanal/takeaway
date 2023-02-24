@@ -13,44 +13,67 @@ const socket = io(process.env.REACT_APP_API_URL);
 
 
 const OrdersBox = (props) => {
-   console.log("@@",props.item.orderStatusId)
+   // console.log("@@", props.item.orderStatusId)
    const [orderStatusId, setOrderStatusId] = useState(props.item.orderStatusId)
+
    function generateStatusName(updatedId) {
-      if(!updatedId){
+      if (!updatedId) {
          updatedId = orderStatusId
       }
       const onlyValues = Object.values(orderStatusMap)
       let updatedLabel
-      onlyValues.map((item,id)=> {
-      if(item.status ===updatedId){
-         updatedLabel = onlyValues[id].label
-      }
+      let dynamicColor
+      onlyValues.map((item, id) => {
+         if (item.status === updatedId) {
+            updatedLabel = onlyValues[id].label
+            dynamicColor = onlyValues[id].color
+            console.log(updatedLabel, dynamicColor, "sadada")
+         }
       })
       return updatedLabel
-      }
+   }
    const selectDynamicColor = () => {
       if (props.item.orderStatus === "Pending") {
-         return '#F29339'
-      } else if (props.item.orderStatus === "Accepted") {
+         return '#5F9EA0'
+      }
+      else if (props.item.orderStatus === "AdminAccepted") {
+         return '#FF8C00'
+      }
+      else if (props.item.orderStatus === "AdminRejected") {
+         return '#E9967A'
+      }
+      else if (props.item.orderStatus === "RiderCancelled") {
          return '#077E8C'
-      } else {
+      }
+      else if (props.item.orderStatus === "RiderAccepted") {
+         return 'green  '
+      }
+      else if (props.item.orderStatus === "Pick Up") {
+         return '#ADD8E6'
+      }
+      else if (props.item.orderStatus === "Takeaway Success") {
+         return '#2827CC'
+      }
+      else {
          return 'red'
       }
    }
 
- 
-   const changeStatus = (status ,statusId) => {
-      if(orderStatusId <6){
+
+   const changeStatus = (status, statusId) => {
+      if (orderStatusId < 6) {
          setOrderStatusId(orderStatusId + 1)
-         if(!status){
-           status = generateStatusName(orderStatusId)
-        }
-           const orderDetails = {
-              status: status,
-              id: props.item._id,
-              statusId: props.isRider ? orderStatusId  : statusId
-           }
-           socket.emit('orderRequest', orderDetails)
+         if (!status) {
+            status = generateStatusName(orderStatusId)
+         }
+         const orderDetails = {
+            status: status,
+            id: props.item._id,
+            statusId: props.isRider ? orderStatusId : statusId,
+
+         }
+         props.fetchAvailableItems()
+         socket.emit('orderRequest', orderDetails)
       }
    }
    const content = (
@@ -92,24 +115,24 @@ const OrdersBox = (props) => {
                   <div style={{ margin: '20px 0' }}>
                      {props.isRider ? (
                         <>
-                        {orderStatusId < 6 ? (
-                          <Button onClick={() => changeStatus()}>{generateStatusName()}</Button>
-                        ): (
-                           <h1>Successfully delivered</h1>
-                        )}
-                          </>
-                     ) : (
-                        <>  
-                        {orderStatusId != 2 || orderStatusId != -1 ? (
-                           <>
-                            <Button onClick={() => changeStatus('AdminAccepted', 2)}>Accept</Button>
-                              <div><Button onClick={() => changeStatus('AdminRejected', -1)} type="primary">Reject</Button></div>
-                           </>
-                        ): null}
+                           {orderStatusId < 6 ? (
+                              <Button onClick={() => changeStatus()}>{generateStatusName()}</Button>
+                           ) : (
+                              <h3>Successfully delivered</h3>
+                           )}
                         </>
-                     )} 
+                     ) : (
+                        <>
+                           {orderStatusId != 2 || orderStatusId != -1 ? (
+                              <>
+                                 <Button onClick={() => changeStatus('AdminAccepted', 2)}>Accept</Button>
+                                 <div><Button onClick={() => changeStatus('AdminRejected', -1)} type="primary">Reject</Button></div>
+                              </>
+                           ) : null}
+                        </>
+                     )}
                   </div>
-                 
+
                </div>
             </div>
             <div className="order-footer">

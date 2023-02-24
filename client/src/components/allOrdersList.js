@@ -40,7 +40,7 @@ const AllOrdersList = (props) => {
 
   return (
     <>
-    <div className='search'>
+      <div className='search'>
         <input type="search" className='search_box' placeholder='Search'
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -52,7 +52,7 @@ const AllOrdersList = (props) => {
             <h3 >Order List</h3>
             {orders.map((item, id) => {
               console.log(item)
-              return <OrdersBox isRider={props.isRider} item={item} key={id} />
+              return <OrdersBox isRider={props.isRider} item={item} key={id} fetchAvailableItems={fetchAvailableItems} />
             })}
             <Pagination className="pagination" total={ordersCount} onChange={(page, size) => fetchAvailableItems(page, size)} />
           </div>
