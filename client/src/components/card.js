@@ -50,7 +50,7 @@ const Card = (props) => {
          </Modal>
          <div onClick={() => props.role === 'admin' ? null : setIsModalOpen(true)} className='category'>
             <div className='categoryImage'>
-               {/* {props.item.photo && <img src={require(`../uploads/${props.item.photo}`)} alt='Loading...' />} */}
+               {props.item.photo && <img src={require(`../uploads/${props.item.photo}`)} alt='Loading...' />}
             </div>
             <div>{props.item.categoryName}</div>
             <div className='editDelete'>{props.role === 'admin' ? <div onClick={() => setIsModalOpen(true)}>

@@ -5,7 +5,6 @@ import { Modal, Button } from "antd";
 import { useSelector } from 'react-redux';
 import Card from '../../components/card';
 import ReusableForm from '../../components/reusableForm'
-import { MdOutlineAddCircle } from 'react-icons/md';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -42,6 +41,8 @@ const Items = () => {
 
   return (
     <>
+      {role === "admin" ? <Button onClick={() => showModal()} className="addItems">Add Items</Button> : ""}
+
       <div className='search'>
         <input type="search" className='search_box' placeholder='Search'
           onChange={(e) => setQuery(e.target.value)}
@@ -58,12 +59,6 @@ const Items = () => {
           <ReusableForm handleCancel={handleCancel} fetchAvailableItems={fetchAvailableItems} />
         </Modal>
 
-        {role === "admin" ? <Button onClick={() => showModal()}
-          style={{
-            marginTop: "20px", height: '10vh', width: '10vw',
-            backgroundColor: '#306660', color: 'white', fontSize: '20px', borderRadius: '10px'
-          }}
-        >Add Items <MdOutlineAddCircle /></Button> : ""}
         <div class="flex-container">
           {validItems.map((item) => {
             return (

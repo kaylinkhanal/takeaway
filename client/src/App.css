@@ -447,10 +447,13 @@ select {
   color: white;
   font-size: 1.2rem;
   padding: 0 10px;
+  transition: 0.3s;
 }
 
 .addItems:hover {
   background-color: white;
+  scale: 1.1;
+  transition: 0.3s;
 }
 
 #adminTheme {
