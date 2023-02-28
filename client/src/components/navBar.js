@@ -45,7 +45,7 @@ const NavBar = () => {
                 {navItems[role].map(item=>  <Link to={item.link}><div onClick={()=>setOpen(false)} className="naveItems">{item.label}</div></Link> )}
                 </Drawer>
             <div className="navBox2" id={role === 'admin' ? 'adminTheme' : 'userTheme'}>
-            <Link to="/" style={{ textDecoration:"underline",color:"#04F87E", paddingLeft:"20px", fontSize:"30px"}}><ImHome /></Link>
+            <Link to="/" style={{ textDecoration:"underline",color:"#ffff", paddingLeft:"20px", fontSize:"30px"}}><ImHome /></Link>
                 <div className="icon">
                     <div className="user_details">
                         <Link to="/profile" className="user_name">{name}</Link>

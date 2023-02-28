@@ -15,9 +15,10 @@ const ordersSchema = new mongoose.Schema(
     orderStatus: { type: String },
     orderStatusId: { type: Number, default: 1 },
     minimumDeliveryPrice: { type: Number },
-    distance: { type: Number },
-    discount: { type: Number },
-
+    distance:{type: Number},
+    discount:{type: Number},
+    photo:{type: String},
+ 
   },
   { collection: "orders" }
 );
