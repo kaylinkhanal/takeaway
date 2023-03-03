@@ -53,7 +53,7 @@ const NavBar = () => {
                     </div>
                     <FontAwesomeIcon icon={faUser} className="user_icon" />
                 </div>
-               {role==='admin'? <div className="name_admin">Admin</div>:""}
+               {role==='admin'? <div className="name_admin">{name}</div>:""}
             </div>
         </>
     );
