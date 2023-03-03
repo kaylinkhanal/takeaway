@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../models/Users");
+const Messages = require("../models/Messages")
 const bcrypt = require("bcrypt")
 const multer = require('multer')
 var jwt = require('jsonwebtoken');
@@ -15,6 +16,17 @@ const PostProfile = async(req, res) => {
   }
 };
 
+const PostMessages = async(req, res)=> {
+  const data= await Messages.create(req.body)
+}
+
+const GetMessagesById = async(req, res)=> {
+  console.log(req)
+  const data= await Messages.find()
+  res.json({
+    messagesList: data
+  })
+}
 const PutChangePassword = async (req, res) => {
   try {
     const user = await Users.findOne({ _id: req.query._id })
@@ -58,6 +70,21 @@ const GetUsers = async (req, res) => {
   }
 };
 
+const GetAllUsers = async (req, res) => {
+  try {
+    const userList = await Users.find().select('_id name')
+    res.json({
+      userList
+    })
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+
 exports.PostProfile = PostProfile;
 exports.PutChangePassword = PutChangePassword;
 exports.GetUsers = GetUsers;
+exports.GetAllUsers = GetAllUsers;
+exports.PostMessages =PostMessages;
+exports.GetMessagesById = GetMessagesById;
